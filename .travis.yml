@@ -130,9 +130,12 @@ before_deploy:
   - python wats/wats/main.py run --mode $WATS_MODE --wrf-dir WRF --wps-dir WPS --work-dir wats_work $MPI_FLAG
 
 deploy:
-  provider: script
-  skip_cleanup: true
+  provider: pages
+  github-token: $GITHUB_TOKEN
+  skip-cleanup: true
+  local-dir: wats_work/output
+  repo: $WATS_DATA_REPO
+  target-branch: $TRAVIS_REPO_SLUG-$TRAVIS_BUILD_NUMBER-$MODE
   on:
     all_branches: true
     condition: $SYSTEM = make
-  script: bash wats/.ci/travis/deploy-wats-data.sh wats_work/output
