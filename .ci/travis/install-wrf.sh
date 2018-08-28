@@ -8,7 +8,7 @@ if [ $SYSTEM == "cmake" ]; then
 
     mkdir build && cd build
     cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=install \
-          -DENABLE_GRIB1=${GRIB1} -DENABLE_GRIB2=${GRIB2} -DMODE=${MODE} -DNESTING=${NESTING} -DIDEAL_CASE=${IDEAL_CASE} ..
+          -DENABLE_GRIB1=${GRIB1} -DENABLE_GRIB2=${GRIB2} -DMODE=${MODE} -DNESTING=${NESTING} ..
     
     # It sometimes happens that the compiler runs out of memory due to parallel compilation.
     # The construction below means "try with 2 cores, and if it fails, try again with 1 core".

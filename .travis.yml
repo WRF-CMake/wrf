@@ -68,7 +68,6 @@ jobs:
         - GRIB2=0
         - MODE=dm+sm
         - NESTING=basic
-        - IDEAL_CASE=ALL
 
     - stage: build
       os: osx
