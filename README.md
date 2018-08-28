@@ -1,7 +1,6 @@
 <p align="center"><img src="images/WRF-Cmake_Logo.svg" alt="WRF-CMake Logo" width="160"></p>
 
 ## Table of contents
-- [Table of contents](#table-of-contents)
 - [What is WRF-CMake?](#what-is-wrf-cmake)
     - [Currently supported platforms](#currently-supported-platforms)
     - [Currently unsupported features](#currently-unsupported-features)
