@@ -25,6 +25,12 @@ set(ideal_cases
 	ideal fire heldsuarez scm_xy tropical_cyclone
 )
 foreach(ideal_case ${ideal_cases})
+# FIXME CMake apparently can't handle multiple files which use the same module name, as is the case with module_initialize_*.F
+#    -> likely leads to a race condition as the temporary .mod0 files are stored in the same folder (?)
+#    -> restarting the build also doesn't help in this case
+# [ 99%] Building Fortran object main/CMakeFiles/ideal_em_fire.dir/__/dyn_em/module_initialize_fire.F.o
+# [ 99%] Building Fortran object main/CMakeFiles/ideal_em_ideal.dir/__/dyn_em/module_initialize_ideal.F.o
+# f951: Fatal Error: Can't rename module file 'module_initialize_ideal.mod0' to 'module_initialize_ideal.mod': No such file or directory
 	add_executable(ideal_em_${ideal_case}
 		ideal_em.F
 		../dyn_em/module_initialize_${ideal_case}.F
