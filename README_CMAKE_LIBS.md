@@ -1,22 +1,71 @@
 # How to install required libraries for WRF-CMake
-The following libraries are required on your system to install WRF-CMake from source: [Git](https://git-scm.com/), [JasPer](https://www.ece.uvic.ca/~frodo/jasper/), [libpng](http://www.libpng.org/pub/png/libpng.html), [libjpeg](http://libjpeg.sourceforge.net/), [zlib](https://zlib.net/), [HDF5](https://support.hdfgroup.org/HDF5/), [NetCDF-C](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp), [NetCDF-Fortran](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp), and MPI (required if building in `dmpar` or `dm+sm` mode). We assume that you have administrative privileges on your computer.
+The following libraries are required on your system to install WRF-CMake from source: [Git](https://git-scm.com/), [JasPer](https://www.ece.uvic.ca/~frodo/jasper/), [libpng](http://www.libpng.org/pub/png/libpng.html), [libjpeg](http://libjpeg.sourceforge.net/), [zlib](https://zlib.net/), [HDF5](https://support.hdfgroup.org/HDF5/), [NetCDF-C](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp), [NetCDF-Fortran](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp), and MPI (required if building in `dmpar` or `dm+sm` mode).
+
+For the installation of libraries, we rely on your system's package managers (APT, YUM, Homebrew). We assume that you have administrative privileges on your computer. If you do not have administrative privileges you should request these libraries to be installed by your system administrator so that they can tare of this for you and manage updates on your behalf.
 
 ## Table of contents
 - [Ubuntu](#ubuntu)
+    - [Ubuntu 14.04 LTS (Trusty)](#14.04-lts-(trusty))
+    - [16.04 LTS (Xenial)](#16.04-lts-(xenial))
+    - [18.04 LTS (Bionic)](#18.04-lts-(bionic))
 - [macOS](#macOS)
 - [Windows](#windows)
-    - [Microsoft MPI](#microsoft-mpi)
+    - [Microsoft MPI support](#microsoft-mpi-support)
 
 ## Ubuntu
+
+### Ubuntu 14.04 LTS (Trusty)
+To install all the required dependencies, including support for MPI, run the following commands from your terminal prompt:
+
 ```sh
-sudo apt-get install libjasper-dev libjpeg-dev libpng-dev zlib1g-dev libmpich-dev
+sudo apt-get update && sudo apt-get upgrade -y
+sudo apt-get install -y git cmake3 gfortran libnetcdf-dev libpng-dev libjasper-dev libmpich-dev
 ```
 
+After the installtion is complete, you can go back to [Build and Install WRF-CMake](README_CMAKE_INSTALL.md#build-and-install-wrf-cmake).
+
+### 16.04 LTS (Xenial)
+To install all the required dependencies, including support for MPI, run the following commands from your terminal prompt:
+
+```sh
+sudo apt-get update && sudo apt-get upgrade -y
+sudo apt-get install -y git cmake gfortran libnetcdf-dev libnetcdff-dev libpng-dev libjasper-dev libjpeg-dev zlib1g-dev libmpich-dev
+```
+
+After the installtion is complete, you can go back to [Build and Install WRF-CMake](README_CMAKE_INSTALL.md#build-and-install-wrf-cmake).
+
+### 18.04 LTS (Bionic)
+
+To install all the required dependencies except for JasPer (installed manually, see below), including support for MPI, run the following commands from your terminal prompt:
+
+```sh
+sudo apt-get update && sudo apt-get upgrade -y
+sudo apt-get install -y git cmake gfortran libnetcdf-dev libnetcdff-dev libpng-dev libjpeg-dev zlib1g-dev libmpich-dev
+```
+
+NOTE: `libjasper-dev` is currently not provided though APT and you will need to install it from source. For the moment, you can simply [download the latest version of JasPer](https://www.ece.uvic.ca/~frodo/jasper/#download) and install it manually from source. To do this you can use the following commands:
+
+```
+cd /tmp
+wget https://www.ece.uvic.ca/~frodo/jasper/software/jasper-2.0.14.tar.gz
+tar xvzf jasper-2.0.14.tar.gz
+cd jasper-2.0.14/build/
+cmake build ..
+sudo make install
+```
+
+After the installtion is complete, you can go back to [Build and Install WRF-CMake](README_CMAKE_INSTALL.md#build-and-install-wrf-cmake).
+
 ## macOS
+
+On macOS, we can use Homebrew to to install the required libraries. If you do not have Homebrew installed on your system, install it from [here](https://brew.sh/) then, to install all the required dependencies, including support for MPI, run the following commands from your terminal prompt:
+
 ```sh
 brew update
-brew install gcc netcdf jasper
+brew install git cmake gcc netcdf jasper mpich
 ```
+
+After the installtion is complete, you can go back to [Build and Install WRF-CMake](README_CMAKE_INSTALL.md#build-and-install-wrf-cmake).
 
 ## Windows
 - Install the 64bit version of [MSYS2](http://www.msys2.org/)
@@ -48,7 +97,9 @@ cmake -DCMAKE_GENERATOR="MSYS Makefiles" -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_T
 make install
 ```
 
-### Microsoft MPI
+If you require MPI support you can continue with the section below, otherwise you can go back to [Build and Install WRF-CMake](README_CMAKE_INSTALL.md#build-and-install-wrf-cmake).
+
+### Microsoft MPI support
 The following MS MPI instructions originated from:
 - http://www.math.ucla.edu/~wotaoyin/windows_coding.html
 - https://github.com/coderefinery/autocmake/issues/85
@@ -94,4 +145,4 @@ mpiexec -n 2 example1.exe
 mpiexec -n 2 example2.exe
 ```
 
-If everything went OK, you can now build WRF with MPI.
+If everything went OK, you can now build WRF with MPI. You can go back to [Build and Install WRF-CMake](README_CMAKE_INSTALL.md#build-and-install-wrf-cmake).
