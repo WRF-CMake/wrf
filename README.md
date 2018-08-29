@@ -1,6 +1,5 @@
 # WRF-CMake [![Build status](https://ci.appveyor.com/api/projects/status/86508wximkvmf95g/branch/wrf-cmake?svg=true)](https://ci.appveyor.com/project/WRF-CMake/wrf/branch/wrf-cmake) [![Build Status](https://travis-ci.com/WRF-CMake/WRF.svg?branch=wrf-cmake)](https://travis-ci.com/WRF-CMake/WRF) 
 
-## Table of contents
 - [What is WRF-CMake?](#what-is-wrf-cmake)
     - [Currently supported platforms](#currently-supported-platforms)
     - [Currently unsupported features](#currently-unsupported-features)
