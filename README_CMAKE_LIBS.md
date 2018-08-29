@@ -1,16 +1,24 @@
+# How to install required libraries for WRF-CMake
+The following libraries are required on your system to install WRF-CMake from source: [Git](https://git-scm.com/), [JasPer](https://www.ece.uvic.ca/~frodo/jasper/), [libpng](http://www.libpng.org/pub/png/libpng.html), [libjpeg](http://libjpeg.sourceforge.net/), [zlib](https://zlib.net/), [HDF5](https://support.hdfgroup.org/HDF5/), [NetCDF-C](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp), [NetCDF-Fortran](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp), and MPI (required if building in `dmpar` or `dm+sm` mode). We assume that you have administrative privileges on your computer.
 
-### Ubuntu
+## Table of contents
+- [Ubuntu](#ubuntu)
+- [macOS](#macOS)
+- [Windows](#windows)
+    - [Microsoft MPI](#microsoft-mpi)
+
+## Ubuntu
 ```sh
 sudo apt-get install libjasper-dev libjpeg-dev libpng-dev zlib1g-dev libmpich-dev
 ```
 
-### macOS
+## macOS
 ```sh
 brew update
 brew install gcc netcdf jasper
 ```
 
-### Windows
+## Windows
 - Install the 64bit version of [MSYS2](http://www.msys2.org/)
 - If you already have MSYS2 installed, make sure that you didn't compile and install any of WRF's dependencies within the **MSYS** shell, otherwise these might be picked up by accident within the **MinGW** shell. To be sure, use a fresh MSYS2 install.
 - Inside the MSYS2 **MinGW 64-bit** shell, run `pacman -Syu`
@@ -40,7 +48,7 @@ cmake -DCMAKE_GENERATOR="MSYS Makefiles" -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_T
 make install
 ```
 
-#### Microsoft MPI
+### Microsoft MPI
 The following MS MPI instructions originated from:
 - http://www.math.ucla.edu/~wotaoyin/windows_coding.html
 - https://github.com/coderefinery/autocmake/issues/85

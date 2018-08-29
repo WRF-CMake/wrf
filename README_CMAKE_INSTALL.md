@@ -1,9 +1,9 @@
 # How to install WRF-CMake and WPS-CMake from source
 
 There are two mandatory steps and one optional step to install WRF-CMake/WPS-CMake from source on your system:
-1. [Install dependencies](#install-dependencies)
-2. [Build and Install WRF-CMake](#build-and-install-wrf-cmake)
-3. [Build and Install WPS-CMake (required to run `real` cases)](#build-and-install-wps-cmake)
+1. Required: [Install dependencies](#install-dependencies)
+2. Required: [Build and Install WRF-CMake](#build-and-install-wrf-cmake)
+3. Optional: [Build and Install WPS-CMake — required to run `real` cases](#build-and-install-wps-cmake)
 
 ## Install dependencies
 The following libraries are required on your system to install WRF-CMake from source: [Git](https://git-scm.com/), [JasPer](https://www.ece.uvic.ca/~frodo/jasper/), [libpng](http://www.libpng.org/pub/png/libpng.html), [libjpeg](http://libjpeg.sourceforge.net/), [zlib](https://zlib.net/), [HDF5](https://support.hdfgroup.org/HDF5/), [NetCDF-C](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp), [NetCDF-Fortran](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp), and MPI (required if building in `dmpar` or `dm+sm` mode). The above libraries are most likely available from your system's package manager (e.g. APT, yum, Homebrew, etc.). If you do not have the latest version of these libraries installed on your system, please refer to [How to install required libraries for WRF-CMake](README_CMAKE_LIBS.md).
@@ -25,7 +25,7 @@ where `<install_directory>` is the directory where to install WRF. Depending on 
 ### On Windows (with MinGW-w64 and gcc/gfortran)
 Make sure you [installed all the required dependencies](README_CMAKE_LIBS.md) before continuing.
 
-### Build WRF-CMake in serial mode
+#### Build WRF-CMake in serial mode
 Open an MSYS2 **MinGW 64-bit** shell and run:
 ```sh
 git clone https://github.com/WRF-CMake/WRF.git
@@ -36,7 +36,7 @@ cmake --build . --target install
 ```
 The folder `~/WRF_install` now contains the WRF installation and is ready to use.
 
-### Build WRF-CMake with MPI support
+#### Build WRF-CMake with MPI support
 Open an MSYS2 **MinGW 64-bit** shell and run:
 ```sh
 git clone https://github.com/WRF-CMake/WRF.git

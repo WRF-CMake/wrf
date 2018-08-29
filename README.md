@@ -1,6 +1,7 @@
 <p align="center"><img src="images/WRF-Cmake_Logo.svg" alt="WRF-CMake Logo" width="160"></p>
 
 ## Table of contents
+- [Table of contents](#table-of-contents)
 - [What is WRF-CMake?](#what-is-wrf-cmake)
     - [Currently supported platforms](#currently-supported-platforms)
     - [Currently unsupported features](#currently-unsupported-features)
@@ -37,7 +38,7 @@ To download the latest releases, please see the following links:
 To use WRF-CMake and WPS-CMake built in `dmpar`, you need to download and install Microsoft MPI — download and install `msmpisetup.exe` from [https://www.microsoft.com/en-us/download/details.aspx?id=56727](https://www.microsoft.com/en-us/download/details.aspx?id=56727).
 
 ### Build from source
-To build WRF-CMake from source, please refer to the [WRF-CMake Installation page](README_CMAKE.md).
+To build WRF-CMake from source, please refer to the [WRF-CMake Installation page](README_CMAKE_INSTALL.md).
 
 ## Changes to be upstreamed
 - `external/io_grib1/MEL_grib1/{grib_enc.c,gribputgds.c,pack_spatial.c}`: Remove redundant header includes causing symbol conflicts in Windows
