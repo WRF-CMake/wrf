@@ -46,6 +46,7 @@ endif()
 
 set(ARCH_CUSTOM "" CACHE STRING "Name of custom architecture configuration to use")
 option(OPTIMIZE_C "Optimize C code even in Debug mode" ON)
+option(DISABLE_RUNTIME_CHECKS "Disable compiler runtime checks in Release mode" OFF)
 option(DEBUG_ARCH "Print arch files debug information" OFF)
 option(DEBUG_GLOBAL_DEFINITIONS "Print global preprocessor definitions applied to all source files" OFF)
 option(DEBUG_FEATURE_TESTS "Print debug information while running compiler feature tests" OFF)
@@ -163,6 +164,11 @@ set(CMAKE_Fortran_FLAGS "${Fortran_preprocess} ${Fortran_io} ${Fortran_other}")
 
 if (OPTIMIZE_C)
     set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} ${C_optimized}")
+endif()
+
+if (NOT DISABLE_RUNTIME_CHECKS)
+    set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} ${C_checked}")
+    set(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE} ${Fortran_checked}")
 endif()
 
 if (SAVE_TEMPS)

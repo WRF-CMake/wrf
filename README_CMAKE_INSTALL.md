@@ -87,6 +87,7 @@ where `<install_directory>` is the directory where to install WPS and `<wrf_cmak
 |Name|Options|Default|Description|
 |----|-------|-------|-----------|
 |`CMAKE_BUILD_TYPE`|`Release`, `Debug`|`Release`|Whether to optimise/build with debug flags.|
+|`DISABLE_RUNTIME_CHECKS`|`ON`, `OFF`|`OFF`|Whether to disable compiler runtime checks in Release mode.|
 |`ENABLE_GRIB1`|`ON`, `OFF`|`OFF`|Enable/Disable GRIB 1 support (`ungrib` always has GRIB 1).|
 |`ENABLE_GRIB2_PNG`|`ON`, `OFF`|`ON`|Enable/Disable GRIB 2 PNG support.|
 |`ENABLE_GRIB2_JPEG2000`|`ON`, `OFF`|`ON`|Enable/Disable GRIB 2 JPEG2000 support.|
