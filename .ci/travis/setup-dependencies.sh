@@ -33,8 +33,9 @@ if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
 
 elif [[ $TRAVIS_OS_NAME == 'osx' ]]; then
 
-    # Homebrew fails during "brew link" if c++ is already present.
-    if command -v /usr/local/include/c++; then rm '/usr/local/include/c++'; fi
+    # If c++ is already present on the system, homebrew fails to install gcc.
+    # We use the `f` flag in case c++ is not present to suppress the error message.
+    rm -f /usr/local/include/c++
 
     brew update
     brew install gcc netcdf jasper
