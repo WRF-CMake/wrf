@@ -34,7 +34,7 @@ if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
 elif [[ $TRAVIS_OS_NAME == 'osx' ]]; then
 
     # If c++ is already present on the system, homebrew fails to install gcc.
-    # We use the `f` flag in case c++ is not present to suppress the error message.
+    # Use the `f` flag in case c++ is not present to avoid errors.
     rm -f /usr/local/include/c++
 
     brew update
