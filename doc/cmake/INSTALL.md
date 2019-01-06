@@ -1,6 +1,6 @@
 # Install WRF-/WPS-CMake from source
 
-There are two mandatory, and one optional step to install WRF-/WPS-CMake from source on your system:
+There are two mandatory and one optional step to install WRF-/WPS-CMake from source on your system:
 1. [Install dependencies](#install-dependencies) (required)
 2. [Build and Install WRF-CMake](#build-and-install-wrf-cmake) (required)
 3. [Build and Install WPS-CMake](#build-and-install-wps-cmake) (optional)
