@@ -25,12 +25,12 @@ WRF-CMake is designed to work alongside the current releases of WRF therefore yo
 
 ## Installation
 
-The installation of WRF-CMake is straightforward thanks to the downloadable pre-built binaries for most Linux distributions (specifically [ RPM-based and Debian-based distribution-compatible](https://en.wikipedia.org/wiki/List_of_Linux_distributions)), macOS, and Windows (see [binary distribution](#binary-distribution-experimental) below) -- most users wishing to run WRF on their system can simply download the pre-compiled binaries without the need of building from source. Alternately, to build WRF from source, please refer to the [source distribution](#source-distribution) section below.
+The installation of WRF-CMake is straightforward thanks to the downloadable pre-built binaries for most Linux distributions (specifically [ RPM-based and Debian-based distribution-compatible](https://en.wikipedia.org/wiki/List_of_Linux_distributions)), macOS, and Windows (see [binary distribution](#binary-distribution-experimental) below) -- most users wishing to run WRF on their system can simply download the pre-compiled binaries without the need of building from source. Alternately, to build WRF from source, please refer to the [source distribution](#source-distribution) section below. HPC users, or users seeking to run WRF in the 'most optimal' configuration for their system, are advised to build WRF-CMake from source.
 
 
 ### Binary distribution (Experimental)
 
-To download the latest pre-compiled binary releases, see below -- please note that these distributions are currently experimental therefore please report any issues [here](https://github.com/WRF-CMake/WRF/issues). HPC users, or users seeking to run WRF in the 'most optimal' configuration for their system, are advised to build WRF-CMake from source(see [this page](doc/cmake/INSTALL.md))
+To download the latest pre-compiled binary releases, see below -- please note that these distributions are currently experimental therefore please report any issues [here](https://github.com/WRF-CMake/WRF/issues).
 
 - WRF-CMake (`serial` and `dmpar`): [https://github.com/WRF-CMake/WRF/releases](https://github.com/WRF-CMake/WRF/releases).
 - WPS-CMake (`serial` and `dmpar`): [https://github.com/WRF-CMake/WPS/releases](https://github.com/WRF-CMake/WPS/releases).
