@@ -30,7 +30,7 @@ The installation of WRF-CMake is straightforward thanks to the downloadable pre-
 
 ### Binary distribution (Experimental)
 
-To download the latest pre-compiled binary releases, see below -- please note that these distributions are currently experimental therefore please report any issues [here](https://github.com/WRF-CMake/WRF/issues).
+To download the latest pre-compiled binary releases, see below -- please note that these distributions are currently experimental, therefore please report any issues [here](https://github.com/WRF-CMake/WRF/issues).
 
 - WRF-CMake (`serial` and `dmpar`): [https://github.com/WRF-CMake/WRF/releases](https://github.com/WRF-CMake/WRF/releases).
 - WPS-CMake (`serial` and `dmpar`): [https://github.com/WRF-CMake/WPS/releases](https://github.com/WRF-CMake/WPS/releases).
