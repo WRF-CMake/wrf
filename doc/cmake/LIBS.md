@@ -104,7 +104,7 @@ The following MS MPI instructions originated from:
 - http://www.math.ucla.edu/~wotaoyin/windows_coding.html
 - https://github.com/coderefinery/autocmake/issues/85
 
-Download and install both `msi` and `exe` from https://www.microsoft.com/en-us/download/details.aspx?id=56727.
+Download and install both `msi` and `exe` from https://github.com/Microsoft/Microsoft-MPI/releases.
 
 Restart the MSYS2 **MinGW 64-bit** shell and run:
 ```sh

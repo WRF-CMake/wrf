@@ -40,7 +40,7 @@ To download the latest pre-compiled binary releases, see below -- please note th
 
 If you want to launch WRF-CMake and WPS-CMake built in `dmpar` to run on multiple processes, you need to have MPI installed on your system.
 
-- On Windows, download and install Microsoft MPI (`msmpisetup.exe`) from [https://www.microsoft.com/en-us/download/details.aspx?id=56727](https://www.microsoft.com/en-us/download/details.aspx?id=56727).
+- On Windows, download and install Microsoft MPI (`msmpisetup.exe`) from [https://github.com/Microsoft/Microsoft-MPI/releases](https://github.com/Microsoft/Microsoft-MPI/releases).
 - On macOS you can get it though [Homebrew](https://brew.sh/) using `brew update && brew install mpich`.
 - On Linux, use your package manager to download mpich (version ≥ 3.0.4). E.g. `sudo apt-get update && sudo apt-get install mpich` on Debian-based systems or `sudo yum install mpich` on RPM-based system like CentOS.
 
