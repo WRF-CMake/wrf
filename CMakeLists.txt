@@ -28,7 +28,7 @@ enable_testing()
 #    User options      #
 ########################
 
-set(BUILD_TYPE_VALUES Debug Release)
+set(BUILD_TYPE_VALUES Debug Release RelWithDebInfo)
 if (CMAKE_CONFIGURATION_TYPES) # multi-config generators like MSVC
     set(CMAKE_CONFIGURATION_TYPES ${BUILD_TYPE_VALUES} CACHE TYPE INTERNAL FORCE)
 else()
@@ -157,9 +157,11 @@ endif()
 
 set(CMAKE_C_FLAGS_DEBUG "${C_debug} ${C_checked}")
 set(CMAKE_C_FLAGS_RELEASE "${C_optimized}")
+set(CMAKE_C_FLAGS_RELWITHDEBINFO "${C_debug} ${C_checked} ${C_optimized}")
 set(CMAKE_C_FLAGS "${C_other}")
 set(CMAKE_Fortran_FLAGS_DEBUG "${Fortran_debug} ${Fortran_checked}")
 set(CMAKE_Fortran_FLAGS_RELEASE "${Fortran_optimized}")
+set(CMAKE_Fortran_FLAGS_RELWITHDEBINFO "${Fortran_optimized} ${Fortran_debug}")
 set(CMAKE_Fortran_FLAGS "${Fortran_preprocess} ${Fortran_io} ${Fortran_other}")
 
 if (OPTIMIZE_C)
@@ -169,6 +171,8 @@ endif()
 if (ENABLE_RUNTIME_CHECKS)
     set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} ${C_checked}")
     set(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE} ${Fortran_checked}")
+    set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} ${C_checked}")
+    set(CMAKE_Fortran_FLAGS_RELWITHDEBINFO "${CMAKE_Fortran_FLAGS_RELWITHDEBINFO} ${Fortran_checked}")
 endif()
 
 if (SAVE_TEMPS)
