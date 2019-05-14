@@ -6,7 +6,7 @@ There are two mandatory and one optional step to install WRF-/WPS-CMake from sou
 3. [Build and Install WPS-CMake](#build-and-install-wps-cmake) (optional)
 
 ## Install dependencies
-The following libraries are required on your system to install WRF-CMake from source: [Git](https://git-scm.com/), [JasPer](https://www.ece.uvic.ca/~frodo/jasper/), [libpng](http://www.libpng.org/pub/png/libpng.html), [libjpeg](http://libjpeg.sourceforge.net/), [zlib](https://zlib.net/), [HDF5](https://support.hdfgroup.org/HDF5/), [NetCDF-C](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp), [NetCDF-Fortran](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp), and MPI (required if building in `dmpar` or `dm+sm` mode). The above libraries are most likely available from your system's package manager (e.g. APT, yum, Homebrew, etc.). If you do not have the latest version of these libraries installed on your system, please see [this page](LIBS.md).
+The following libraries are required on your system to install WRF-CMake from source: [Git](https://git-scm.com/), [JasPer](https://www.ece.uvic.ca/~frodo/jasper/), [libpng](http://www.libpng.org/pub/png/libpng.html), [libjpeg](http://libjpeg.sourceforge.net/), [zlib](https://zlib.net/), [HDF5](https://support.hdfgroup.org/HDF5/), [NetCDF-C](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp), [NetCDF-Fortran](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp), and MPI (required if building in `dmpar` or `dm_sm` mode). The above libraries are most likely available from your system's package manager (e.g. APT, yum, Homebrew, etc.). If you do not have the latest version of these libraries installed on your system, please see [this page](LIBS.md).
 
 ## Build and Install WRF-CMake
 
@@ -74,7 +74,7 @@ By default WRF-CMake will compile in `serial` mode with `basic` nesting option. 
 
 |Name|Options|Default|Description|
 |----|-------|-------|-----------|
-|`MODE`|`serial`, `dmpar`, `smpar`, `dm+sm`|`serial`|Serial/parallel modes|
+|`MODE`|`serial`, `dmpar`, `smpar`, `dm_sm`|`serial`|Serial/parallel modes|
 |`NESTING`|`none`, `basic`, `vortex`, `following`|`basic`|Domain Options|
 |`CMAKE_BUILD_TYPE`|`Release`, `Debug`, `RelWithDebInfo`|`Release`|Whether to optimise/build with debug flags.|
 |`ENABLE_RUNTIME_CHECKS`|`ON`, `OFF`|`OFF`|Whether to enable compiler runtime checks in Release mode.|

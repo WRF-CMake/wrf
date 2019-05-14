@@ -1,0 +1,35 @@
+steps:
+- bash: bash .ci/unix/use-conda.sh
+  displayName: Enable Conda
+
+- bash: |
+    set -ex
+    git clone --depth=1 --branch=$WATS_BRANCH https://github.com/$WATS_REPO.git wats
+    conda env update -n base -f wats/environment.yml
+  displayName: Install WATS
+
+- task: UniversalPackages@0
+  displayName: Download WPS outputs
+  inputs:
+    command: download
+    downloadDirectory: wats_wps_outputs/
+    vstsFeed: WATS
+    vstsFeedPackage: wps.ref
+    vstsPackageVersion: $(WATS_WPS_PKG_VERSION)
+
+- bash: |
+    cd wats_wps_outputs
+    find . -type f
+  displayName: List WPS output files
+
+- pwsh: |
+    if ($Env:MODE.StartsWith("dm")) { $mpi_flag="--mpi" }
+    if ($Env:BUILD_SYSTEM -eq "CMake") { $dir_suffix="build/install" }
+    python wats/wats/main.py run --mode $Env:WATS_MODE --wrf-dir ./$dir_suffix --wps-dir ../WPS/$dir_suffix --wps-case-output-dir wats_wps_outputs/00 --work-dir wats_work $mpi_flag
+  displayName: Run WATS
+
+- task: PublishBuildArtifacts@1
+  displayName: Store WATS outputs
+  inputs:
+    pathtoPublish: wats_work/output
+    artifactName: wats_$(OS_NAME)_$(BUILD_SYSTEM)_$(BUILD_TYPE)_$(MODE)

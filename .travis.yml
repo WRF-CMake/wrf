@@ -3,74 +3,62 @@
 language: python
 python: "3.6"
 
-env:
-  global:
-    - WRF_REPO=$TRAVIS_REPO_SLUG
-    - WPS_REPO=WRF-CMake/WPS
-    - WRF_COMMIT=$TRAVIS_COMMIT
-    - WPS_COMMIT=wps-cmake
-    - WATS_REPO=WRF-CMake/wats
-    - WATS_BRANCH=master
-    - WATS_DATA_REPO=WRF-CMake/wats-data
-    - WATS_MODE=wrf
-
 jobs:
   include:
-    # Make reference build (WATS)
+    # Make builds
+    
     - stage: build
       os: linux
       dist: trusty
       sudo: required
       env:
-        - SYSTEM=make
-        # use Debug for faster compilation to be able to run more cases
+        - BUILD_SYSTEM=Make
         - BUILD_TYPE=Debug
         - CC=gcc
         - FC=gfortran
         - MODE=serial
 
-    # Make reference build (WATS)
     - stage: build
       os: linux
       dist: trusty
       sudo: required
       env:
-        - SYSTEM=make
+        - BUILD_SYSTEM=Make
         - BUILD_TYPE=Debug
         - CC=gcc
         - FC=gfortran
         - MODE=dmpar
     
-    # Make reference build (WATS)
     - stage: build
       os: osx
       osx_image: xcode9.2 # https://github.com/travis-ci/travis-ci/issues/9640
       language: generic
       env:
-        - SYSTEM=make
+        - BUILD_SYSTEM=Make
         - BUILD_TYPE=Debug
         - CC=gcc-8 # GNU via Homebrew
         - FC=gfortran-8
         - MODE=serial
 
-    # Make reference build (WATS)
     - stage: build
       os: osx
       osx_image: xcode9.2 # https://github.com/travis-ci/travis-ci/issues/9640
       language: generic
       env:
-        - SYSTEM=make
+        - BUILD_SYSTEM=Make
         - BUILD_TYPE=Debug
         - CC=gcc-8 # GNU via Homebrew
         - FC=gfortran-8
         - MODE=dmpar
+
+    # CMake builds
 
     - stage: build
       os: linux
       dist: trusty
       sudo: required # Need sudo to install netcdf via apt as not whitelisted 
       env:
-        - SYSTEM=cmake
+        - BUILD_SYSTEM=CMake
         - BUILD_TYPE=Debug
         - CC=gcc
         - FC=gfortran
@@ -84,13 +72,13 @@ jobs:
       dist: trusty
       sudo: required
       env:
-        - SYSTEM=cmake
+        - BUILD_SYSTEM=CMake
         - BUILD_TYPE=Debug
         - CC=gcc
         - FC=gfortran
         - GRIB1=1
         - GRIB2=0
-        - MODE=dm+sm
+        - MODE=dm_sm
         - NESTING=basic
 
     - stage: build
@@ -98,7 +86,7 @@ jobs:
       osx_image: xcode9.2 # https://github.com/travis-ci/travis-ci/issues/9640
       language: generic
       env:
-        - SYSTEM=cmake
+        - BUILD_SYSTEM=CMake
         - BUILD_TYPE=Debug
         - CC=gcc-8 # GNU via Homebrew
         - FC=gfortran-8
@@ -112,7 +100,7 @@ jobs:
       osx_image: xcode9.2 # https://github.com/travis-ci/travis-ci/issues/9640
       language: generic
       env:
-        - SYSTEM=cmake
+        - BUILD_SYSTEM=CMake
         - BUILD_TYPE=Debug
         - CC=gcc-8 # GNU via Homebrew
         - FC=gfortran-8
@@ -121,48 +109,11 @@ jobs:
         - MODE=dmpar
         - NESTING=basic
 
-    - stage: wats
-      # Currently, WATS is only supported for branch builds since
-      # pull requests (from forks) cannot access the necessary secrets.
-      if: type != pull_request
-      os: linux
-      before_install: skip
-      install:
-        - git clone --depth=1 --branch=$WATS_BRANCH https://github.com/$WATS_REPO.git wats
-      script:
-        - wats/.ci/travis/trigger-wats-travis.sh
-        - wats/.ci/travis/trigger-wats-appveyor.sh
-
 before_install:
-  - .ci/travis/setup-dependencies.sh
+  - .ci/unix/dump-vm-specs.sh
+  - .ci/unix/setup-dependencies.sh
 
 install:
-  - .ci/travis/install-wrf.sh
+  - .ci/unix/install-wrf.sh
 
 script: skip
-
-before_deploy:
-  - .ci/travis/install-python3.sh
-  - cd ..
-  - git clone --depth=100 --no-single-branch https://github.com/$WPS_REPO.git WPS
-  - git clone --depth=1 --branch=$WATS_BRANCH https://github.com/$WATS_REPO.git wats
-  - cd WPS
-  - git checkout $WPS_COMMIT
-  - .ci/travis/install-wps.sh
-  - cd ..
-  - pip3 install -r wats/requirements.txt
-  - if [[ $MODE == dm* ]]; then export MPI_FLAG=--mpi ; fi
-  - python3 wats/wats/main.py run --mode $WATS_MODE --wrf-dir WRF --wps-dir WPS --work-dir wats_work $MPI_FLAG
-  - pip3 install -r wats/.ci/travis/requirements.txt
-  - python3 wats/.ci/travis/cleanup-wats-data.py
-
-deploy:
-  provider: pages
-  github-token: $GITHUB_TOKEN
-  skip-cleanup: true
-  local-dir: ../wats_work/output
-  repo: $WATS_DATA_REPO
-  target-branch: $TRAVIS_REPO_SLUG-$TRAVIS_BUILD_NUMBER-$TRAVIS_OS_NAME-$MODE
-  on:
-    all_branches: true
-    condition: $SYSTEM = make

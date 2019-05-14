@@ -1,0 +1,90 @@
+parameters:
+  templates:
+    Linux: unix.yml
+    macOS: unix.yml
+    Windows: windows.yml
+  
+  Linux:
+    CC: gcc-8
+    FC: gfortran-8
+  macOS:
+    CC: gcc-8
+    FC: gfortran-8
+  Windows:
+    CC: gcc
+    FC: gfortran
+  
+  common:
+    WATS_REPO: WRF-CMake/wats
+    WATS_BRANCH: master
+    WATS_MODE: wrf
+    WATS_WPS_PKG_VERSION: 0.0.2
+    NESTING: basic
+    GRIB1: 0
+    GRIB2: 1
+  
+  # Loop/matrix parameters.
+  # Note that these may be overridden by the including yml (typically azure-pipelines.yml).
+  OS_NAMES: [Windows, Linux, macOS]
+  BUILD_SYSTEMS: [Make, CMake]
+  BUILD_TYPES: [Debug, Release]
+  MODES: [serial, smpar, dmpar, dm_sm]
+
+jobs:
+- ${{ each OS_NAME in parameters.OS_NAMES }}:
+  - ${{ each BUILD_TYPE in parameters.BUILD_TYPES }}:
+    - ${{ each MODE in parameters.MODES }}:
+      
+      - ${{ each BUILD_SYSTEM in parameters.BUILD_SYSTEMS }}:
+        # For Windows, since there is no Make-based build, skip that combination.
+        - ${{ if not(and(eq(OS_NAME, 'Windows'), eq(BUILD_SYSTEM, 'Make'))) }}:
+          - template: ${{ parameters.templates[OS_NAME] }}
+            parameters:
+              OS_NAME: ${{ OS_NAME }}
+              BUILD_SYSTEM: ${{ BUILD_SYSTEM }}
+              BUILD_TYPE: ${{ BUILD_TYPE }}
+              MODE: ${{ MODE }}
+              ${{ insert }}: ${{ parameters[OS_NAME] }}
+              ${{ insert }}: ${{ parameters.common }}
+              ${{ if or(eq(parameters.WATS_PLOTS, 'true'), eq(parameters.WATS_DIFF, 'true')) }}:
+                WATS_RUN: true
+      
+      # Make vs CMake comparison
+      - ${{ if eq(parameters.WATS_DIFF, 'true') }}:
+        - template: wats_diff.yml
+          parameters:
+            # For Windows, since there is no Make-based reference, compare against Linux.
+            ${{ if eq(OS_NAME, 'Windows') }}:
+              OS_NAME_LEFT: Linux
+            ${{ if ne(OS_NAME, 'Windows') }}:
+              OS_NAME_LEFT: ${{ OS_NAME }}
+            OS_NAME_RIGHT: ${{ OS_NAME }}
+            BUILD_SYSTEM_LEFT: Make
+            BUILD_SYSTEM_RIGHT: CMake
+            BUILD_TYPE: ${{ BUILD_TYPE }}
+            MODE: ${{ MODE }}
+            ${{ insert }}: ${{ parameters.common }}
+
+# Make vs Make comparison
+- ${{ if eq(parameters.WATS_DIFF, 'true') }}:
+  - ${{ each BUILD_TYPE in parameters.BUILD_TYPES }}:
+    - ${{ each MODE in parameters.MODES }}:
+      - template: wats_diff.yml
+        parameters:
+          OS_NAME_LEFT: Linux
+          OS_NAME_RIGHT: macOS
+          BUILD_SYSTEM_LEFT: Make
+          BUILD_SYSTEM_RIGHT: Make
+          BUILD_TYPE: ${{ BUILD_TYPE }}
+          MODE: ${{ MODE }}
+          ${{ insert }}: ${{ parameters.common }}
+
+- ${{ if eq(parameters.WATS_PLOTS, 'true') }}:
+  - template: wats_plots.yml
+    parameters:
+      OS_NAMES: ${{ parameters.OS_NAMES }}
+      BUILD_SYSTEMS: ${{ parameters.BUILD_SYSTEMS }}
+      BUILD_TYPES: ${{ parameters.BUILD_TYPES }}
+      MODES: ${{ parameters.MODES }}
+      vars:
+        ${{ insert }}: ${{ parameters.common }}

@@ -1,0 +1,14 @@
+# Runs on commits to any branch except wrf-cmake.
+trigger:
+  branches:
+    include:
+    - '*'
+    exclude:
+    - wrf-cmake
+pr: none
+
+jobs:
+- template: .ci/azure-pipelines/matrix.yml
+  parameters:
+    WATS_DIFF: false
+    WATS_PLOTS: false

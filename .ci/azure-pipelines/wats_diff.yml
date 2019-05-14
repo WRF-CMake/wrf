@@ -1,0 +1,50 @@
+jobs:
+- job: wats_diff_${{ parameters.OS_NAME_LEFT }}_${{ parameters.OS_NAME_RIGHT }}_${{ parameters.BUILD_SYSTEM_LEFT }}_${{ parameters.BUILD_SYSTEM_RIGHT }}_${{ parameters.BUILD_TYPE }}_${{ parameters.MODE }}
+  displayName: 'WATS ${{ parameters.OS_NAME_LEFT }}/${{ parameters.OS_NAME_RIGHT }} ${{ parameters.BUILD_SYSTEM_LEFT }}/${{ parameters.BUILD_SYSTEM_RIGHT }}: ${{ parameters.BUILD_TYPE }}, ${{ parameters.MODE }}'
+  
+  pool:
+    vmImage: ubuntu-16.04
+  
+  dependsOn:
+  - ${{ parameters.OS_NAME_LEFT }}_${{ parameters.BUILD_SYSTEM_LEFT }}_${{ parameters.BUILD_TYPE }}_${{ parameters.MODE }}
+  - ${{ parameters.OS_NAME_RIGHT }}_${{ parameters.BUILD_SYSTEM_RIGHT }}_${{ parameters.BUILD_TYPE }}_${{ parameters.MODE }}
+  
+  variables:
+    ${{ insert }}: ${{ parameters }}
+
+  steps:
+  - bash: bash .ci/unix/use-conda.sh
+    displayName: Enable Conda
+  
+  - bash: |
+      set -ex
+      git clone --depth=1 --branch=$WATS_BRANCH https://github.com/$WATS_REPO.git wats
+      conda env update -n base -f wats/environment.yml
+    displayName: Install WATS
+
+  - task: DownloadBuildArtifacts@0
+    displayName: Retrieve ${{ parameters.OS_NAME_LEFT }} ${{ parameters.BUILD_SYSTEM_LEFT }} WATS outputs
+    inputs:
+      downloadPath: wats_outputs
+      downloadType: specific
+      itemPattern: 'wats_${{ parameters.OS_NAME_LEFT }}_${{ parameters.BUILD_SYSTEM_LEFT }}_${{ parameters.BUILD_TYPE }}_${{ parameters.MODE }}/**'
+  
+  - task: DownloadBuildArtifacts@0
+    displayName: Retrieve ${{ parameters.OS_NAME_RIGHT }} ${{ parameters.BUILD_SYSTEM_RIGHT }} WATS outputs
+    inputs:
+      downloadPath: wats_outputs
+      downloadType: specific
+      itemPattern: 'wats_${{ parameters.OS_NAME_RIGHT }}_${{ parameters.BUILD_SYSTEM_RIGHT }}_${{ parameters.BUILD_TYPE }}_${{ parameters.MODE }}/**'
+  
+  - script: |
+      cd wats_outputs
+      find . -type f
+    displayName: List WATS output files
+  
+  - script: |
+      set -ex
+      O=wats_outputs
+      W="python wats/wats/main.py diff --mode $WATS_MODE"
+      $W $O/wats_${OS_NAME_LEFT}_${BUILD_SYSTEM_LEFT}_${BUILD_TYPE}_${MODE} $O/wats_${OS_NAME_RIGHT}_${BUILD_SYSTEM_RIGHT}_${BUILD_TYPE}_${MODE}
+    displayName: Run WATS diff
+      

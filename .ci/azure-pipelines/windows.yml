@@ -1,0 +1,45 @@
+jobs:
+- job: ${{ parameters.OS_NAME }}_${{ parameters.BUILD_SYSTEM }}_${{ parameters.BUILD_TYPE }}_${{ parameters.MODE }}
+  displayName: '${{ parameters.OS_NAME }} ${{ parameters.BUILD_SYSTEM }}: ${{ parameters.BUILD_TYPE }}, ${{ parameters.MODE }}'
+
+  timeoutInMinutes: 0
+
+  pool:
+      vmImage: windows-2019
+
+  variables:
+    ${{ insert }}: ${{ parameters }}
+
+  steps:
+  - pwsh: .ci\windows\dump-vm-specs.ps1
+    displayName: Dump VM specs
+
+  - script: set
+    displayName: Dump environment variables
+
+  # We will install the latest version later on.
+  - pwsh: |
+      $products = Get-CimInstance -ClassName Win32_Product -Filter "Name like 'Microsoft MPI%'"
+      foreach ($p in $products) {
+        echo "Uninstalling $($p.Name)"
+        Invoke-CimMethod -InputObject $p -MethodName Uninstall
+      }
+    condition: and(succeeded(), startsWith(variables.MODE, 'dm'))
+    displayName: Remove existing MSMPI
+
+  # /NoUpdate temporarily necessary due to freezing in windows-2019 image during update...
+  - script: |
+      choco install msys2 --params "/InstallDir:c:\msys64 /NoUpdate"
+    displayName: Install MSYS2
+
+  - task: BatchScript@1
+    displayName: Setup dependencies
+    inputs:
+      filename: .ci\windows\setup-dependencies.bat
+      modifyEnvironment: true
+
+  - script: call .ci\windows\install-wrf.bat
+    displayName: Install WRF
+
+  - ${{ if eq(parameters.WATS_RUN, 'true') }}:
+    - template: wats_run.yml

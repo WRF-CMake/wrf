@@ -5,26 +5,29 @@ image: Visual Studio 2017 # See https://www.appveyor.com/docs/build-environment/
 clone_depth: 50
 
 environment:
+  global:
+    BUILD_SYSTEM: CMake
+
   matrix:
     - BUILD_TYPE: Debug
+      CC: gcc
+      FC: gfortran
       MODE: serial
       NESTING: basic
       GRIB1: 0
       GRIB2: 1
       
     - BUILD_TYPE: Debug
+      CC: gcc
+      FC: gfortran
       MODE: dmpar
       NESTING: basic
       GRIB1: 0
       GRIB2: 1
 
-
 install:
-  - call .ci\appveyor\setup-dependencies.bat
+  - ps: .ci\windows\dump-vm-specs.ps1
+  - call .ci\windows\setup-dependencies.bat
 
 build_script:
-  - call .ci\appveyor\install-wrf.bat
-
-artifacts:
-  - path: build/install
-    name: WRF
+  - call .ci\windows\install-wrf.bat

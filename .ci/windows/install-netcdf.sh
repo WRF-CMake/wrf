@@ -11,7 +11,7 @@ CC=gcc cmake -DCMAKE_GENERATOR="MSYS Makefiles" \
     -DBUILD_TESTING=OFF -DENABLE_TESTS=OFF -DENABLE_DAP=FALSE \
     -DNC_FIND_SHARED_LIBS=OFF -DBUILD_UTILITIES=OFF -DENABLE_EXAMPLES=OFF \
     -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX ..
-make -j 2
+make -j 4
 make install
 rm -rf $MINGW_PREFIX/lib/cmake/netCDF # breaks for some reason otherwise in netcdf-fortran
 rm -rf * # avoid cmake cache using this directly in netcdf-fortran
@@ -25,6 +25,6 @@ mkdir build && cd build
 CC=gcc FC=gfortran cmake -DCMAKE_GENERATOR="MSYS Makefiles" \
     -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DENABLE_TESTS=OFF \
     -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX ..
-make -j 2
+make -j 4
 make install
 popd
