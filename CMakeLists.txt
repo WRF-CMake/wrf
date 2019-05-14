@@ -157,7 +157,7 @@ endif()
 
 set(CMAKE_C_FLAGS_DEBUG "${C_debug} ${C_checked}")
 set(CMAKE_C_FLAGS_RELEASE "${C_optimized}")
-set(CMAKE_C_FLAGS_RELWITHDEBINFO "${C_debug} ${C_optimized}")
+set(CMAKE_C_FLAGS_RELWITHDEBINFO "${C_optimized} ${C_debug}")
 set(CMAKE_C_FLAGS "${C_other}")
 set(CMAKE_Fortran_FLAGS_DEBUG "${Fortran_debug} ${Fortran_checked}")
 set(CMAKE_Fortran_FLAGS_RELEASE "${Fortran_optimized}")
