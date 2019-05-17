@@ -8,6 +8,7 @@ set THIS_FOLDER=%~dp0
 set HTTP_RETRIES=3
 
 if "%MODE:~0,2%"=="dm" (
+    pwsh -v
     echo Install MSMPI
     rem v10 currently unusable (https://github.com/Microsoft/Microsoft-MPI/issues/7)
     rem pwsh -c Invoke-WebRequest -MaximumRetryCount %HTTP_RETRIES% -OutFile msmpisetup.exe https://github.com/Microsoft/Microsoft-MPI/releases/download/v10.0/msmpisetup.exe || goto :error
