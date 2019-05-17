@@ -10,11 +10,11 @@ set HTTP_RETRIES=3
 if "%MODE:~0,2%"=="dm" (
     echo Install MSMPI
     rem v10 currently unusable (https://github.com/Microsoft/Microsoft-MPI/issues/7)
-    rem powershell -c Invoke-WebRequest -OutFile msmpisetup.exe https://github.com/Microsoft/Microsoft-MPI/releases/download/v10.0/msmpisetup.exe || goto :error
-    rem powershell -c Invoke-WebRequest -OutFile msmpisdk.msi https://github.com/Microsoft/Microsoft-MPI/releases/download/v10.0/msmpisdk.msi || goto :error
+    rem pwsh -c Invoke-WebRequest -MaximumRetryCount %HTTP_RETRIES% -OutFile msmpisetup.exe https://github.com/Microsoft/Microsoft-MPI/releases/download/v10.0/msmpisetup.exe || goto :error
+    rem pwsh -c Invoke-WebRequest -MaximumRetryCount %HTTP_RETRIES% -OutFile msmpisdk.msi https://github.com/Microsoft/Microsoft-MPI/releases/download/v10.0/msmpisdk.msi || goto :error
     rem v9.0.1
-    powershell -c Invoke-WebRequest -MaximumRetryCount %HTTP_RETRIES% -OutFile msmpisetup.exe https://download.microsoft.com/download/4/A/6/4A6AAED8-200C-457C-AB86-37505DE4C90D/msmpisetup.exe || goto :error
-    powershell -c Invoke-WebRequest -MaximumRetryCount %HTTP_RETRIES% -OutFile msmpisdk.msi https://download.microsoft.com/download/4/A/6/4A6AAED8-200C-457C-AB86-37505DE4C90D/msmpisdk.msi || goto :error
+    pwsh -c Invoke-WebRequest -MaximumRetryCount %HTTP_RETRIES% -OutFile msmpisetup.exe https://download.microsoft.com/download/4/A/6/4A6AAED8-200C-457C-AB86-37505DE4C90D/msmpisetup.exe || goto :error
+    pwsh -c Invoke-WebRequest -MaximumRetryCount %HTTP_RETRIES% -OutFile msmpisdk.msi https://download.microsoft.com/download/4/A/6/4A6AAED8-200C-457C-AB86-37505DE4C90D/msmpisdk.msi || goto :error
     msmpisetup.exe -unattend || goto :error
     msmpisdk.msi /passive || goto :error
 )
