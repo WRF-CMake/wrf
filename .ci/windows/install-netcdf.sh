@@ -1,6 +1,8 @@
 #!/bin/bash
 set -ex
 
+HTTP_RETRIES=3
+
 pushd /tmp
 # TODO use release once branch has been merged.
 git clone https://github.com/WRF-CMake/netcdf-c.git -b mingw-support
@@ -17,8 +19,7 @@ rm -rf $MINGW_PREFIX/lib/cmake/netCDF # breaks for some reason otherwise in netc
 rm -rf * # avoid cmake cache using this directly in netcdf-fortran
 
 cd /tmp
-wget ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-fortran-4.4.4.tar.gz
-tar xvzf netcdf-fortran-4.4.4.tar.gz
+curl --retry ${HTTP_RETRIES} ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-fortran-4.4.4.tar.gz | tar xz
 cd netcdf-fortran-4.4.4
 sed -i 's/ADD_SUBDIRECTORY(examples)/#ADD_SUBDIRECTORY(examples)/' CMakeLists.txt # patch CMakeLists.txt and comment out example building
 mkdir build && cd build
