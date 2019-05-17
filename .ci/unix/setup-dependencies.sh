@@ -84,8 +84,7 @@ elif [ "$(uname)" == "Darwin" ]; then
     rm -f /usr/local/include/c++
 
     # Don't fall-back to source build if bottle download fails for some reason (e.g. network issues).
-    # Source builds generally take too long in CI. This setting let's brew fail immediately
-    # and currently doesn't retry the download.
+    # Source builds generally take too long in CI. This setting let's brew fail immediately.
     export HOMEBREW_NO_BOTTLE_SOURCE_FALLBACK=1
 
     # disable automatic cleanup, just takes time
