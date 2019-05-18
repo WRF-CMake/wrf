@@ -87,15 +87,20 @@ elif [ "$(uname)" == "Darwin" ]; then
     # Source builds generally take too long in CI. This setting let's brew fail immediately.
     export HOMEBREW_NO_BOTTLE_SOURCE_FALLBACK=1
 
-    # disable automatic cleanup, just takes time
+    # Retry downloads if there was a failure.
+    # Used only for bottles, but not during 'brew update' which uses git internally.
+    export HOMEBREW_CURL_RETRIES=${HTTP_RETRIES}
+
+    # Disable automatic cleanup, just takes time.
     export HOMEBREW_NO_INSTALL_CLEANUP=1
 
-    # brew does not have a retry option itself, so we have to wrap it.
+    # 'brew update' uses git and does not have a retry option, so we wrap it.
     retry brew update -v
+
     # Since "brew install" can't silently ignore already installed packages
     # we're using this instead.
     # See https://github.com/Homebrew/brew/issues/2491#issuecomment-294264745.
-    retry brew bundle --verbose --no-upgrade --file=$SCRIPTDIR/Brewfile
+    brew bundle --verbose --no-upgrade --file=$SCRIPTDIR/Brewfile
 
     nc-config --all
 
