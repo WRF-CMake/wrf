@@ -33,14 +33,14 @@ jobs:
       conda env update -n base -f wats/environment.yml
     displayName: Install WATS
   
-  # Plot: Linux/Make/Debug/serial against all others
+  # Plot: Ubuntu/Make/Debug/serial against all others
 
   - task: DownloadBuildArtifacts@0
-    displayName: Retrieve reference Linux/Make/Debug/serial WATS outputs
+    displayName: Retrieve reference Ubuntu/Make/Debug/serial WATS outputs
     inputs:
       downloadPath: wats_outputs
       downloadType: specific
-      itemPattern: 'wats_Linux_Make_Debug_serial/**'
+      itemPattern: 'wats_Ubuntu_Make_Debug_serial/**'
   
   - ${{ each OS_NAME in parameters.OS_NAMES }}:
     - ${{ each BUILD_TYPE in parameters.BUILD_TYPES }}:
@@ -48,7 +48,7 @@ jobs:
         - ${{ each BUILD_SYSTEM in parameters.BUILD_SYSTEMS }}:
           # For Windows, since there is no Make-based build, skip that combination.
           # Also, skip the reference combination.
-          - ${{ if not(or(and(eq(OS_NAME, 'Windows'), eq(BUILD_SYSTEM, 'Make')), and(eq(OS_NAME, 'Linux'), eq(BUILD_SYSTEM, 'Make'), eq(MODE, 'serial'), eq(BUILD_TYPE, 'Debug')))) }}:
+          - ${{ if not(or(and(eq(OS_NAME, 'Windows'), eq(BUILD_SYSTEM, 'Make')), and(eq(OS_NAME, 'Ubuntu'), eq(BUILD_SYSTEM, 'Make'), eq(MODE, 'serial'), eq(BUILD_TYPE, 'Debug')))) }}:
 
             - task: DownloadBuildArtifacts@0
               displayName: Retrieve trial ${{ OS_NAME }}/${{ BUILD_SYSTEM }}/${{ BUILD_TYPE }}/${{ MODE }} WATS outputs
@@ -62,24 +62,24 @@ jobs:
                   set -ex
                   O=wats_outputs
                   W="python wats/wats/plots.py compute --stats-dir wats_stats/${{ DOMAIN }}/TALL --filter ${{ DOMAIN }} --append"
-                  $W $O/wats_Linux_Make_Debug_serial $O/wats_${{ OS_NAME }}_${{ BUILD_SYSTEM }}_${{ BUILD_TYPE }}_${{ MODE }}
-                displayName: 'Run WATS: compute plot stats Linux/Make/Debug/serial vs ${{ OS_NAME }}/${{ BUILD_SYSTEM }}/${{ BUILD_TYPE }}/${{ MODE }} for domain ${{ DOMAIN }}'
+                  $W $O/wats_Ubuntu_Make_Debug_serial $O/wats_${{ OS_NAME }}_${{ BUILD_SYSTEM }}_${{ BUILD_TYPE }}_${{ MODE }}
+                displayName: 'Run WATS: compute plot stats Ubuntu/Make/Debug/serial vs ${{ OS_NAME }}/${{ BUILD_SYSTEM }}/${{ BUILD_TYPE }}/${{ MODE }} for domain ${{ DOMAIN }}'
               
               - ${{ each TIME in parameters.TIMES }}:
                 - script: |
                     set -ex
                     O=wats_outputs
                     W="python wats/wats/plots.py compute --stats-dir wats_stats/${{ DOMAIN }}/T${{ TIME }} --filter ${{ DOMAIN }} --time-idx ${{ TIME }} --append"
-                    $W $O/wats_Linux_Make_Debug_serial $O/wats_${{ OS_NAME }}_${{ BUILD_SYSTEM }}_${{ BUILD_TYPE }}_${{ MODE }}
-                  displayName: 'Run WATS: compute plot stats Linux/Make/Debug/serial vs ${{ OS_NAME }}/${{ BUILD_SYSTEM }}/${{ BUILD_TYPE }}/${{ MODE }} for domain ${{ DOMAIN }} - T${{ TIME }}'
+                    $W $O/wats_Ubuntu_Make_Debug_serial $O/wats_${{ OS_NAME }}_${{ BUILD_SYSTEM }}_${{ BUILD_TYPE }}_${{ MODE }}
+                  displayName: 'Run WATS: compute plot stats Ubuntu/Make/Debug/serial vs ${{ OS_NAME }}/${{ BUILD_SYSTEM }}/${{ BUILD_TYPE }}/${{ MODE }} for domain ${{ DOMAIN }} - T${{ TIME }}'
                 
             - script: |
                 rm -rf wats_outputs/wats_${{ OS_NAME }}_${{ BUILD_SYSTEM }}_${{ BUILD_TYPE }}_${{ MODE }}
               displayName: Remove trial ${{ OS_NAME }}/${{ BUILD_SYSTEM }}/${{ BUILD_TYPE }}/${{ MODE }} WATS outputs 
 
   - script: |
-      rm -rf wats_outputs/wats_Linux_Make_Debug_serial
-    displayName: Remove reference Linux/Make/Debug/serial WATS outputs 
+      rm -rf wats_outputs/wats_Ubuntu_Make_Debug_serial
+    displayName: Remove reference Ubuntu/Make/Debug/serial WATS outputs 
 
   - task: PublishBuildArtifacts@1
     displayName: Store WATS plot stats

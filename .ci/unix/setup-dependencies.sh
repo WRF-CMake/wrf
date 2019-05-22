@@ -129,7 +129,7 @@ if [ "$(uname)" == "Linux" ]; then
             curl http://www.mpich.org/static/downloads/${MPICH_VERSION}/mpich-${MPICH_VERSION}.tar.gz | tar xz
             cd mpich-${MPICH_VERSION}
             ./configure --prefix=/usr
-            sudo make install -j 4
+            sudo make install -j$(nproc)
         fi
     fi
 
