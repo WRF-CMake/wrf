@@ -1,7 +1,7 @@
 parameters:
   templates:
     Ubuntu: unix.yml
-    CentOS: unix.yml
+    CentOS: unix.yml # Docker image, see template.
     macOS: unix.yml
     Windows: windows.yml
   
