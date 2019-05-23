@@ -2,7 +2,7 @@
 
 if [ "$(uname)" == "Darwin" ]; then
     echo "##vso[task.prependpath]$CONDA/bin"
-    sudo chown -R $USER $CONDA
+    sudo chown -R $(whoami) $CONDA
 elif [ "$(uname)" == "Linux" ]; then
     if [ "$(lsb_release -i -s)" == "CentOS" ]; then
         curl -sL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -o miniconda.sh
@@ -11,7 +11,7 @@ elif [ "$(uname)" == "Linux" ]; then
         rm miniconda.sh
     fi
     echo "##vso[task.prependpath]/usr/share/miniconda/bin"
-    sudo chown -R $USER /usr/share/miniconda
+    sudo chown -R $(whoami) /usr/share/miniconda
 else
     echo "##vso[task.prependpath]$CONDA\Scripts"
     # We don't use conda activate as we would have to repeat that in each task,
