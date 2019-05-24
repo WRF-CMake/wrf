@@ -5,7 +5,7 @@ steps:
       rootFolderOrFile: build/install
       includeRootFolder: false
       archiveType: zip
-      archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.SourceBranchName)-$(MODE)-$(NESTING)-$(BUILD_TYPE)-$(OS_NAME).zip' 
+      archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.SourceBranchName)-$(NESTING)_nesting-$(MODE)-x64-$(OS_NAME)-$(BUILD_TYPE).zip' 
     displayName: Create distribution package
 
 - ${{ if not(eq(parameters.OS_NAME, 'Windows')) }}:
@@ -18,7 +18,7 @@ steps:
       includeRootFolder: false
       archiveType: tar
       tarCompression: xz
-      archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.SourceBranchName)-$(MODE)-$(NESTING)-$(BUILD_TYPE)-$(OS_NAME).tar.xz' 
+      archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.SourceBranchName)-$(NESTING)_nesting-$(MODE)-x64-$(OS_NAME)-$(BUILD_TYPE).tar.xz' 
     displayName: Create distribution package
 
 - pwsh: |
