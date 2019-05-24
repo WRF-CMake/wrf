@@ -45,7 +45,7 @@ else()
 endif()
 
 set(ARCH_CUSTOM "" CACHE STRING "Name of custom architecture configuration to use")
-option(USE_REAL8 "Use 8-byte reals" OFF)
+option(USE_REAL8 "Use double precision reals" OFF)
 option(OPTIMIZE_C "Optimize C code even in Debug mode" ON)
 option(ENABLE_RUNTIME_CHECKS "Enable compiler runtime checks in Release mode" OFF)
 option(DEBUG_ARCH "Print arch files debug information" OFF)
