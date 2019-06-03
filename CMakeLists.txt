@@ -111,11 +111,6 @@ if (NOT MINGW AND NOT UNIX)
     message(FATAL_ERROR "Unsupported operating system / toolset")
 endif()
 
-if (CMAKE_Fortran_COMPILER_ID MATCHES "Clang")
-    # See Transpose() subroutine in external/io_netcdf/wrf_io.F90 for details.
-    message(FATAL_ERROR "Clang is not supported, use gcc/gfortran from Homebrew instead")
-endif()
-
 if (NOT ARCH_CUSTOM)
     set(ARCH_C_VARS debug optimized checked temps other)
     set(ARCH_Fortran_VARS debug optimized preprocess io checked temps other)

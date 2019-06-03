@@ -103,7 +103,7 @@ jobs:
       env:
         - BUILD_SYSTEM=CMake
         - BUILD_TYPE=Debug
-        - CC=gcc-8 # GNU via Homebrew
+        - CC=clang # Apple Clang
         - FC=gfortran-8
         - GRIB1=1
         - GRIB2=1
