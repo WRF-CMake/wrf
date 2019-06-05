@@ -62,7 +62,7 @@ On macOS, we can use Homebrew to to install the required libraries. If you do no
 
 ```sh
 brew update
-brew install git cmake gcc netcdf jasper mpich
+brew install git cmake gcc netcdf jasper open-mpi
 ```
 
 After the installation is complete, you can go back to [Build and Install WRF-CMake].
