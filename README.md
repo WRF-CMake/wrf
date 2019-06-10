@@ -10,6 +10,7 @@
   - [Documentation](#documentation)
   - [Example usage](#example-usage)
   - [How to cite](#how-to-cite)
+  - [How to contribute](#how-to-contribute)
   - [Testing framework](#testing-framework)
   - [Changes to be upstreamed](#changes-to-be-upstreamed)
   - [Copyright and license](#copyright-and-license)
@@ -104,6 +105,11 @@ W.C. Skamarock, J.B. Klemp, J. Dudhia, D.O. Gill, D.M. Barker, M.G. Duda, X.-Y. 
 Riechert and Meyer, 2019a: TODO
 
 Riechert and Meyer, 2019b: TODO
+
+
+## How to contribute
+
+If you are looking to contribute, please read our Contributors' guide for details.
 
 
 ## Testing framework
