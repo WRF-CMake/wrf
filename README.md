@@ -56,8 +56,8 @@ To build and install WRF-CMake or WPS-CMake manually from source, see [this page
 WRF-CMake and WPS-CMake can be built and installed using [Homebrew](https://docs.brew.sh/Installation) (macOS) or [Linuxbrew](https://docs.brew.sh/Homebrew-on-Linux#install) (Linux) with the following commands:
 
 ``` bash
-brew tap wrf-cmake/wrf && brew install wrf
-brew tap wrf-cmake/wps && brew install wps
+brew tap wrf-cmake/wrf
+brew install wrf
 ```
 
 
