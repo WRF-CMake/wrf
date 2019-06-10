@@ -85,16 +85,16 @@ If you want to launch WRF-CMake and WPS-CMake built in `dmpar` to run on multipl
 
 ## Example usage
 
-If you are a complete beginner, we recommend going [trough the basics](http://www2.mmm.ucar.edu/wrf/OnLineTutorial/Basics/index.php) or [running the case studies](http://www2.mmm.ucar.edu/wrf/OnLineTutorial/CASES/index.php) as described in the [WRF-ARW Online Tutorial](http://www2.mmm.ucar.edu/wrf/OnLineTutorial/).
+If you have already used WRF/WPS before and you just want a quick tutorial to go over the main steps, we have put together a very basic tutorial on our sister-project's website [GIS4WRF](https://gis4wrf.github.io/) with step-by-step instructions [here](https://gis4wrf.github.io/tutorials/wrf-cmake/simulate-the-2018-european-heat-wave-with-wrf-cmake/).
 
-If you have already used WRF/WPS before and you just want a quick tutorial to go over the main steps, we have put together a very basic one on our sister-project's website [GIS4WRF](https://gis4wrf.github.io/). You can follow the step-by-step tutorial [here](https://gis4wrf.github.io/tutorials/).
+Otherwise, if you are a complete beginner, we recommend going [trough the basics](http://www2.mmm.ucar.edu/wrf/OnLineTutorial/Basics/index.php) or [running the case studies](http://www2.mmm.ucar.edu/wrf/OnLineTutorial/CASES/index.php) as described in the [WRF-ARW Online Tutorial](http://www2.mmm.ucar.edu/wrf/OnLineTutorial/).
 
 
 ## How to cite
 
 When using WRF-CMake in your project or publication, please cite the model as well as the software and version number as shown in the example below. Please make sure that you reference the correct DOI when referencing the software version you are using -- for a list of versions and corresponding DOIs, please see the archived versions on Zenodo at: [TODO]
 
-*We used WRF (Skamarock et al., 2008) model, from WRF-CMake (Riechert and Meyer, 2019a), version 4.1 (Riechert and Meyer, 2019b) to [...]*
+*We used the WRF (Skamarock et al., 2008) model WRF-CMake (Riechert and Meyer, 2019a), version 4.1 (Riechert and Meyer, 2019b) to [...]*
 
 The corresponding reference list should be as follows
 
