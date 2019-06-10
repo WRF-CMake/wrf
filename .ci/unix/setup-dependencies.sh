@@ -40,7 +40,7 @@ if [ "$(uname)" == "Linux" ]; then
         sudo add-apt-repository ppa:ubuntu-toolchain-r/test
 
         sudo apt-get update
-        sudo apt-get install gcc-8 gfortran-8 libpng-dev libjasper-dev 
+        sudo apt-get install $CC $FC libpng-dev libjasper-dev 
         sudo apt-get install libnetcdf-dev
 
         # Need to build netcdf-fortran manually as the Fortran compiler versions have to match.
@@ -50,7 +50,7 @@ if [ "$(uname)" == "Linux" ]; then
         cd netcdf-fortran-4.4.4
         sed -i 's/ADD_SUBDIRECTORY(examples)/#ADD_SUBDIRECTORY(examples)/' CMakeLists.txt
         mkdir build && cd build
-        CC=gcc-8 FC=gfortran-8 cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_TESTS=OFF -DCMAKE_INSTALL_PREFIX=/usr ..
+        cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_TESTS=OFF -DCMAKE_INSTALL_PREFIX=/usr ..
         make -j 4
         sudo make install
     fi
@@ -69,7 +69,7 @@ if [ "$(uname)" == "Linux" ]; then
             cd /tmp
             curl --retry ${HTTP_RETRIES} http://www.mpich.org/static/downloads/${MPICH_VERSION}/mpich-${MPICH_VERSION}.tar.gz | tar xz
             cd mpich-${MPICH_VERSION}
-            CC=gcc-8 FC=gfortran-8 ./configure --prefix=/usr
+            ./configure --prefix=/usr
             make -j 4
             sudo make install
         fi
