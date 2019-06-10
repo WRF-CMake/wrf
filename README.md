@@ -1,9 +1,26 @@
 # WRF-CMake [![Build status Azure Pipelines](https://dev.azure.com/WRF-CMake/WRF/_apis/build/status/WRF%20(full)?branchName=wrf-cmake)](https://dev.azure.com/WRF-CMake/WRF/_build/latest?definitionId=5&branchName=wrf-cmake) [![Build status Appveyor](https://ci.appveyor.com/api/projects/status/86508wximkvmf95g/branch/wrf-cmake?svg=true)](https://ci.appveyor.com/project/WRF-CMake/wrf/branch/wrf-cmake) [![Build status Travis CI](https://travis-ci.com/WRF-CMake/WRF.svg?branch=wrf-cmake)](https://travis-ci.com/WRF-CMake/WRF)
 
+  - [Project overview](#project-overview)
+    - [Currently supported platforms](#currently-supported-platforms)
+    - [Currently unsupported features](#currently-unsupported-features)
+  - [Installation](#installation)
+    - [Manually from source](#manually-from-source)
+    - [Using Homebrew or Linuxbrew](#using-homebrew-or-linuxbrew)
+    - [Binary distribution (Experimental)](#binary-distribution-experimental)
+  - [Documentation](#documentation)
+  - [Example usage](#example-usage)
+  - [How to cite](#how-to-cite)
+  - [Testing framework](#testing-framework)
+  - [Changes to be upstreamed](#changes-to-be-upstreamed)
+  - [Copyright and license](#copyright-and-license)
+
+## Project overview
+
 WRF-CMake adds CMake support to the latest version of the [Advanced Research Weather Research and Forecasting](https://www.mmm.ucar.edu/weather-research-and-forecasting-model) model (here WRF, for short) with the intention of streamlining and simplifying its configuration and build process. In our view, the use of CMake provides model developers, code maintainers, and end-users with several advantages such as robust incremental rebuilds, flexible library dependency discovery, native tool-chains for Windows, macOS, and Linux with minimal external dependencies, thus increasing portability, and automatic generation of project files for different platforms.
 
 WRF-CMake is designed to work alongside the current releases of WRF, therefore you can still compile your code using the legacy Makefiles included in WRF and WPS for any of the currently unsupported features.
 
+For more details, please see the short summary paper [WRF-CMake: integrating CMake support into the Advanced Research WRF (ARW) modelling system](https://joss.theoj.org/papers/9a87d84b2ed00ed82a6e297a4c34b3cf) on [The Journal of Open Source Software](https://joss.theoj.org/) website.
 
 ### Currently supported platforms
 
@@ -27,7 +44,21 @@ WRF-CMake is designed to work alongside the current releases of WRF, therefore y
 
 ## Installation
 
-The installation of WRF-CMake is straightforward thanks to the downloadable pre-built binaries for most Linux distributions (specifically [ RPM-based and Debian-based distribution-compatible](https://en.wikipedia.org/wiki/List_of_Linux_distributions)), macOS, and Windows (see [binary distribution](#binary-distribution-experimental) below) -- most users wishing to run WRF on their system can simply download the pre-compiled binaries without the need of building from source. Alternately, to build WRF from source, please refer to the [source distribution](#source-distribution) section below. HPC users, or users seeking to run WRF in the 'most optimal' configuration for their system, are advised to build WRF-CMake from source.
+The installation of WRF-CMake or WPS-CMake is straightforward thanks to the downloadable pre-built binaries for most Linux distributions (specifically [ RPM-based and Debian-based distribution-compatible](https://en.wikipedia.org/wiki/List_of_Linux_distributions)), macOS, and Windows (see [binary distribution](#binary-distribution-experimental) below) -- most users wishing to run WRF on their system can simply download the pre-compiled binaries without the need of building from source. Alternately, you can install WRF-CMake or WPS-CMake using the Homebrew/Linuxbrew package manager or by building and installing the software from source, please refer to the build and install [manually from source](#manually-from-source) and [Using Homebrew or Linuxbrew](using-homebrew-or-linuxbrew) section below.
+
+Please note that HPC users, or users seeking to run WRF in the 'most optimal' configuration for their system, are advised to build WRF-CMake manually from source or using the Homebrew/Linuxbrew package manager.
+
+
+### Manually from source
+To build and install WRF-CMake or WPS-CMake manually from source, see [this page](doc/cmake/INSTALL.md).
+
+### Using Homebrew or Linuxbrew
+WRF-CMake and WPS-CMake can be built and installed using [Homebrew](https://docs.brew.sh/Installation) (macOS) or [Linuxbrew](https://docs.brew.sh/Homebrew-on-Linux#install) (Linux) with the following commands:
+
+``` bash
+brew tap wrf-cmake/wrf && brew install wrf
+brew tap wrf-cmake/wps && brew install wps
+```
 
 
 ### Binary distribution (Experimental)
@@ -47,10 +78,35 @@ If you want to launch WRF-CMake and WPS-CMake built in `dmpar` to run on multipl
 - On Linux, use your package manager to download mpich (version ≥ 3.0.4). E.g. `sudo apt-get update && sudo apt-get install mpich` on Debian-based systems or `sudo yum install mpich` on RPM-based system like CentOS.
 
 
-### Source distribution
-To build WRF-CMake from source, see [this page](doc/cmake/INSTALL.md).
+## Documentation
 
-## Testing
+- For the WRF model technical documentation, please refer to [A Description of the Advanced Research WRF Version 3](https://opensky.ucar.edu/islandora/object/technotes%3A500/datastream/PDF/view).
+- For the WRF model user documentation, please refer to [The Advanced Research WRF version 4 Modeling System User’s Guide](http://www2.mmm.ucar.edu/wrf/users/docs/user_guide_v4/contents.html).
+
+## Example usage
+
+If you are a complete beginner, we recommend going [trough the basics](http://www2.mmm.ucar.edu/wrf/OnLineTutorial/Basics/index.php) or [running the case studies](http://www2.mmm.ucar.edu/wrf/OnLineTutorial/CASES/index.php) as described in the [WRF-ARW Online Tutorial](http://www2.mmm.ucar.edu/wrf/OnLineTutorial/).
+
+If you have already used WRF/WPS before and you just want a quick tutorial to go over the main steps, we have put together a very basic one on our sister-project's website [GIS4WRF](https://gis4wrf.github.io/). You can follow the step-by-step tutorial [here](https://gis4wrf.github.io/tutorials/).
+
+
+## How to cite
+
+When using WRF-CMake in your project or publication, please cite the model as well as the software and version number as shown in the example below. Please make sure that you reference the correct DOI when referencing the software version you are using -- for a list of versions and corresponding DOIs, please see the archived versions on Zenodo at: [TODO]
+
+*We used WRF (Skamarock et al., 2008) model, from WRF-CMake (Riechert and Meyer, 2019a), version 4.1 (Riechert and Meyer, 2019b) to [...]*
+
+The corresponding reference list should be as follows
+
+W.C. Skamarock, J.B. Klemp, J. Dudhia, D.O. Gill, D.M. Barker, M.G. Duda, X.-Y. Huang, W. Wang, J.G. Powers
+**A Description of the Advanced Research WRF Version 3**. NCAR Tech (2008). Note NCAR/TN-475+STR. https://doi.org/10.5065/D68S4MVH
+
+Riechert and Meyer, 2019a: TODO
+
+Riechert and Meyer, 2019b: TODO
+
+
+## Testing framework
 
 In our current GitHub set-up, we perform a series of compilation and regression tests at each commit using the [WRF-CMake Automated Testing Suite](https://github.com/WRF-CMake/wats) on Windows, macOS, and Linux. You can find the results of such tests [here](https://travis-ci.com/WRF-CMake), [here](https://ci.appveyor.com/project/WRF-CMake/wrf), and [here](https://ci.appveyor.com/project/WRF-CMake/wps).
 
