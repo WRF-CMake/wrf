@@ -58,7 +58,10 @@ WRF-CMake and WPS-CMake can be built and installed using [Homebrew](https://docs
 
 ``` bash
 brew tap wrf-cmake/wrf
-brew install wrf
+# Apple Clang is not supported in latest avalable WRF-CMake release (4.0.3),
+# however this has now been fixed and the fixes are available from the wrf-cmake branch.
+# We pass the `--HEAD` flag to buld WRF-CMake and WPS-CMake from the latest commit from the wrf-cmake branch.
+brew install wrf --HEAD -v
 ```
 
 
@@ -109,7 +112,7 @@ Riechert and Meyer, 2019b: TODO
 
 ## How to contribute
 
-If you are looking to contribute, please read our Contributors' guide for details.
+If you are looking to contribute, please read our [Contributors' guide](CONTRIBUTING.md) for details.
 
 
 ## Testing framework
