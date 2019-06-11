@@ -327,6 +327,10 @@ if (ENABLE_MPI)
     set(USE_RSL_LITE ON)
 endif()
 
+if (ENABLE_OpenMP)
+    add_definitions(-D_OPENMP)
+endif()
+
 if (ENABLE_NESTING AND NOT ENABLE_MPI)
     add_definitions(-DDM_PARALLEL -DSTUBMPI)
     set(USE_RSL_LITE ON)
