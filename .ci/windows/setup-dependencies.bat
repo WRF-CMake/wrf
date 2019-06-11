@@ -32,13 +32,17 @@ call refreshenv.cmd
 rem Restore old PATH after refreshenv in case other scripts modified it already
 set PATH=%OLDPATH%
 
+echo Install MSYS2
+choco install msys2 --params "/InstallDir:c:\wrf_msys64 /NoUpdate"
+
 rem Setup MinGW shell
-set PATH=C:\msys64\usr\bin;%PATH%
+set PATH=C:\wrf_msys64\usr\bin;%PATH%
 set MSYSTEM=MINGW64
 
-echo Install MSYS2 and MinGW64 Packages
+echo Install MinGW64 Packages
 bash -lc "pacman --noconfirm -Syu" || goto :error
-bash -lc "pacman --noconfirm --needed -S mingw-w64-x86_64-toolchain mingw64/mingw-w64-x86_64-cmake make unzip git mingw64/mingw-w64-x86_64-portablexdr" || goto :error
+bash -lc "pacman --noconfirm -Su" || goto :error
+bash -lc "pacman --noconfirm --needed -S mingw-w64-x86_64-gcc mingw-w64-x86_64-gcc-fortran mingw-w64-x86_64-cmake make unzip git mingw-w64-x86_64-portablexdr" || goto :error
 bash -lc "pacman --noconfirm --needed -S mingw-w64-x86_64-libpng mingw-w64-x86_64-libjpeg-turbo mingw-w64-x86_64-jasper" || goto :error
 bash -lc "pacman --noconfirm --needed -S mingw-w64-x86_64-hdf5 mingw-w64-x86_64-libtool tar" || goto :error
 

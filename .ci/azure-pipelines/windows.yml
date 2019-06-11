@@ -20,21 +20,6 @@ jobs:
   - script: set
     displayName: Dump environment variables
 
-  # We will install the latest version later on.
-  - pwsh: |
-      $products = Get-CimInstance -ClassName Win32_Product -Filter "Name like 'Microsoft MPI%'"
-      foreach ($p in $products) {
-        echo "Uninstalling $($p.Name)"
-        Invoke-CimMethod -InputObject $p -MethodName Uninstall
-      }
-    condition: and(succeeded(), startsWith(variables.MODE, 'dm'))
-    displayName: Remove existing MSMPI
-
-  # /NoUpdate temporarily necessary due to freezing in windows-2019 image during update...
-  - script: |
-      choco install msys2 --params "/InstallDir:c:\msys64 /NoUpdate"
-    displayName: Install MSYS2
-
   - task: BatchScript@1
     displayName: Setup dependencies
     inputs:
