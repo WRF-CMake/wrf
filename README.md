@@ -21,7 +21,7 @@ WRF-CMake adds CMake support to the latest version of the [Advanced Research Wea
 
 WRF-CMake is designed to work alongside the current releases of WRF, therefore you can still compile your code using the legacy Makefiles included in WRF and WPS for any of the currently unsupported features.
 
-For more details, please see the short summary paper [WRF-CMake: integrating CMake support into the Advanced Research WRF (ARW) modelling system](https://joss.theoj.org/papers/9a87d84b2ed00ed82a6e297a4c34b3cf) on [The Journal of Open Source Software](https://joss.theoj.org/) website.
+For more details, please see the short summary paper [WRF-CMake: integrating CMake support into the Advanced Research WRF (ARW) modelling system](https://joss.theoj.org/papers/9a87d84b2ed00ed82a6e297a4c34b3cf) on the [Journal of Open Source Software](https://joss.theoj.org/) website.
 
 ### Currently supported platforms
 
@@ -45,9 +45,9 @@ For more details, please see the short summary paper [WRF-CMake: integrating CMa
 
 ## Installation
 
-The installation of WRF-CMake or WPS-CMake is straightforward thanks to the downloadable pre-built binaries for most Linux distributions (specifically [ RPM-based and Debian-based distribution-compatible](https://en.wikipedia.org/wiki/List_of_Linux_distributions)), macOS, and Windows (see [binary distribution](#binary-distribution-experimental) below) -- most users wishing to run WRF on their system can simply download the pre-compiled binaries without the need of building from source. Alternately, you can install WRF-CMake or WPS-CMake using the Homebrew/Linuxbrew package manager or by building and installing the software from source, please refer to the build and install [manually from source](#manually-from-source) and [Using Homebrew or Linuxbrew](using-homebrew-or-linuxbrew) section below.
+The installation of WRF-CMake or WPS-CMake is straightforward thanks to the downloadable pre-built binaries for most Linux distributions (specifically [ RPM-based and Debian-based distribution-compatible](https://en.wikipedia.org/wiki/List_of_Linux_distributions)), macOS, and Windows (see [binary distribution](#binary-distribution-experimental) below) -- most users wishing to run WRF on their system can simply download the pre-compiled binaries without the need to build from source. Alternately, you can install WRF-CMake or WPS-CMake using the Homebrew/Linuxbrew package manager, or by building and installing the software from source -- please refer to the build and install [manually from source](#manually-from-source) and [Using Homebrew or Linuxbrew](using-homebrew-or-linuxbrew) section below.
 
-Please note that HPC users, or users seeking to run WRF in the 'most optimal' configuration for their system, are advised to build WRF-CMake manually from source or using the Homebrew/Linuxbrew package manager.
+Please note that HPC users, or users seeking to run WRF in the 'most optimal' configuration for their system are advised to build WRF-CMake manually from source or to use the Homebrew/Linuxbrew package manager.
 
 
 ### Manually from source
