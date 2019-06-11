@@ -20,10 +20,9 @@ A clear and concise description of what you expected to happen.
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
-**Desktop (please complete the following information):**
- - OS: [e.g. Ubuntu, macOS, Windows]
- - Compiler [e.g. gcc/gfortran, icc/ifort]
- - Version [e.g. 8.1.0]
+**System information (please complete the following information):**
+ - OS name and version: [e.g. Ubuntu 18, macOS 10.14, Windows 10]
+ - Compiler name and version [e.g. gcc/gfortran 8.1, icc/ifort 19]
 
 **Additional context**
 Add any other context about the problem here.
