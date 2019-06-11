@@ -96,18 +96,20 @@ Otherwise, if you are a complete beginner, we recommend going [trough the basics
 
 ## How to cite
 
-When using WRF-CMake in your project or publication, please cite the model as well as the software and version number as shown in the example below. Please make sure that you reference the correct DOI when referencing the software version you are using -- for a list of versions and corresponding DOIs, please see the archived versions on Zenodo at: [TODO]
+When using WRF-CMake in your project or publication, please cite as shown in the example below -- both WRF-CMake and the WRF model should be cited. Please also make sure that you reference the correct DOI when referencing the software version you are using -- for a list of versions and corresponding DOIs, please see the archived versions on Zenodo at [TODO].
 
-*We used the WRF (Skamarock et al., 2008) model WRF-CMake (Riechert and Meyer, 2019a), version 4.1 (Riechert and Meyer, 2019b) to [...]*
+> We used WRF-CMake (Riechert and Meyer, 2019a), version x.x.x (Riechert and Meyer, 2019b) of the Weather Research and Forecasting (WRF) Model (Skamarock et al., 2008) to ...
 
 The corresponding reference list should be as follows
 
-W.C. Skamarock, J.B. Klemp, J. Dudhia, D.O. Gill, D.M. Barker, M.G. Duda, X.-Y. Huang, W. Wang, J.G. Powers
+> Riechert and Meyer, 2019a: TODO
+>
+> Riechert and Meyer, 2019b: TODO
+>
+> W.C. Skamarock, J.B. Klemp, J. Dudhia, D.O. Gill, D.M. Barker, M.G. Duda, X.-Y. Huang, W. Wang, J.G. Powers
 **A Description of the Advanced Research WRF Version 3**. NCAR Tech (2008). Note NCAR/TN-475+STR. https://doi.org/10.5065/D68S4MVH
 
-Riechert and Meyer, 2019a: TODO
 
-Riechert and Meyer, 2019b: TODO
 
 
 ## How to contribute
