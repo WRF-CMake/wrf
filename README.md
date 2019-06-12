@@ -51,7 +51,7 @@ Please note that HPC users, or users seeking to run WRF in the 'most optimal' co
 
 
 ### Manually from source
-To build and install WRF-CMake or WPS-CMake manually from source, see [this page](doc/cmake/INSTALL.md).
+To build and install WRF-CMake or WPS-CMake manually from source, see [the install from source page](doc/cmake/INSTALL.md).
 
 ### Using Homebrew or Linuxbrew
 WRF-CMake and WPS-CMake can be built and installed using [Homebrew](https://docs.brew.sh/Installation) (macOS) or [Linuxbrew](https://docs.brew.sh/Homebrew-on-Linux#install) (Linux) with the following commands:
@@ -86,9 +86,9 @@ If you want to launch WRF-CMake and WPS-CMake built in `dmpar` to run on multipl
 
 ## Example usage
 
-If you have already used WRF/WPS before and you just want a quick tutorial to go over the main steps, we have put together a very basic tutorial on our sister-project's website [GIS4WRF](https://gis4wrf.github.io/) with step-by-step instructions [here](https://gis4wrf.github.io/tutorials/wrf-cmake/simulate-the-2018-european-heat-wave-with-wrf-cmake/).
+If you have already used WRF/WPS before and you just want a quick tutorial to go over the main steps, we have put together a very basic tutorial on our sister-project's website [GIS4WRF](https://gis4wrf.github.io/) with step-by-step instructions: [Simulate The 2018 European Heat Wave with WRF-CMake](https://gis4wrf.github.io/tutorials/wrf-cmake/simulate-the-2018-european-heat-wave-with-wrf-cmake/).
 
-Otherwise, if you are a complete beginner, we recommend going [trough the basics](http://www2.mmm.ucar.edu/wrf/OnLineTutorial/Basics/index.php) or [running the case studies](http://www2.mmm.ucar.edu/wrf/OnLineTutorial/CASES/index.php) as described in the [WRF-ARW Online Tutorial](http://www2.mmm.ucar.edu/wrf/OnLineTutorial/).
+Otherwise, if you are a beginner, we recommend going [trough the basics](http://www2.mmm.ucar.edu/wrf/OnLineTutorial/Basics/index.php) or [running the case studies](http://www2.mmm.ucar.edu/wrf/OnLineTutorial/CASES/index.php) as described in the [WRF-ARW Online Tutorial](http://www2.mmm.ucar.edu/wrf/OnLineTutorial/).
 
 
 ## How to cite
