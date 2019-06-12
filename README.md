@@ -88,7 +88,7 @@ If you want to launch WRF-CMake and WPS-CMake built in `dmpar` to run on multipl
 
 If you have already used WRF/WPS before and you just want a quick tutorial to go over the main steps, we have put together a very basic tutorial on our sister-project's website [GIS4WRF](https://gis4wrf.github.io/) with step-by-step instructions: [Simulate The 2018 European Heat Wave with WRF-CMake](https://gis4wrf.github.io/tutorials/wrf-cmake/simulate-the-2018-european-heat-wave-with-wrf-cmake/).
 
-Otherwise, if you are a beginner, we recommend going [trough the basics](http://www2.mmm.ucar.edu/wrf/OnLineTutorial/Basics/index.php) or [running the case studies](http://www2.mmm.ucar.edu/wrf/OnLineTutorial/CASES/index.php) as described in the [WRF-ARW Online Tutorial](http://www2.mmm.ucar.edu/wrf/OnLineTutorial/).
+Otherwise, if you are a beginner, we recommend going [through the basics](http://www2.mmm.ucar.edu/wrf/OnLineTutorial/Basics/index.php) or [running the case studies](http://www2.mmm.ucar.edu/wrf/OnLineTutorial/CASES/index.php) as described in the [WRF-ARW Online Tutorial](http://www2.mmm.ucar.edu/wrf/OnLineTutorial/).
 
 
 ## How to cite
@@ -99,9 +99,9 @@ When using WRF-CMake in your project or publication, please cite as shown in the
 
 The corresponding reference list should be as follows
 
-> Riechert and Meyer, 2019a: TODO
+> M. Riechert, D. Meyer, 2019a. TODO: *In preparation*
 >
-> Riechert and Meyer, 2019b: TODO
+> M. Riechert, D. Meyer, 2019b: TODO: *In preparation*
 >
 > W.C. Skamarock, J.B. Klemp, J. Dudhia, D.O. Gill, D.M. Barker, M.G. Duda, X.-Y. Huang, W. Wang, J.G. Powers
 **A Description of the Advanced Research WRF Version 3**. NCAR Tech (2008). Note NCAR/TN-475+STR. https://doi.org/10.5065/D68S4MVH
