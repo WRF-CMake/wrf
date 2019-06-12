@@ -24,9 +24,9 @@ Before creating a feature request, please check if a similar feature has been al
 
 ## Coding conventions
 
-Same as in the [WRF](https://github.com/wrf-model/WRF) and [WPS](https://github.com/wrf-model/WPS).
+Same as in [WRF](https://github.com/wrf-model/WRF) and [WPS](https://github.com/wrf-model/WPS).
 
 
 ## Versioning
 
-WRF-CMake and WPS-CMake fully tracks releases made by the [WRF](https://github.com/wrf-model/WRF) and [WPS](https://github.com/wrf-model/WPS) model.
+WRF-CMake and WPS-CMake fully tracks releases made by [WRF](https://github.com/wrf-model/WRF) and [WPS](https://github.com/wrf-model/WPS).
