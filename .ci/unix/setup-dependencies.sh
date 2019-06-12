@@ -44,9 +44,8 @@ if [ "$(uname)" == "Linux" ]; then
         sudo apt-get install libnetcdf-dev
 
         # Need to build netcdf-fortran manually as the Fortran compiler versions have to match.
-        # TODO remove this once WRF 4.1 is out (as that switches from modules to .inc for netcdf & mpi)
         cd /tmp
-        curl --retry ${HTTP_RETRIES} ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-fortran-4.4.4.tar.gz | tar xz
+        curl --retry ${HTTP_RETRIES} https://www.unidata.ucar.edu/downloads/netcdf/ftp/netcdf-fortran-4.4.4.tar.gz | tar xz
         cd netcdf-fortran-4.4.4
         sed -i 's/ADD_SUBDIRECTORY(examples)/#ADD_SUBDIRECTORY(examples)/' CMakeLists.txt
         mkdir build && cd build
@@ -64,7 +63,6 @@ if [ "$(uname)" == "Linux" ]; then
             sudo apt-get install libmpich-dev
         else
             # Need to build mpich manually as the Fortran compiler versions have to match.
-            # TODO remove this once WRF 4.1 is out (as that switches from modules to .inc for netcdf & mpi)
             MPICH_VERSION=3.2.1
             cd /tmp
             curl --retry ${HTTP_RETRIES} http://www.mpich.org/static/downloads/${MPICH_VERSION}/mpich-${MPICH_VERSION}.tar.gz | tar xz
