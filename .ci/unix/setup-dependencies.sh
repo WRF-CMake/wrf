@@ -37,7 +37,7 @@ if [ "$(uname)" == "Linux" ]; then
     else
         # macOS (via Homebrew) and Windows (via MSYS2) always provide the latest
         # compiler versions. On Ubuntu, we need to opt-in explicitly. 
-        sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+        sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
 
         sudo apt-get update
         sudo apt-get install $CC $FC libpng-dev libjasper-dev 

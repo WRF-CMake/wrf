@@ -157,7 +157,7 @@ jobs:
         - FC=gfortran-9
         - GRIB1=1
         - GRIB2=1
-        - MODE=dm_sm
+        - MODE=dmpar # not using dm_sm as Apple's Clang doesn't easily support OpenMP
         - NESTING=basic
 
 before_install:
