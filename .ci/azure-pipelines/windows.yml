@@ -1,3 +1,6 @@
+# WRF-CMake (https://github.com/WRF-CMake/WRF).
+# Copyright 2019 M. Riechert and D. Meyer. Licensed under the MIT License.
+
 jobs:
 - job: ${{ parameters.OS_NAME }}_${{ parameters.BUILD_SYSTEM }}_${{ parameters.BUILD_TYPE }}_${{ parameters.MODE }}
   displayName: '${{ parameters.OS_NAME }} ${{ parameters.BUILD_SYSTEM }}: ${{ parameters.BUILD_TYPE }}, ${{ parameters.MODE }}'

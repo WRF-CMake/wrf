@@ -1,3 +1,6 @@
+# WRF-CMake (https://github.com/WRF-CMake/WRF).
+# Copyright 2019 M. Riechert and D. Meyer. Licensed under the MIT License.
+
 jobs:
 - job: wats_diff_${{ parameters.OS_NAME_LEFT }}_${{ parameters.OS_NAME_RIGHT }}_${{ parameters.BUILD_SYSTEM_LEFT }}_${{ parameters.BUILD_SYSTEM_RIGHT }}_${{ parameters.BUILD_TYPE }}_${{ parameters.MODE }}
   displayName: 'WATS ${{ parameters.OS_NAME_LEFT }}/${{ parameters.OS_NAME_RIGHT }} ${{ parameters.BUILD_SYSTEM_LEFT }}/${{ parameters.BUILD_SYSTEM_RIGHT }}: ${{ parameters.BUILD_TYPE }}, ${{ parameters.MODE }}'

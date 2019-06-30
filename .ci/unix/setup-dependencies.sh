@@ -1,12 +1,19 @@
 #!/bin/bash
 
+# WRF-CMake (https://github.com/WRF-CMake/WRF).
 # Copyright 2018 M. Riechert and D. Meyer. Licensed under the MIT License.
 
 set -ex
 
 SCRIPTDIR=$(dirname "$0")
 
+source $SCRIPTDIR/retry.sh
+
+HTTP_RETRIES=3
+
 if [ "$(uname)" == "Linux" ]; then
+
+    echo "APT::Acquire::Retries \"${HTTP_RETRIES}\";" | sudo tee /etc/apt/apt.conf.d/80-retries
 
     if [ "$(lsb_release -c -s)" == "trusty" ]; then
         sudo apt-get update
@@ -39,8 +46,7 @@ if [ "$(uname)" == "Linux" ]; then
         # Need to build netcdf-fortran manually as the Fortran compiler versions have to match.
         # TODO remove this once WRF 4.1 is out (as that switches from modules to .inc for netcdf & mpi)
         cd /tmp
-        wget ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-fortran-4.4.4.tar.gz
-        tar xvzf netcdf-fortran-4.4.4.tar.gz
+        curl --retry ${HTTP_RETRIES} ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-fortran-4.4.4.tar.gz | tar xz
         cd netcdf-fortran-4.4.4
         sed -i 's/ADD_SUBDIRECTORY(examples)/#ADD_SUBDIRECTORY(examples)/' CMakeLists.txt
         mkdir build && cd build
@@ -61,7 +67,7 @@ if [ "$(uname)" == "Linux" ]; then
             # TODO remove this once WRF 4.1 is out (as that switches from modules to .inc for netcdf & mpi)
             MPICH_VERSION=3.2.1
             cd /tmp
-            curl http://www.mpich.org/static/downloads/${MPICH_VERSION}/mpich-${MPICH_VERSION}.tar.gz | tar xz
+            curl --retry ${HTTP_RETRIES} http://www.mpich.org/static/downloads/${MPICH_VERSION}/mpich-${MPICH_VERSION}.tar.gz | tar xz
             cd mpich-${MPICH_VERSION}
             CC=gcc-8 FC=gfortran-8 ./configure --prefix=/usr
             make -j 4
@@ -78,10 +84,20 @@ elif [ "$(uname)" == "Darwin" ]; then
     # Use the `-f` flag in case c++ is not present to avoid errors.
     rm -f /usr/local/include/c++
 
-    # disable automatic cleanup, just takes time
+    # Don't fall-back to source build if bottle download fails for some reason (e.g. network issues).
+    # Source builds generally take too long in CI. This setting let's brew fail immediately.
+    export HOMEBREW_NO_BOTTLE_SOURCE_FALLBACK=1
+
+    # Retry downloads if there was a failure.
+    # Used only for bottles, but not during 'brew update' which uses git internally.
+    export HOMEBREW_CURL_RETRIES=${HTTP_RETRIES}
+
+    # Disable automatic cleanup, just takes time.
     export HOMEBREW_NO_INSTALL_CLEANUP=1
 
-    brew update -v
+    # 'brew update' uses git and does not have a retry option, so we wrap it.
+    retry brew update -v
+
     # Since "brew install" can't silently ignore already installed packages
     # we're using this instead.
     # See https://github.com/Homebrew/brew/issues/2491#issuecomment-294264745.

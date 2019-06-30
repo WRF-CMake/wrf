@@ -5,9 +5,9 @@ For the installation of libraries, we rely on your system's package managers (AP
 
 ## Table of contents
 - [Ubuntu](#ubuntu)
-    - [14.04 LTS (Trusty)](#14.04-lts-(trusty))
-    - [16.04 LTS (Xenial)](#16.04-lts-(xenial))
-    - [18.04 LTS (Bionic)](#18.04-lts-(bionic))
+    - [14.04 LTS (Trusty)](#1404-lts-trusty)
+    - [16.04 LTS (Xenial)](#1604-lts-xenial)
+    - [18.04 LTS (Bionic)](#1804-lts-bionic)
 - [macOS](#macOS)
 - [Windows](#windows)
     - [Microsoft MPI support](#microsoft-mpi-support)
@@ -22,7 +22,7 @@ sudo apt-get update && sudo apt-get upgrade -y
 sudo apt-get install -y git cmake3 gfortran libnetcdf-dev libpng-dev libjasper-dev libmpich-dev
 ```
 
-After the installtion is complete, you can go back to [Build and Install WRF-CMake](README_CMAKE_INSTALL.md#build-and-install-wrf-cmake).
+After the installtion is complete, you can go back to [Build and Install WRF-CMake].
 
 ### 16.04 LTS (Xenial)
 To install all the required dependencies, including support for MPI, run the following commands from your terminal prompt:
@@ -32,7 +32,7 @@ sudo apt-get update && sudo apt-get upgrade -y
 sudo apt-get install -y git cmake gfortran libnetcdf-dev libnetcdff-dev libpng-dev libjasper-dev libjpeg-dev zlib1g-dev libmpich-dev
 ```
 
-After the installtion is complete, you can go back to [Build and Install WRF-CMake](README_CMAKE_INSTALL.md#build-and-install-wrf-cmake).
+After the installtion is complete, you can go back to [Build and Install WRF-CMake].
 
 ### 18.04 LTS (Bionic)
 
@@ -54,7 +54,7 @@ cmake ..
 sudo make install
 ```
 
-After the installtion is complete, you can go back to [Build and Install WRF-CMake](README_CMAKE_INSTALL.md#build-and-install-wrf-cmake).
+After the installtion is complete, you can go back to [Build and Install WRF-CMake].
 
 ## macOS
 
@@ -62,10 +62,10 @@ On macOS, we can use Homebrew to to install the required libraries. If you do no
 
 ```sh
 brew update
-brew install git cmake gcc netcdf jasper mpich
+brew install git cmake gcc netcdf jasper open-mpi
 ```
 
-After the installtion is complete, you can go back to [Build and Install WRF-CMake](README_CMAKE_INSTALL.md#build-and-install-wrf-cmake).
+After the installation is complete, you can go back to [Build and Install WRF-CMake].
 
 ## Windows
 - Install the 64bit version of [MSYS2](http://www.msys2.org/)
@@ -97,7 +97,7 @@ cmake -DCMAKE_GENERATOR="MSYS Makefiles" -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_T
 make install
 ```
 
-If you require MPI support you can continue with the section below, otherwise you can go back to [Build and Install WRF-CMake](README_CMAKE_INSTALL.md#build-and-install-wrf-cmake).
+If you require MPI support you can continue with the section below, otherwise you can go back to [Build and Install WRF-CMake].
 
 ### Microsoft MPI support
 The following MS MPI instructions originated from:
@@ -145,4 +145,6 @@ mpiexec -n 2 example1.exe
 mpiexec -n 2 example2.exe
 ```
 
-If everything went OK, you can now build WRF with MPI. You can go back to [Build and Install WRF-CMake](README_CMAKE_INSTALL.md#build-and-install-wrf-cmake).
+If everything went OK, you can now build WRF with MPI. You can go back to [Build and Install WRF-CMake].
+
+[Build and Install WRF-CMake]:INSTALL.md#build-and-install-wrf-cmake

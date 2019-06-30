@@ -1,3 +1,6 @@
+# WRF-CMake (https://github.com/WRF-CMake/WRF).
+# Copyright 2019 M. Riechert and D. Meyer. Licensed under the MIT License.
+
 # Runs on commits to the wrf-cmake branch and PRs.
 trigger:
 - wrf-cmake

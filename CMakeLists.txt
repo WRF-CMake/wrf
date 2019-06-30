@@ -1,3 +1,4 @@
+# WRF-CMake (https://github.com/WRF-CMake/WRF).
 # Copyright 2018 M. Riechert and D. Meyer. Licensed under the MIT License.
 
 cmake_minimum_required(VERSION 3.1)
@@ -108,11 +109,6 @@ set(ENABLE_NETCDF ON)
 
 if (NOT MINGW AND NOT UNIX)
     message(FATAL_ERROR "Unsupported operating system / toolset")
-endif()
-
-if (CMAKE_Fortran_COMPILER_ID MATCHES "Clang")
-    # See Transpose() subroutine in external/io_netcdf/wrf_io.F90 for details.
-    message(FATAL_ERROR "Clang is not supported, use gcc/gfortran from Homebrew instead")
 endif()
 
 if (NOT ARCH_CUSTOM)
@@ -306,6 +302,7 @@ add_definitions(
     -DKEEP_INT_AROUND
     -DLIMIT_ARGS
     -DBUILD_RRTMG_FAST=1
+    -DSHOW_ALL_VARS_USED=0
     -DCONFIG_BUF_LEN=65536
     -DMAX_DOMAINS_F=21
     -DIWORDSIZE=4
@@ -314,6 +311,7 @@ add_definitions(
     -DRWORDSIZE=4
     -DMAX_HISTORY=25
     -DWRF_USE_CLM
+    -DLANDREAD_STUB=1
 
     # See Transpose() subroutine in external/io_netcdf/wrf_io.F90.
     -DNO_M4
