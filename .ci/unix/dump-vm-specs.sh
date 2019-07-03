@@ -14,6 +14,7 @@ if [ "$(uname)" == "Darwin" ]; then
     sudo scutil --get HostName || true
     sudo scutil --get LocalHostName || true
 elif [ "$(uname)" == "Linux" ]; then
+    sudo apt install -y lsb-release
     lsb_release -a
     free -m
     lscpu
