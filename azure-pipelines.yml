@@ -8,6 +8,10 @@ trigger:
     - '*'
     exclude:
     - wrf-cmake
+  paths:
+    exclude:
+    - 'doc/'
+    - 'README*'
 pr: none
 
 jobs:
