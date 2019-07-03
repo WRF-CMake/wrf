@@ -50,15 +50,15 @@ cd /tmp
 wget https://www.ece.uvic.ca/~frodo/jasper/software/jasper-2.0.14.tar.gz
 tar xvzf jasper-2.0.14.tar.gz
 cd jasper-2.0.14/build/
-cmake ..
+cmake -DCMAKE_INSTALL_PREFIX=/usr ..
 sudo make install
 ```
 
-After the installtion is complete, you can go back to [Build and Install WRF-CMake].
+After the installation is complete, you can go back to [Build and Install WRF-CMake].
 
 ## macOS
 
-On macOS, we can use Homebrew to to install the required libraries. If you do not have Homebrew installed on your system, install it from [here](https://brew.sh/) then, to install all the required dependencies, including support for MPI, run the following commands from your terminal prompt:
+On macOS, we can use Homebrew to install the required libraries. If you do not have Homebrew installed on your system, install it from [here](https://brew.sh/) then, to install all the required dependencies, including support for MPI, run the following commands from your terminal prompt:
 
 ```sh
 brew update

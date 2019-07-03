@@ -15,9 +15,10 @@ if [ "$(uname)" == "Linux" ]; then
 
     echo "APT::Acquire::Retries \"${HTTP_RETRIES}\";" | sudo tee /etc/apt/apt.conf.d/80-retries
 
-    if [ "$(lsb_release -c -s)" == "trusty" ]; then
-        sudo apt-get update
+    sudo apt-get update
+    sudo apt-get install -y software-properties-common curl cmake
 
+    if [ "$(lsb_release -c -s)" == "trusty" ]; then
         # We don't use latest compiler versions for 14.04 as we would otherwise
         # also have to build both netcdf-c and netcdf-fortran, whereas on
         # newer Ubuntu these two are separate packages and we just have to
@@ -40,8 +41,19 @@ if [ "$(uname)" == "Linux" ]; then
         sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
 
         sudo apt-get update
-        sudo apt-get install $CC $FC libpng-dev libjasper-dev 
-        sudo apt-get install libnetcdf-dev
+        sudo apt-get install -y $CC $FC libpng-dev
+        sudo apt-get install -y libnetcdf-dev
+
+        if [ "$(lsb_release -c -s)" == "xenial" ]; then
+            sudo apt-get install -y libjasper-dev 
+        else
+            # From bionic onwards, libjasper is not available via apt-get.
+            cd /tmp
+            curl --retry ${HTTP_RETRIES} https://www.ece.uvic.ca/~frodo/jasper/software/jasper-2.0.14.tar.gz | tar xz
+            cd jasper-2.0.14/build/
+            cmake -DCMAKE_INSTALL_PREFIX=/usr ..
+            sudo make install
+        fi
 
         # Need to build netcdf-fortran manually as the Fortran compiler versions have to match.
         cd /tmp
@@ -55,12 +67,12 @@ if [ "$(uname)" == "Linux" ]; then
     fi
 
     if [ $BUILD_SYSTEM == 'Make' ]; then
-        sudo apt-get install csh m4 libhdf5-serial-dev
+        sudo apt-get install -y csh m4 libhdf5-serial-dev
     fi
 
     if [[ $MODE == dm* ]]; then
         if [ "$(lsb_release -c -s)" == "trusty" ]; then
-            sudo apt-get install libmpich-dev
+            sudo apt-get install -y libmpich-dev
         else
             # Need to build mpich manually as the Fortran compiler versions have to match.
             MPICH_VERSION=3.2.1
