@@ -7,14 +7,26 @@ There are two mandatory and one optional step to install WRF-/WPS-CMake from sou
 
 [Homebrew](https://github.com/WRF-CMake/homebrew-wrf) users: You can build and install an MPI-enabled release version with basic nesting support with:
 ```sh
-brew install -v wrf-cmake/wrf/wrf
+brew tap wrf-cmake/wrf
+brew install wrf-cmake -v
 ```
-For more flexibility, see the manual build instructions below.
+For more flexibility, e.g. when changing the registry, see the manual build instructions below.
 
 ## Install dependencies
 The following libraries are required on your system to install WRF-CMake from source: [Git](https://git-scm.com/), [JasPer](https://www.ece.uvic.ca/~frodo/jasper/), [libpng](http://www.libpng.org/pub/png/libpng.html), [libjpeg](http://libjpeg.sourceforge.net/), [zlib](https://zlib.net/), [HDF5](https://support.hdfgroup.org/HDF5/), [NetCDF-C](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp), [NetCDF-Fortran](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp), and MPI (required if building in `dmpar` or `dm_sm` mode). The above libraries are most likely available from your system's package manager (e.g. APT, yum, Homebrew, etc.). If you do not have the latest version of these libraries installed on your system, please see [this page](LIBS.md).
 
 ## Build and Install WRF-CMake
+
+### Transition from original build system
+
+Original | CMake
+---------|------
+`./configure` | `cmake ...`
+`./compile` | `make install`
+
+Further notes:
+- The original build system uses a series of terminal prompts when running `./configure` whereas for CMake any non-default options need to be specified as command-line arguments.
+- If you change any registry files, then just re-run `make install`.
 
 ### On Linux and macOS
 The general commands to download, configure and install WRF-CMake on Linux and macOS are:

@@ -5,6 +5,11 @@ image: Visual Studio 2017 # See https://www.appveyor.com/docs/build-environment/
 
 clone_depth: 50
 
+skip_commits:
+  files:
+    - 'doc/*'
+    - 'README*'
+
 environment:
   global:
     BUILD_SYSTEM: CMake
