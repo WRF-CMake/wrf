@@ -37,8 +37,8 @@ jobs:
       env:
         - BUILD_SYSTEM=Make
         - BUILD_TYPE=Debug
-        - CC=gcc-8 # GNU via Homebrew
-        - FC=gfortran-8
+        - CC=gcc-9 # GNU via Homebrew
+        - FC=gfortran-9
         - MODE=serial
 
     - stage: build
@@ -48,8 +48,8 @@ jobs:
       env:
         - BUILD_SYSTEM=Make
         - BUILD_TYPE=Debug
-        - CC=gcc-8 # GNU via Homebrew
-        - FC=gfortran-8
+        - CC=gcc-9 # GNU via Homebrew
+        - FC=gfortran-9
         - MODE=dmpar
 
     # CMake builds
@@ -89,8 +89,8 @@ jobs:
       env:
         - BUILD_SYSTEM=CMake
         - BUILD_TYPE=Debug
-        - CC=gcc-8 # GNU via Homebrew
-        - FC=gfortran-8
+        - CC=gcc-9 # GNU via Homebrew
+        - FC=gfortran-9
         - GRIB1=1
         - GRIB2=1
         - MODE=serial
@@ -104,7 +104,7 @@ jobs:
         - BUILD_SYSTEM=CMake
         - BUILD_TYPE=Debug
         - CC=clang # Apple Clang
-        - FC=gfortran-8
+        - FC=gfortran-9
         - GRIB1=1
         - GRIB2=1
         - MODE=dmpar

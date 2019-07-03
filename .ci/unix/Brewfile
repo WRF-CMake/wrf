@@ -1,5 +1,5 @@
 brew "coreutils"
-brew "gcc@8"
+brew "gcc"
 brew "netcdf"
 brew "jasper"
 brew "libpng"
