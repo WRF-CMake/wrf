@@ -8,7 +8,7 @@ if [ "$(uname)" == "Darwin" ]; then
     sudo chown -R $USER $CONDA
 elif [ "$(uname)" == "Linux" ]; then
     if [ ! -d /usr/share/miniconda ]; then
-        curl -sL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -o miniconda.sh
+        curl -L --retry 3 https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -o miniconda.sh
         chmod +x miniconda.sh
         sudo ./miniconda.sh -b -p /usr/share/miniconda
         rm miniconda.sh

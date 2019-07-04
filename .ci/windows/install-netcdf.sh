@@ -23,7 +23,7 @@ rm -rf $MINGW_PREFIX/lib/cmake/netCDF # breaks for some reason otherwise in netc
 rm -rf * # avoid cmake cache using this directly in netcdf-fortran
 
 cd /tmp
-curl --retry ${HTTP_RETRIES} ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-fortran-4.4.4.tar.gz | tar xz
+curl --retry ${HTTP_RETRIES} https://www.unidata.ucar.edu/downloads/netcdf/ftp/netcdf-fortran-4.4.4.tar.gz | tar xz
 cd netcdf-fortran-4.4.4
 sed -i 's/ADD_SUBDIRECTORY(examples)/#ADD_SUBDIRECTORY(examples)/' CMakeLists.txt # patch CMakeLists.txt and comment out example building
 mkdir build && cd build
