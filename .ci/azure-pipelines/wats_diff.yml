@@ -21,7 +21,8 @@ jobs:
   
   - bash: |
       set -ex
-      git clone --depth=1 --branch=$WATS_BRANCH https://github.com/$WATS_REPO.git wats
+      curl https://github.com/$WATS_REPO/archive/$WATS_BRANCH.tar.gz | tar xz
+      mv wats-$WATS_BRANCH wats
       conda env update -n base -f wats/environment.yml
     displayName: Install WATS
 
