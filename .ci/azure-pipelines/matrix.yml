@@ -25,6 +25,8 @@ parameters:
     NESTING: basic
     GRIB1: 0
     GRIB2: 1
+
+  RELEASE: false
   
   # Loop/matrix parameters.
   # Note that these may be overridden by the including yml (typically azure-pipelines.yml).
@@ -43,6 +45,7 @@ jobs:
         - ${{ if not(and(eq(OS_NAME, 'Windows'), eq(BUILD_SYSTEM, 'Make'))) }}:
           - template: ${{ parameters.templates[OS_NAME] }}
             parameters:
+              RELEASE: ${{ parameters.RELEASE }}
               OS_NAME: ${{ OS_NAME }}
               BUILD_SYSTEM: ${{ BUILD_SYSTEM }}
               BUILD_TYPE: ${{ BUILD_TYPE }}

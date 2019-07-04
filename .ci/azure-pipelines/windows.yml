@@ -31,3 +31,8 @@ jobs:
 
   - ${{ if eq(parameters.WATS_RUN, 'true') }}:
     - template: wats_run.yml
+
+  - ${{ if eq(parameters.RELEASE, 'true') }}:
+    - template: release.yml
+      parameters:
+        ${{ insert }}: ${{ parameters }}

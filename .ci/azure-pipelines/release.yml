@@ -1,0 +1,47 @@
+steps:
+- ${{ if eq(parameters.OS_NAME, 'Windows') }}:
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: build/install
+      includeRootFolder: false
+      archiveType: zip
+      archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.SourceBranchName)-$(NESTING)_nesting-$(MODE)-x64-$(OS_NAME)-$(BUILD_TYPE).zip' 
+    displayName: Create distribution package
+
+- ${{ if not(eq(parameters.OS_NAME, 'Windows')) }}:
+  - bash: bash .ci/unix/delocate.sh
+    displayName: Delocate
+
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: build/install
+      includeRootFolder: false
+      archiveType: tar
+      tarCompression: xz
+      archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.SourceBranchName)-$(NESTING)_nesting-$(MODE)-x64-$(OS_NAME)-$(BUILD_TYPE).tar.xz' 
+    displayName: Create distribution package
+
+- pwsh: |
+    dir $(Build.ArtifactStagingDirectory) -r | % { if ($_.Name -cne $_.Name.ToLower()) { ren $_.FullName $_.Name.ToLower() } }
+  displayName: Rename to lowercase
+
+# not strictly needed
+- task: PublishBuildArtifacts@1
+  displayName: Store distribution package
+  inputs:
+    pathtoPublish: $(Build.ArtifactStagingDirectory)
+    artifactName: dist_$(OS_NAME)_$(BUILD_SYSTEM)_$(BUILD_TYPE)_$(MODE)
+
+- task: GithubRelease@0 
+  displayName: Create GitHub Draft Release
+  inputs:
+    gitHubConnection: WRF-CMake-releases
+    repositoryName: WRF-CMake/WRF
+    action: edit # will create if not existing
+    tag: $(Build.SourceBranchName)
+    isDraft: true
+    isPreRelease: true
+    addChangeLog: false
+    assetUploadMode: replace
+    assets: |
+      $(Build.ArtifactStagingDirectory)/*
