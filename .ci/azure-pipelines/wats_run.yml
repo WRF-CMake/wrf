@@ -26,10 +26,11 @@ steps:
     find . -type f
   displayName: List WPS output files
 
-- pwsh: |
-    if ($Env:MODE.StartsWith("dm")) { $mpi_flag="--mpi" }
-    if ($Env:BUILD_SYSTEM -eq "CMake") { $dir_suffix="build/install" }
-    python wats/wats/main.py run --mode $Env:WATS_MODE --wrf-dir ./$dir_suffix --wps-dir ../WPS/$dir_suffix --wps-case-output-dir wats_wps_outputs/00 --work-dir wats_work $mpi_flag
+- bash: |
+    set -ex
+    if [[ $MODE == dm* ]]; then mpi_flag="--mpi"; fi
+    if [[ $BUILD_SYSTEM == "CMake" ]]; then dir_suffix="build/install"; fi
+    python wats/wats/main.py run --mode $WATS_MODE --wrf-dir ./$dir_suffix --wps-dir ../WPS/$dir_suffix --wps-case-output-dir wats_wps_outputs/00 --work-dir wats_work $mpi_flag
   displayName: Run WATS
 
 - task: PublishBuildArtifacts@1
