@@ -12,8 +12,6 @@ In general, you can contribute by reporting an issue or by directly contributing
 - [Versioning](#versioning)
 
 
-If you would like to know more about specific development guidelines, please refer to our [development notes](DEVELOP.md).
-
 ## Report a bug
 
 Before creating bug reports, please check if similar issue have already been reported [here](https://github.com/WRF-CMake/WRF/issues). If none exist please create a new issue and include as many details as possible using the required template.
