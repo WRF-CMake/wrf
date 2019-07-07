@@ -1,3 +1,4 @@
+# WRF-CMake (https://github.com/WRF-CMake/WRF).
 # Copyright 2018 M. Riechert and D. Meyer. Licensed under the MIT License.
 
 language: python
@@ -27,7 +28,29 @@ jobs:
         - BUILD_TYPE=Debug
         - CC=gcc
         - FC=gfortran
-        - MODE=dmpar
+        - MODE=dm_sm
+
+    - stage: build
+      os: linux
+      dist: xenial
+      sudo: required
+      env:
+        - BUILD_SYSTEM=Make
+        - BUILD_TYPE=Debug
+        - CC=gcc-9
+        - FC=gfortran-9
+        - MODE=serial
+
+    - stage: build
+      os: linux
+      dist: xenial
+      sudo: required
+      env:
+        - BUILD_SYSTEM=Make
+        - BUILD_TYPE=Debug
+        - CC=gcc-9
+        - FC=gfortran-9
+        - MODE=dm_sm
     
     - stage: build
       os: osx
@@ -36,8 +59,8 @@ jobs:
       env:
         - BUILD_SYSTEM=Make
         - BUILD_TYPE=Debug
-        - CC=gcc-8 # GNU via Homebrew
-        - FC=gfortran-8
+        - CC=gcc-9 # GNU via Homebrew
+        - FC=gfortran-9
         - MODE=serial
 
     - stage: build
@@ -47,9 +70,9 @@ jobs:
       env:
         - BUILD_SYSTEM=Make
         - BUILD_TYPE=Debug
-        - CC=gcc-8 # GNU via Homebrew
-        - FC=gfortran-8
-        - MODE=dmpar
+        - CC=gcc-9 # GNU via Homebrew
+        - FC=gfortran-9
+        - MODE=dm_sm
 
     # CMake builds
 
@@ -82,14 +105,42 @@ jobs:
         - NESTING=basic
 
     - stage: build
+      os: linux
+      dist: xenial
+      sudo: required # Need sudo to install netcdf via apt as not whitelisted 
+      env:
+        - BUILD_SYSTEM=CMake
+        - BUILD_TYPE=Debug
+        - CC=gcc-9
+        - FC=gfortran-9
+        - GRIB1=0
+        - GRIB2=1
+        - MODE=serial
+        - NESTING=basic
+
+    - stage: build
+      os: linux
+      dist: xenial
+      sudo: required
+      env:
+        - BUILD_SYSTEM=CMake
+        - BUILD_TYPE=Debug
+        - CC=gcc-9
+        - FC=gfortran-9
+        - GRIB1=1
+        - GRIB2=0
+        - MODE=dm_sm
+        - NESTING=basic
+
+    - stage: build
       os: osx
       osx_image: xcode9.2 # https://github.com/travis-ci/travis-ci/issues/9640
       language: generic
       env:
         - BUILD_SYSTEM=CMake
         - BUILD_TYPE=Debug
-        - CC=gcc-8 # GNU via Homebrew
-        - FC=gfortran-8
+        - CC=gcc-9 # GNU via Homebrew
+        - FC=gfortran-9
         - GRIB1=1
         - GRIB2=1
         - MODE=serial
@@ -102,11 +153,11 @@ jobs:
       env:
         - BUILD_SYSTEM=CMake
         - BUILD_TYPE=Debug
-        - CC=gcc-8 # GNU via Homebrew
-        - FC=gfortran-8
+        - CC=clang # Apple Clang
+        - FC=gfortran-9
         - GRIB1=1
         - GRIB2=1
-        - MODE=dmpar
+        - MODE=dmpar # not using dm_sm as Apple's Clang doesn't easily support OpenMP
         - NESTING=basic
 
 before_install:

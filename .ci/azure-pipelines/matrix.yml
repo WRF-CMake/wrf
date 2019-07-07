@@ -1,3 +1,6 @@
+# WRF-CMake (https://github.com/WRF-CMake/WRF).
+# Copyright 2019 M. Riechert and D. Meyer. Licensed under the MIT License.
+
 parameters:
   templates:
     Linux: unix.yml
@@ -5,11 +8,11 @@ parameters:
     Windows: windows.yml
   
   Linux:
-    CC: gcc-8
-    FC: gfortran-8
+    CC: gcc-9
+    FC: gfortran-9
   macOS:
-    CC: gcc-8
-    FC: gfortran-8
+    CC: gcc-9
+    FC: gfortran-9
   Windows:
     CC: gcc
     FC: gfortran
@@ -22,6 +25,8 @@ parameters:
     NESTING: basic
     GRIB1: 0
     GRIB2: 1
+
+  RELEASE: false
   
   # Loop/matrix parameters.
   # Note that these may be overridden by the including yml (typically azure-pipelines.yml).
@@ -40,6 +45,7 @@ jobs:
         - ${{ if not(and(eq(OS_NAME, 'Windows'), eq(BUILD_SYSTEM, 'Make'))) }}:
           - template: ${{ parameters.templates[OS_NAME] }}
             parameters:
+              RELEASE: ${{ parameters.RELEASE }}
               OS_NAME: ${{ OS_NAME }}
               BUILD_SYSTEM: ${{ BUILD_SYSTEM }}
               BUILD_TYPE: ${{ BUILD_TYPE }}

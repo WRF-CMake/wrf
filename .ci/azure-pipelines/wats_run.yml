@@ -1,10 +1,14 @@
+# WRF-CMake (https://github.com/WRF-CMake/WRF).
+# Copyright 2019 M. Riechert and D. Meyer. Licensed under the MIT License.
+
 steps:
 - bash: bash .ci/unix/use-conda.sh
   displayName: Enable Conda
 
 - bash: |
     set -ex
-    git clone --depth=1 --branch=$WATS_BRANCH https://github.com/$WATS_REPO.git wats
+    curl -L --retry 3 https://github.com/$WATS_REPO/archive/$WATS_BRANCH.tar.gz | tar xz
+    mv wats-$WATS_BRANCH wats
     conda env update -n base -f wats/environment.yml
   displayName: Install WATS
 
@@ -22,10 +26,11 @@ steps:
     find . -type f
   displayName: List WPS output files
 
-- pwsh: |
-    if ($Env:MODE.StartsWith("dm")) { $mpi_flag="--mpi" }
-    if ($Env:BUILD_SYSTEM -eq "CMake") { $dir_suffix="build/install" }
-    python wats/wats/main.py run --mode $Env:WATS_MODE --wrf-dir ./$dir_suffix --wps-dir ../WPS/$dir_suffix --wps-case-output-dir wats_wps_outputs/00 --work-dir wats_work $mpi_flag
+- bash: |
+    set -ex
+    if [[ $MODE == dm* ]]; then mpi_flag="--mpi"; fi
+    if [[ $BUILD_SYSTEM == "CMake" ]]; then dir_suffix="build/install"; fi
+    python wats/wats/main.py run --mode $WATS_MODE --wrf-dir ./$dir_suffix --wps-dir ../WPS/$dir_suffix --wps-case-output-dir wats_wps_outputs/00 --work-dir wats_work $mpi_flag
   displayName: Run WATS
 
 - task: PublishBuildArtifacts@1

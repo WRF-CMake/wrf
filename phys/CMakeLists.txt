@@ -1,3 +1,4 @@
+# WRF-CMake (https://github.com/WRF-CMake/WRF).
 # Copyright 2018 M. Riechert and D. Meyer. Licensed under the MIT License.
 
 set(CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/mod)
@@ -45,10 +46,12 @@ add_library(phys STATIC
 	module_bl_gwdo.F
 	module_bl_myjurb.F
 	module_bl_boulac.F
+	module_checkerror.F
 	module_bl_camuwpbl_driver.F
 	module_bl_mfshconvpbl.F
 	module_shcu_camuwshcu_driver.F
 	module_shcu_camuwshcu.F
+	module_shcu_deng.F
 	module_shcu_grims.F
 	module_shcu_nscv.F
 	module_cu_camzm_driver.F
@@ -69,6 +72,7 @@ add_library(phys STATIC
 	module_cu_ksas.F
 	module_cu_nsas.F
 	module_cu_sas.F
+	module_gocart_coupling.F
 	module_cu_scalesas.F
 	module_cu_osas.F
 	module_cu_kfcup.F
@@ -79,6 +83,7 @@ add_library(phys STATIC
 	module_mp_wsm3.F
 	module_mp_wsm5.F
 	module_mp_wsm6.F
+	module_mp_wsm7.F
 	module_mp_etanew.F
 	module_mp_fer_hires.F
 	module_mp_HWRF.F
@@ -87,13 +92,16 @@ add_library(phys STATIC
 	module_mp_fast_sbm.F
 	module_ltng_lpi.F
 	module_mp_gsfcgce.F
+	module_mp_gsfcgce_4ice_nuwrf.F
 	module_mp_morr_two_moment.F
 	module_mp_p3.F
+	module_mp_jensen_ishmael.F
 	module_mp_morr_two_moment_aero.F
 	module_mp_milbrandt2mom.F
 	module_mp_nssl_2mom.F
 	module_mp_wdm5.F
 	module_mp_wdm6.F
+	module_mp_wdm7.F
 	module_mp_cammgmp_driver.F
 	module_ra_sw.F
 	module_ra_clWRF_support.F

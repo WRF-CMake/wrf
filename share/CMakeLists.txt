@@ -1,3 +1,4 @@
+# WRF-CMake (https://github.com/WRF-CMake/WRF).
 # Copyright 2018 M. Riechert and D. Meyer. Licensed under the MIT License.
 
 set(CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/mod)
@@ -32,6 +33,7 @@ add_library(share STATIC
 	module_llxy.F
 	module_interp_nmm.F
 	module_interp_store.F
+	module_string_tools.F
 	module_MPP.F
 	module_date_time.F
 	module_bc.F

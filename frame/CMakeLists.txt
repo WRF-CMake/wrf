@@ -1,3 +1,4 @@
+# WRF-CMake (https://github.com/WRF-CMake/WRF).
 # Copyright 2018 M. Riechert and D. Meyer. Licensed under the MIT License.
 
 set(CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/mod)
