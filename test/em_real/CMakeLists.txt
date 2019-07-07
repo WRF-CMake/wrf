@@ -1,3 +1,4 @@
+# WRF-CMake (https://github.com/WRF-CMake/wrf).
 # Copyright 2018 M. Riechert and D. Meyer. Licensed under the MIT License.
 
 set(run_files
@@ -34,8 +35,14 @@ set(run_files
     bulkdens.asc_s_0_03_0_9 
     bulkradii.asc_s_0_03_0_9 
     CCN_ACTIVATE.BIN 
-    p3_lookup_table_1.dat-v2.8.2 
-    p3_lookup_table_2.dat-v2.8.2
+    p3_lookup_table_1.dat-v4.1
+    p3_lookup_table_2.dat-v4.1
+    HLC.TBL
+    wind-turbine-1.tbl
+    ishmael-gamma-tab.bin
+    ishmael-qi-qc.bin
+    ishmael-qi-qr.bin
+    BROADBAND_CLOUD_GODDARD.bin
     GENPARM.TBL
     LANDUSE.TBL
     SOILPARM.TBL 

@@ -1,3 +1,4 @@
+# WRF-CMake (https://github.com/WRF-CMake/wrf).
 # Copyright 2018 M. Riechert and D. Meyer. Licensed under the MIT License.
 
 cmake_minimum_required(VERSION 3.1)
@@ -28,7 +29,7 @@ enable_testing()
 #    User options      #
 ########################
 
-set(BUILD_TYPE_VALUES Debug Release)
+set(BUILD_TYPE_VALUES Debug Release RelWithDebInfo)
 if (CMAKE_CONFIGURATION_TYPES) # multi-config generators like MSVC
     set(CMAKE_CONFIGURATION_TYPES ${BUILD_TYPE_VALUES} CACHE TYPE INTERNAL FORCE)
 else()
@@ -111,11 +112,6 @@ if (NOT MINGW AND NOT UNIX)
     message(FATAL_ERROR "Unsupported operating system / toolset")
 endif()
 
-if (CMAKE_Fortran_COMPILER_ID MATCHES "Clang")
-    # See Transpose() subroutine in external/io_netcdf/wrf_io.F90 for details.
-    message(FATAL_ERROR "Clang is not supported, use gcc/gfortran from Homebrew instead")
-endif()
-
 if (NOT ARCH_CUSTOM)
     set(ARCH_C_VARS debug optimized checked temps other)
     set(ARCH_Fortran_VARS debug optimized preprocess io checked promotion temps other)
@@ -158,9 +154,11 @@ endif()
 
 set(CMAKE_C_FLAGS_DEBUG "${C_debug} ${C_checked}")
 set(CMAKE_C_FLAGS_RELEASE "${C_optimized}")
+set(CMAKE_C_FLAGS_RELWITHDEBINFO "${C_optimized} ${C_debug}")
 set(CMAKE_C_FLAGS "${C_other}")
 set(CMAKE_Fortran_FLAGS_DEBUG "${Fortran_debug} ${Fortran_checked}")
 set(CMAKE_Fortran_FLAGS_RELEASE "${Fortran_optimized}")
+set(CMAKE_Fortran_FLAGS_RELWITHDEBINFO "${Fortran_optimized} ${Fortran_debug}")
 set(CMAKE_Fortran_FLAGS "${Fortran_preprocess} ${Fortran_io} ${Fortran_other}")
 
 if (OPTIMIZE_C)
@@ -170,6 +168,8 @@ endif()
 if (ENABLE_RUNTIME_CHECKS)
     set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} ${C_checked}")
     set(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE} ${Fortran_checked}")
+    set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} ${C_checked}")
+    set(CMAKE_Fortran_FLAGS_RELWITHDEBINFO "${CMAKE_Fortran_FLAGS_RELWITHDEBINFO} ${Fortran_checked}")
 endif()
 
 if (USE_REAL8)
@@ -313,6 +313,7 @@ add_definitions(
     -DKEEP_INT_AROUND
     -DLIMIT_ARGS
     -DBUILD_RRTMG_FAST=1
+    -DSHOW_ALL_VARS_USED=0
     -DCONFIG_BUF_LEN=65536
     -DMAX_DOMAINS_F=21
     -DIWORDSIZE=4
@@ -321,6 +322,7 @@ add_definitions(
     -DRWORDSIZE=${RWORDSIZE}
     -DMAX_HISTORY=25
     -DWRF_USE_CLM
+    -DLANDREAD_STUB=1
 
     # See Transpose() subroutine in external/io_netcdf/wrf_io.F90.
     -DNO_M4

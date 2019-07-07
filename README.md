@@ -1,4 +1,4 @@
-# WRF-CMake [![Build status](https://ci.appveyor.com/api/projects/status/86508wximkvmf95g/branch/wrf-cmake?svg=true)](https://ci.appveyor.com/project/WRF-CMake/wrf/branch/wrf-cmake) [![Build Status](https://travis-ci.com/WRF-CMake/WRF.svg?branch=wrf-cmake)](https://travis-ci.com/WRF-CMake/WRF)
+# WRF-CMake [![Build status Azure Pipelines](https://dev.azure.com/WRF-CMake/wrf/_apis/build/status/WRF%20(full)?branchName=wrf-cmake)](https://dev.azure.com/WRF-CMake/wrf/_build/latest?definitionId=5&branchName=wrf-cmake) [![Build status Appveyor](https://ci.appveyor.com/api/projects/status/86508wximkvmf95g/branch/wrf-cmake?svg=true)](https://ci.appveyor.com/project/WRF-CMake/wrf/branch/wrf-cmake) [![Build status Travis CI](https://travis-ci.com/WRF-CMake/wrf.svg?branch=wrf-cmake)](https://travis-ci.com/WRF-CMake/wrf)
 
 WRF-CMake adds CMake support to the latest version of the [Advanced Research Weather Research and Forecasting](https://www.mmm.ucar.edu/weather-research-and-forecasting-model) model (here WRF, for short) with the intention of streamlining and simplifying its configuration and build process. In our view, the use of CMake provides model developers, code maintainers, and end-users with several advantages such as robust incremental rebuilds, flexible library dependency discovery, native tool-chains for Windows, macOS, and Linux with minimal external dependencies, thus increasing portability, and automatic generation of project files for different platforms.
 
@@ -21,6 +21,7 @@ WRF-CMake is designed to work alongside the current releases of WRF, therefore y
 - WRF-Hydro
 - File and line number in wrf_error_fatal() messages
 - WRF-NMM (discontinued -- see https://dtcenter.org/wrf-nmm/users/)
+- Automatic moving nests (via `TERRAIN_AND_LANDUSE` environment variable)
 
 
 ## Installation
@@ -30,19 +31,19 @@ The installation of WRF-CMake is straightforward thanks to the downloadable pre-
 
 ### Binary distribution (Experimental)
 
-To download the latest pre-compiled binary releases, see below -- please note that these distributions are currently experimental, therefore please report any issues [here](https://github.com/WRF-CMake/WRF/issues).
+To download the latest pre-compiled binary releases, see below -- please note that these distributions are currently experimental, therefore please report any issues [here](https://github.com/WRF-CMake/wrf/issues).
 
-- WRF-CMake (`serial` and `dmpar`): [https://github.com/WRF-CMake/WRF/releases](https://github.com/WRF-CMake/WRF/releases).
-- WPS-CMake (`serial` and `dmpar`): [https://github.com/WRF-CMake/WPS/releases](https://github.com/WRF-CMake/WPS/releases).
+- WRF-CMake (`serial` and `dmpar`): [https://github.com/WRF-CMake/wrf/releases](https://github.com/WRF-CMake/wrf/releases).
+- WPS-CMake (`serial` and `dmpar`): [https://github.com/WRF-CMake/wps/releases](https://github.com/WRF-CMake/wps/releases).
 
 
 #### Note on MPI
 
-If you want to launch WRF-CMake and WPS-CMake built in `dmpar` to run on multiple processes, you need to have MPI installed on your system.
+If you want to launch WRF-CMake and WPS-CMake binary distributions built in `dmpar` to run on multiple processes, you need to have MPI installed on your system.
 
-- On Windows, download and install Microsoft MPI (`msmpisetup.exe`) from [https://github.com/Microsoft/Microsoft-MPI/releases](https://github.com/Microsoft/Microsoft-MPI/releases).
-- On macOS you can get it through [Homebrew](https://brew.sh/) using `brew update && brew install mpich`.
-- On Linux, use your package manager to download mpich (version ≥ 3.0.4). E.g. `sudo apt-get update && sudo apt-get install mpich` on Debian-based systems or `sudo yum install mpich` on RPM-based system like CentOS.
+- On Windows, download and install Microsoft MPI (`msmpisetup.exe`) from [https://www.microsoft.com/en-us/download/details.aspx?id=56727](https://www.microsoft.com/en-us/download/details.aspx?id=56727).
+- On macOS you can get it through [Homebrew](https://brew.sh/) using `brew install open-mpi`. Note: Binary distributions < 4.1 use `mpich`, in which case you need to `brew install mpich` and possibly uninstall `open-mpi` first.
+- On Linux, use your package manager to download mpich (version ≥ 3.0.4). E.g. `sudo apt install mpich` on Debian-based systems or `sudo yum install mpich` on RPM-based system like CentOS.
 
 
 ### Source distribution
@@ -50,7 +51,9 @@ To build WRF-CMake from source, see [this page](doc/cmake/INSTALL.md).
 
 ## Testing
 
-In our current GitHub set-up, we perform a series of compilation and regression tests at each commit using the [WRF-CMake Automated Testing Suite](https://github.com/WRF-CMake/wats) on Windows, macOS, and Linux. You can find the results of such tests [here](https://travis-ci.com/WRF-CMake), [here](https://ci.appveyor.com/project/WRF-CMake/wrf), and [here](https://ci.appveyor.com/project/WRF-CMake/wps).
+In our current GitHub set-up, we perform a series of compilation and regression tests at each commit using the [WRF-CMake Automated Testing Suite](https://github.com/WRF-CMake/wats) on [Windows, macOS, and Linux](https://dev.azure.com/WRF-CMake/wrf/_build).
+
+When you build WRF or WRF-CMake yourself then you have already done a compilation test. If you like to replicate the regression tests, then follow the steps on the "[Running regression tests locally](doc/ci/LOCAL.md)" page.
 
 
 ## Changes to be upstreamed
@@ -78,5 +81,6 @@ General WRF copyright and license applies for any files part of the original WRF
 
 Additional files provided by WRF-CMake are licensed according to [LICENSE_CMAKE.txt](LICENSE_CMAKE.txt) if the relevant file contains the following header at the beginning of the file, otherwise the general WRF copyright and license applies.
 ```
-Copyright 2018 M. Riechert and D. Meyer. Licensed under the MIT License.
+WRF-CMake (https://github.com/WRF-CMake/wrf).
+Copyright <year> M. Riechert and D. Meyer. Licensed under the MIT License.
 ```

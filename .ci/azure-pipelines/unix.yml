@@ -1,3 +1,6 @@
+# WRF-CMake (https://github.com/WRF-CMake/wrf).
+# Copyright 2019 M. Riechert and D. Meyer. Licensed under the MIT License.
+
 jobs:
 - job: ${{ parameters.OS_NAME }}_${{ parameters.BUILD_SYSTEM }}_${{ parameters.BUILD_TYPE }}_${{ parameters.MODE }}
   displayName: '${{ parameters.OS_NAME }} ${{ parameters.BUILD_SYSTEM }}: ${{ parameters.BUILD_TYPE }}, ${{ parameters.MODE }}'
@@ -10,10 +13,22 @@ jobs:
     ${{ if eq(parameters.OS_NAME, 'macOS') }}:
       vmImage: macos-10.13
 
+  ${{ if eq(parameters.OS_NAME, 'Linux') }}:
+    container:
+      image: ubuntu:16.04
+      options: "--name ci-container -v /usr/bin/docker:/tmp/docker:ro"
+
   variables:
     ${{ insert }}: ${{ parameters }}
 
   steps:
+  - ${{ if eq(parameters.OS_NAME, 'Linux') }}:
+    # https://github.com/Microsoft/azure-pipelines-agent/issues/2043#issuecomment-489692810
+    - script: |
+        /tmp/docker exec -t -u 0 ci-container \
+          sh -c "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confold" -y install sudo"
+      displayName: Set up sudo
+
   - script: .ci/unix/dump-vm-specs.sh
     displayName: Dump VM specs
 
@@ -28,3 +43,8 @@ jobs:
 
   - ${{ if eq(parameters.WATS_RUN, 'true') }}:
     - template: wats_run.yml
+
+  - ${{ if eq(parameters.RELEASE, 'true') }}:
+    - template: release.yml
+      parameters:
+        ${{ insert }}: ${{ parameters }}
