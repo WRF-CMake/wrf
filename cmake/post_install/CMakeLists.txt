@@ -1,4 +1,4 @@
-# WRF-CMake (https://github.com/WRF-CMake/WRF).
+# WRF-CMake (https://github.com/WRF-CMake/wrf).
 # Copyright 2018 M. Riechert and D. Meyer. Licensed under the MIT License.
 
 # See https://gitlab.kitware.com/cmake/cmake/issues/17989 for why this code is in a separate file/folder.

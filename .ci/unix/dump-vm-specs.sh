@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# WRF-CMake (https://github.com/WRF-CMake/WRF).
+# WRF-CMake (https://github.com/WRF-CMake/wrf).
 # Copyright 2019 M. Riechert and D. Meyer. Licensed under the MIT License.
 
 set -ex

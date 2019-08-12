@@ -5298,18 +5298,18 @@ end subroutine uwshcu_readnl
 !
       do i = 1,ncol
 
-#ifdef DEBUG
-         if ( (lchnk == lchnklook(nlook) ) .and. (i == icollook(nlook) ) ) then
-            write(iulog,*) ' '
-#ifdef WRF_PORT
-            call wrf_message(iulog)
-#endif
-            write(iulog,*) ' level, t, q, p', k, t(i,k), q(i,k), p(i,k)
-#ifdef WRF_PORT
-            call wrf_message(iulog)
-#endif
-         endif
-#endif
+!#ifdef DEBUG
+!         if ( (lchnk == lchnklook(nlook) ) .and. (i == icollook(nlook) ) ) then
+!            write(iulog,*) ' '
+!#ifdef WRF_PORT
+!            call wrf_message(iulog)
+!#endif
+!            write(iulog,*) ' level, t, q, p', k, t(i,k), q(i,k), p(i,k)
+!#ifdef WRF_PORT
+!            call wrf_message(iulog)
+!#endif
+!         endif
+!#endif
 ! limit the temperature range to that relevant to the sat vap pres tables
 #if ( ! defined WACCM_MOZART )
          tlim(i) = min(max(t(i,k),173._r8),373._r8)
@@ -5357,18 +5357,18 @@ end subroutine uwshcu_readnl
              r1b    = c2/(c2 + c1*qs)
              qvd   = r1b*tmp
              tsp(i,k) = tlim(i) + ((hltalt(i,k)/cp)*qvd)
-#ifdef DEBUG
-             if ( (lchnk == lchnklook(nlook) ) .and. (i == icollook(nlook) ) ) then
-                write(iulog,*) ' relative humidity ', q(i,k)/qs
-#ifdef WRF_PORT
-                call wrf_message(iulog)
-#endif
-                write(iulog,*) ' first guess ', tsp(i,k)
-#ifdef WRF_PORT
-                call wrf_message(iulog)
-#endif
-             endif
-#endif
+!#ifdef DEBUG
+!             if ( (lchnk == lchnklook(nlook) ) .and. (i == icollook(nlook) ) ) then
+!                write(iulog,*) ' relative humidity ', q(i,k)/qs
+!#ifdef WRF_PORT
+!                call wrf_message(iulog)
+!#endif
+!                write(iulog,*) ' first guess ', tsp(i,k)
+!#ifdef WRF_PORT
+!                call wrf_message(iulog)
+!#endif
+!             endif
+!#endif
              es = estblf(tsp(i,k))
              qsp(i,k) = min(epsqs*es/(p(i,k) - omeps*es),1._r8)
           else
@@ -5429,14 +5429,14 @@ end subroutine uwshcu_readnl
                q1 = min(epsqs*es/(p(i,k) - omeps*es),1._r8)
                dq = abs(q1 - qsp(i,k))/max(q1,1.e-12_r8)
                qsp(i,k) = q1
-#ifdef DEBUG
-               if ( (lchnk == lchnklook(nlook) ) .and. (i == icollook(nlook) ) ) then
-                  write(iulog,*) ' rel chg lev, iter, t, q ', k, l, dt, dq, g
-#ifdef WRF_PORT
-                  call wrf_message(iulog)
-#endif
-               endif
-#endif
+!#ifdef DEBUG
+!               if ( (lchnk == lchnklook(nlook) ) .and. (i == icollook(nlook) ) ) then
+!                  write(iulog,*) ' rel chg lev, iter, t, q ', k, l, dt, dq, g
+!#ifdef WRF_PORT
+!                  call wrf_message(iulog)
+!#endif
+!               endif
+!#endif
                dtm = max(dtm,dt)
                dqm = max(dqm,dq)
 ! if converged at this point, exclude it from more iterations

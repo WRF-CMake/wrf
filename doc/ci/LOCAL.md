@@ -1,6 +1,6 @@
 # Running regression tests locally
 
-In our current GitHub set-up, we perform a series of compilation and regression tests at each commit using the [WRF-CMake Automated Testing Suite](https://github.com/WRF-CMake/wats) on [Windows, macOS, and Linux](https://dev.azure.com/WRF-CMake/WRF/_build).
+In our current GitHub set-up, we perform a series of compilation and regression tests at each commit using the [WRF-CMake Automated Testing Suite](https://github.com/WRF-CMake/wats) on [Windows, macOS, and Linux](https://dev.azure.com/WRF-CMake/wrf/_build).
 
 When you build WRF or WRF-CMake yourself then you have already done a compilation test. If you like to replicate the regression tests, then follow the steps below. The steps assume a Linux or macOS system and may have to be modified for Windows.
 
@@ -22,7 +22,7 @@ python wats/wats/main.py run --mode wrf --mpi --wrf-dir /path/to/wrf --wps-dir /
 mv wats/work/output wats_Linux_CMake_Release_dmpar
 
 # Download reference data to compare against
-# 1. Go to https://dev.azure.com/WRF-CMake/WRF/_build?definitionId=5
+# 1. Go to https://dev.azure.com/WRF-CMake/wrf/_build?definitionId=5
 # 2. Select a successful build from Branch "wrf-cmake"
 # 3. Click on Summary
 # 4. Download wats_Linux_Make_Debug_serial build artifact (~1 GB)
@@ -35,4 +35,4 @@ ls wats/plots
 # Compare magnitudes in nrmse.png and ext_boxplot.png with plots published in JOSS paper.
 ```
 
-If you have any issues with the instructions above, please [open an issue](https://github.com/WRF-CMake/WRF/issues/new).
+If you have any issues with the instructions above, please [open an issue](https://github.com/WRF-CMake/wrf/issues/new).

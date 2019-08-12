@@ -1,4 +1,4 @@
-# WRF-CMake [![Build status Azure Pipelines](https://dev.azure.com/WRF-CMake/WRF/_apis/build/status/WRF%20(full)?branchName=wrf-cmake)](https://dev.azure.com/WRF-CMake/WRF/_build/latest?definitionId=5&branchName=wrf-cmake) [![Build status Appveyor](https://ci.appveyor.com/api/projects/status/86508wximkvmf95g/branch/wrf-cmake?svg=true)](https://ci.appveyor.com/project/WRF-CMake/wrf/branch/wrf-cmake) [![Build status Travis CI](https://travis-ci.com/WRF-CMake/WRF.svg?branch=wrf-cmake)](https://travis-ci.com/WRF-CMake/WRF)
+# WRF-CMake [![Build status Azure Pipelines](https://dev.azure.com/WRF-CMake/wrf/_apis/build/status/WRF%20(full)?branchName=wrf-cmake)](https://dev.azure.com/WRF-CMake/wrf/_build/latest?definitionId=5&branchName=wrf-cmake) [![Build status Appveyor](https://ci.appveyor.com/api/projects/status/86508wximkvmf95g/branch/wrf-cmake?svg=true)](https://ci.appveyor.com/project/WRF-CMake/wrf/branch/wrf-cmake) [![Build status Travis CI](https://travis-ci.com/WRF-CMake/wrf.svg?branch=wrf-cmake)](https://travis-ci.com/WRF-CMake/wrf)
 
 WRF-CMake adds CMake support to the latest version of the [Advanced Research Weather Research and Forecasting](https://www.mmm.ucar.edu/weather-research-and-forecasting-model) model (here WRF, for short) with the intention of streamlining and simplifying its configuration and build process. In our view, the use of CMake provides model developers, code maintainers, and end-users with several advantages such as robust incremental rebuilds, flexible library dependency discovery, native tool-chains for Windows, macOS, and Linux with minimal external dependencies, thus increasing portability, and automatic generation of project files for different platforms.
 
@@ -32,10 +32,10 @@ The installation of WRF-CMake is straightforward thanks to the downloadable pre-
 
 ### Binary distribution (Experimental)
 
-To download the latest pre-compiled binary releases, see below -- please note that these distributions are currently experimental, therefore please report any issues [here](https://github.com/WRF-CMake/WRF/issues).
+To download the latest pre-compiled binary releases, see below -- please note that these distributions are currently experimental, therefore please report any issues [here](https://github.com/WRF-CMake/wrf/issues).
 
-- WRF-CMake (`serial` and `dmpar`): [https://github.com/WRF-CMake/WRF/releases](https://github.com/WRF-CMake/WRF/releases).
-- WPS-CMake (`serial` and `dmpar`): [https://github.com/WRF-CMake/WPS/releases](https://github.com/WRF-CMake/WPS/releases).
+- WRF-CMake (`serial` and `dmpar`): [https://github.com/WRF-CMake/wrf/releases](https://github.com/WRF-CMake/wrf/releases).
+- WPS-CMake (`serial` and `dmpar`): [https://github.com/WRF-CMake/wps/releases](https://github.com/WRF-CMake/wps/releases).
 
 
 #### Note on MPI
@@ -52,7 +52,7 @@ To build WRF-CMake from source, see [this page](doc/cmake/INSTALL.md).
 
 ## Testing
 
-In our current GitHub set-up, we perform a series of compilation and regression tests at each commit using the [WRF-CMake Automated Testing Suite](https://github.com/WRF-CMake/wats) on [Windows, macOS, and Linux](https://dev.azure.com/WRF-CMake/WRF/_build).
+In our current GitHub set-up, we perform a series of compilation and regression tests at each commit using the [WRF-CMake Automated Testing Suite](https://github.com/WRF-CMake/wats) on [Windows, macOS, and Linux](https://dev.azure.com/WRF-CMake/wrf/_build).
 
 When you build WRF or WRF-CMake yourself then you have already done a compilation test. If you like to replicate the regression tests, then follow the steps on the "[Running regression tests locally](doc/ci/LOCAL.md)" page.
 
@@ -82,6 +82,6 @@ General WRF copyright and license applies for any files part of the original WRF
 
 Additional files provided by WRF-CMake are licensed according to [LICENSE_CMAKE.txt](LICENSE_CMAKE.txt) if the relevant file contains the following header at the beginning of the file, otherwise the general WRF copyright and license applies.
 ```
-WRF-CMake (https://github.com/WRF-CMake/WRF).
+WRF-CMake (https://github.com/WRF-CMake/wrf).
 Copyright <year> M. Riechert and D. Meyer. Licensed under the MIT License.
 ```

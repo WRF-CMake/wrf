@@ -1,6 +1,6 @@
 @echo off
 
-rem WRF-CMake (https://github.com/WRF-CMake/WRF).
+rem WRF-CMake (https://github.com/WRF-CMake/wrf).
 rem Copyright 2018 M. Riechert and D. Meyer. Licensed under the MIT License.
 
 rem Adapted from https://github.com/meta-toolkit/meta/blob/c7019401185cdfa15e1193aad821894c35a83e3f/.appveyor.yml

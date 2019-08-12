@@ -32,8 +32,8 @@ Further notes:
 The general commands to download, configure and install WRF-CMake on Linux and macOS are:
 
 ``` sh
-git clone https://github.com/WRF-CMake/WRF.git
-cd WRF
+git clone https://github.com/WRF-CMake/wrf.git
+cd wrf
 mkdir build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=<install_directory> ..
 make install
@@ -67,7 +67,7 @@ Make sure you [installed all the required dependencies](README_CMAKE_LIBS.md) be
 #### Build WRF-CMake in serial mode
 Open an MSYS2 **MinGW 64-bit** shell and run:
 ```sh
-git clone https://github.com/WRF-CMake/WRF.git
+git clone https://github.com/WRF-CMake/wrf.git
 cd WRF
 mkdir build && cd build
 cmake -G "MSYS Makefiles" -DCMAKE_INSTALL_PREFIX=<install_directory> ..
@@ -79,7 +79,7 @@ If your system has enough memory you can enable parallel compilation with `make 
 #### Build WRF-CMake with MPI support
 Open an MSYS2 **MinGW 64-bit** shell and run:
 ```sh
-git clone https://github.com/WRF-CMake/WRF.git
+git clone https://github.com/WRF-CMake/wrf.git
 cd WRF
 mkdir build && cd build
 cmake -G "MSYS Makefiles" -DMODE=dmpar -DCMAKE_INSTALL_PREFIX=<install_directory> \
