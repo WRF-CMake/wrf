@@ -36,23 +36,37 @@ WRF-CMake is available as a free and open-source project on GitHub at [https://g
 
 # Testing
 
-A fundamental aspect of software development is testing. Ideally, model components should be tested individually and under several different testing methodologies [@Feathers2004], however, given that the WRF framework does not offer a way to unit test its components, we chose to separately run build and integration tests to evaluate the effect of our changes. Build tests are performed for all WRF-CMake variants on all supported platforms at every code commit while integration tests are performed by running several simulations using a limited number of namelist configurations as included in the official [WRF Testing Framework](https://github.com/wrf-model/WTF). Integration tests are fully automated and orchestrated by the [WRF-CMake Automated Testing Suite (WATS)](https://github.com/WRF-CMake/wats) and only run at major code changes (e.g. before merging pull requests) to constrain the computing resources used for testing.
+A fundamental aspect of software development is testing. Ideally, model components should be tested individually and under several testing methodologies [@Feathers2004] however, given that the WRF framework does not offer a way to unit test its components, we run build and integration tests separately to evaluate the effects of our changes.
 
-As noted by Hodyss and Majumdar [-@Hodyss2007], and Geer [-@Geer2016], the high sensitivity to initial conditions of dynamical systems, such as the ones used in weather models, can lead to large differences in skill between any two forecasts. It is this high sensitivity to the initial conditions that can obscure the source of model error, whether it originates from a change in compiler or architecture, an actual coding error, or indeed, the intrinsic nature of the dynamical system employed. As a result, we evaluate the impact of a change in build system by comparing outputs from different namelist configurations for each operating system (`Linux`, `macOS`, `Windows`), build type (`Debug`, `Release`), mode (`serial`, `dmpar`, `smpar`, `dm_dm`)[^2] and build system (generator) (`Make`, `CMake`) against the same reference build defined as `Linux/Make/Debug/serial`. We evaluate our changes by comparing model outputs for all the prognostic variables computed by the WRF dynamical core (Table 1) and produced by different build configurations with the ones produced using the reference build by computing the [relative percentage error](https://en.wikipedia.org/w/index.php?title=Approximation_error&oldid=878331002#Formal_Definition) ($\delta$) and the [normalised root mean square error](https://en.wikipedia.org/w/index.php?title=Root-mean-square_deviation&oldid=893196204#Normalized_root-mean-square_deviation) (NRMSE) at the start of the simulation (Figure 1, A0 and B0) and after 60 minutes (Figure 1, A60 and B60).
+In WRF-CMake, tests are performed for all variants and supported platforms at every code commit while integration tests are performed by running several simulations with different configurations (Table 1) with a subset of namelists from the official [WRF Testing Framework](https://github.com/wrf-model/WTF) using the [WRF-CMake Automated Testing Suite (WATS)](https://github.com/WRF-CMake/wats) at any major code changes (e.g. before merging pull requests) to constrain the computing resources used for testing.
 
-Symbol  | Name                                    | Unit
- ------ | --------------------------------------- | ----
-$p$     | Air pressure                            | $\mathsf{Pa}$
-$\phi$  | Surface geopotential                    | $\mathsf{m^2\ s^{-2}}$
-$\theta$| Air potential temperature               | $\mathsf{K}$
-$u$     | Zonal component of wind velocity        | $\mathsf{m\ s^{-1}}$
-$v$     | Meridional component of wind velocity   | $\mathsf{m\ s^{-1}}$
-$w$     | Vertical component of wind velocity     | $\mathsf{m\ s^{-1}}$
+
+| Name       | Option                                |
+| ---------- | ------------------------------------- |
+| OS         | [`Linux`, `macOS`, `Windows`]         |
+| Build generator  | [`Make`, `Cmake`]                     |
+| Build type | [`Debug`, `Release`]                  |
+| Mode       | [`serial`, `dmpar`, `smpar`, `dm_sm`] |
+
+
+Table: Configuration used for running integration tests. `serial`: single processor support, `dmpar`: multiple processor (MP) with distributed memory support (i.e MPI), `smpar`: MP with shared memory support (e.g. OpenMP), `dm_sm`: MP with distributed and shared memory support.
+
+As noted by Hodyss and Majumdar [-@Hodyss2007], and Geer [-@Geer2016], the high sensitivity to initial conditions of dynamical systems, such as the ones used in weather models, can lead to large differences in skill between any two forecasts. It is this high sensitivity to the initial conditions that can obscure the source of model error, whether this originates from a change in compiler or architecture, an actual coding error, or indeed, the intrinsic nature of the dynamical system employed. As a result, we evaluate the impact of our changes by comparing the outputs from a subset of namelists from the official [WRF Testing Framework](https://github.com/wrf-model/WTF) for several configurations (Table 1) against a reference build defined as `Linux/Make/Debug/serial` using the [relative percentage error](https://en.wikipedia.org/w/index.php?title=Approximation_error&oldid=878331002#Formal_Definition) ($\delta$) and the [normalised root mean square error](https://en.wikipedia.org/w/index.php?title=Root-mean-square_deviation&oldid=893196204#Normalized_root-mean-square_deviation) (NRMSE) at the start of the simulation (Figure 1, A0 and B0) and after 60 minutes (Figure 1, A60 and B60). Both $\delta$ and NRMSE are computed per domain for all grid-points on all vertical levels. Normalising factors are computed per grid-point for $\delta$ and per domain, per quantity, per variant, on all vertical-levels and grid-points for NRMSE. $\boldsymbol{\delta}$ represents the vector of all $\delta$s per domain.
+
+
+| Symbol   | Name                                  | Unit                   |
+| -------- | ------------------------------------- | ---------------------- |
+| $p$      | Air pressure                          | $\mathsf{Pa}$          |
+| $\phi$   | Surface geopotential                  | $\mathsf{m^2\ s^{-2}}$ |
+| $\theta$ | Air potential temperature             | $\mathsf{K}$           |
+| $u$      | Zonal component of wind velocity      | $\mathsf{m\ s^{-1}}$   |
+| $v$      | Meridional component of wind velocity | $\mathsf{m\ s^{-1}}$   |
+| $w$      | Vertical component of wind velocity   | $\mathsf{m\ s^{-1}}$   |
 
 Table: WRF prognostic variables evaluated during integration tests.
 
 
-Both $\delta$ and NRMSE are computed per domain for all grid-points on all vertical levels. Normalising factors are computed per grid-point for $\delta$ and per domain, per quantity, per variant, on all vertical-levels and grid-points for NRMSE. $\boldsymbol{\delta}$ represents the vector of all $\delta$s per domain. Results from the current evaluation show that different operating systems have the greatest impact on both $\delta$ and NRMSE (Figure 1) over compiler optimisation strategies or type of build system used.
+Results from the current evaluation show that the choice of operating system have the greatest impact on both $\delta$ and NRMSE (Figure 1) over compiler optimization strategies or type of build system used. A change in build generator to CMake appears to yield values of $\delta$[^2] and NRMSE comparable, in terms of magnitude, to values of $\delta$[^2] and NRMSE obtained from versions of WRF build with Makefiles.
 
 ![`A`: extended box plots of relative percentage errors ($\boldsymbol{\delta}$) against the reference implementation (`Linux/Make/Debug/serial`) for domain with highest errors only (domain 2). `B`: normalised root mean-square error (NRMSE). 0 and 60 show the number of minutes elapsed since the start of the simulation. Extended boxplots show minimum, maximum, median, and percentiles at [99.9, 99, 75, 25, 5, 1, 0.1].](wrf-cmake-stats-plots.pdf)
 
@@ -68,4 +82,4 @@ We thank A. J. Geer at the European Centre for Medium-Range Weather Forecasts (E
 
 [^1]: By WRF, we specifically mean the Advanced Research WRF (ARW). The Non-hydrostatic Mesoscale Model (NMM) dynamical core, WRF-DA, WRFPLUS, WRF-Chem, and WRF-Hydro are not currently supported in WRF-CMake.
 
-[^2]: `serial`: single processor support, `dmpar`: multiple processor (MP) with distributed memory support (i.e MPI), `smpar`: MP with shared memory support (e.g. OpenMP), `dm_sm`: MP with distributed and shared memory support.
+[^2]: WRF on Windows is only available using WRF-CMake.
