@@ -65,7 +65,7 @@ As noted by Hodyss and Majumdar [-@Hodyss2007], and Geer [-@Geer2016], the high 
 Table: WRF prognostic variables evaluated during integration tests.
 
 
-Results from the evaluation show that the choice of operating system has the greatest impact on both $\delta$ and NRMSE (Figure 1) over compiler optimization strategies and build tool used. A change in build tool to CMake appears to produce values of $\delta$ and NRMSE consistent with to those obtained from versions of WRF built with the original build scripts[^2]. High values of NRMSE for $w$ are caused by small absolute values of $w$ (i.e. small absolute errors yield high NRMSE values). Large values of $\delta$ and NRMSE between operating system, particularly when considering `Debug` configurations, appear to be a general property of WRF (i.e. with/without CMake support) and should be investigated further.
+Results from the evaluation show that the choice of operating system has the greatest impact on both $\delta$ and NRMSE (Figure 1) over compiler optimization strategies and build tool used. A change in build tool to CMake appears to produce values of $\delta$ and NRMSE consistent with those obtained from versions of WRF built with the original build scripts[^2]. High values of NRMSE for $w$ are caused by small absolute values of $w$ (i.e. small absolute errors yield high NRMSE values). Large values of $\delta$ and NRMSE between operating system, particularly when considering `Debug` configurations, appear to be a general property of WRF (i.e. with/without CMake support) and should be investigated further.
 
 
 ![`A`: extended box plots of relative percentage errors ($\boldsymbol{\delta}$) against the reference configuration (`Linux/Make/Debug/serial`) for the domain with highest errors only (domain 2). `B`: normalised root mean-square error (NRMSE). 0 and 60 show the number of minutes elapsed since the start of the simulation. Extended boxplots show minimum, maximum, median, and percentiles at [99.9, 99, 75, 25, 5, 1, 0.1].](wrf-cmake-stats-plots.pdf)
@@ -86,4 +86,4 @@ We thank A. J. Geer at the European Centre for Medium-Range Weather Forecasts (E
 
 [^1]: By WRF, we specifically mean the Advanced Research WRF (ARW). The Non-hydrostatic Mesoscale Model (NMM) dynamical core, WRF-DA, WRFPLUS, WRF-Chem, and WRF-Hydro are not currently supported in WRF-CMake.
 
-[^2]: Comparison on Windows was not made as Windows support is only available in WRF-CMake.
+[^2]: Comparison on Windows is not made as Windows support is only available in WRF-CMake.
