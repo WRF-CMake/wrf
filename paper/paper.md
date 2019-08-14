@@ -36,22 +36,21 @@ WRF-CMake is available as a free and open-source project on GitHub at [https://g
 
 # Testing
 
-A fundamental aspect of software development is testing. Ideally, model components should be tested individually and under several testing methodologies [@Feathers2004], however, given that the WRF framework does not offer a way to unit test its components, we instead run build and integration tests to evaluate the effects of our changes.
+A fundamental aspect of software development is testing. Ideally, model components should be tested individually and under several testing methodologies [@Feathers2004]. As the WRF framework does not offer a way to unit test its components, we instead run build and integration tests to evaluate the effects of our changes.
 
-In WRF-CMake, build tests are performed for all variants and supported platforms at every code commit while integration tests are performed by running several simulations with different configurations (Table 1) with a subset of namelists from the official [WRF Testing Framework](https://github.com/wrf-model/WTF) using the [WRF-CMake Automated Testing Suite (WATS)](https://github.com/WRF-CMake/wats) at any major code changes (e.g. before merging pull requests) to constrain the computing resources used for testing.
+Build and integration tests are performed for all supported configurations (Table 1) using continuous integration services. Build tests are run at every code commit. Integration tests are run using the [WRF-CMake Automated Testing Suite (WATS)](https://github.com/WRF-CMake/wats) with a subset of namelists from the official [WRF Testing Framework](https://github.com/wrf-model/WTF) only at major code changes (e.g. before merging pull requests) to constrain computing resources.
+
+| Dimension  | Variant                             |
+| ---------- | ----------------------------------- |
+| OS         | `Linux`, `macOS`, `Windows`         |
+| Build tool | `Make`, `CMake`                     |
+| Build type | `Debug`, `Release`                  |
+| Mode       | `serial`, `dmpar`, `smpar`, `dm_sm` |
 
 
-| Dimension       | Variants                             |
-| --------------- | -------------------------------------|
-| OS              | Linux, macOS, Windows                |
-| Build tool      | Make, CMake                          |
-| Build type      | Debug, Release                       |
-| Mode            | serial, dmpar, smpar, dm_sm          |
+Table: Configurations used for build and integration tests. `Make`: original WRF build system files; `CMake`: this paper; `Debug`: compiler-optimizations disabled; `Release`: compiler-optimizations enabled; `serial`: single processor support; `dmpar`: multiple processor (MP) with distributed memory support (MPI), `smpar` with shared memory support (OpenMP), and `dm_sm` MP with distributed and shared memory support (MPI and OpenMP).
 
-
-Table: Configurations used for running build and integration tests. For build tool, *Make* refers to the original hand-crafted WRF build system files, while *CMake* refers to the work presented in this paper. For build type, *Debug* has compiler optimizations disabled, while *Release* enabled them. For mode, *serial* is single processor support, *dmpar* is multiple processor (MP) with distributed memory support (MPI), smpar is MP with shared memory support (OpenMP), and *dm_sm* is MP with distributed and shared memory support (MPI and OpenMP).
-
-As noted by Hodyss and Majumdar [-@Hodyss2007], and Geer [-@Geer2016], the high sensitivity to initial conditions of dynamical systems, such as the ones used in weather models, can lead to large differences in skill between any two forecasts. It is this high sensitivity to the initial conditions that can obscure the source of model error, whether this originates from a change in compiler or architecture, an actual coding error, or indeed, the intrinsic nature of the dynamical system employed. As a result, we evaluate the impact of our changes by comparing the outputs from a subset of namelists from the official [WRF Testing Framework](https://github.com/wrf-model/WTF) for several configurations (Table 1) against a reference build defined as `Linux/Make/Debug/serial` using the [relative percentage error](https://en.wikipedia.org/w/index.php?title=Approximation_error&oldid=878331002#Formal_Definition) ($\delta$) and the [normalised root mean square error](https://en.wikipedia.org/w/index.php?title=Root-mean-square_deviation&oldid=893196204#Normalized_root-mean-square_deviation) (NRMSE) at the start of the simulation (Figure 1, A0 and B0) and after 60 minutes (Figure 1, A60 and B60). Both $\delta$ and NRMSE are computed per domain for all grid-points on all vertical levels. Normalizing factors are computed per grid-point for $\delta$ and per domain, per quantity, per variant, on all vertical-levels and grid-points for NRMSE. $\boldsymbol{\delta}$ represents the vector of all $\delta$s per domain.
+As noted by Hodyss and Majumdar [-@Hodyss2007], and Geer [-@Geer2016], the high sensitivity to initial conditions of dynamical systems, such as the ones used in weather models, can lead to large differences in skill between any two forecasts. It is this high sensitivity to the initial conditions that can obscure the source of model error, whether this originates from a change in compiler or architecture, an actual coding error, or indeed, the intrinsic nature of the dynamical system employed. As a result, we evaluate the impact of our changes by comparing the outputs from integration tests against a reference build defined as `Linux/Make/Debug/serial` using [relative percentage error](https://en.wikipedia.org/w/index.php?title=Approximation_error&oldid=878331002#Formal_Definition) ($\delta$) and [normalised root mean square error](https://en.wikipedia.org/w/index.php?title=Root-mean-square_deviation&oldid=893196204#Normalized_root-mean-square_deviation) (NRMSE) at the start of the simulation (Figure 1, A0 and B0) and after 60 minutes (Figure 1, A60 and B60). Both $\delta$ and NRMSE are computed per domain for all grid-points on all vertical levels. Normalizing factors are computed per grid-point for $\delta$ and per domain, per quantity, per variant, on all vertical-levels and grid-points for NRMSE. $\boldsymbol{\delta}$ represents the vector of all $\delta$s per domain.
 
 
 | Symbol   | Name                                  | Unit                   |
@@ -66,14 +65,16 @@ As noted by Hodyss and Majumdar [-@Hodyss2007], and Geer [-@Geer2016], the high 
 Table: WRF prognostic variables evaluated during integration tests.
 
 
-Results from the evaluation show that the choice of operating system has the greatest impact on both $\delta$ and NRMSE (Figure 1) over compiler optimization strategies or build tool used. A change in build tool to CMake appears to yield values of $\delta$ and NRMSE comparable, in terms of magnitude, to those obtained from versions of WRF built with the original build scripts[^2]. Since it is not related to CMake but is a general phenomenon of WRF, we have not investigated further why the choice of operating system, particularly when considering only Debug configurations, would yield the greatest differences. The relatively high errors for $w$ are caused by the low magnitude of 1e-3 of the absolute values of $w$, i.e. small absolute errors yield high NRMSE values.
+Results from the evaluation show that the choice of operating system has the greatest impact on both $\delta$ and NRMSE (Figure 1) over compiler optimization strategies and build tool used. A change in build tool to CMake appears to produce values of $\delta$ and NRMSE consistent with to those obtained from versions of WRF built with the original build scripts[^2]. High values in NRMSE for $w$ are caused by small absolute values of $w$ (i.e. small absolute errors yield high NRMSE values). The choice of operating system, particularly when considering `Debug` configurations, appear to be a general property of WRF (i.e. with/without CMake support) and should be investigated further.
+
 
 ![`A`: extended box plots of relative percentage errors ($\boldsymbol{\delta}$) against the reference configuration (`Linux/Make/Debug/serial`) for the domain with highest errors only (domain 2). `B`: normalised root mean-square error (NRMSE). 0 and 60 show the number of minutes elapsed since the start of the simulation. Extended boxplots show minimum, maximum, median, and percentiles at [99.9, 99, 75, 25, 5, 1, 0.1].](wrf-cmake-stats-plots.pdf)
 
-# Conclusions
 
-We introduced WRF-CMake as a modern replacement of the existing build system of WRF. Its main goals are to simplify the build process involved in developing and building WRF and WPS, add support for automated testing using continuous integration (CI), and the generation of pre-built binary releases for Linux, macOS, and Windows. We have detailed our approach to testing and demonstrated that the results obtained with WRF-CMake are consistent with those using the original build system.
-Future work will be to add support for WRF-DA, WRFPLUS, WRF-Chem, and WRF-Hydro, depending on feedback and general uptake by the community.
+# Concluding remarks
+
+We introduce WRF-CMake as a modern replacement for the existing WRF build system. Its main goals are to simplify the build process involved in developing and building WRF and WPS, add support for automated testing using CI, and automate the generation of pre-built binary releases for Linux, macOS, and Windows. Results from the limited integration tests indicate that values of $\delta$ and NRMSE from outputs produced using WRF-CMake are consistent with those produced using the original build system. Future work may include support for WRF-DA, WRFPLUS, WRF-Chem, and WRF-Hydro, depending on feedback and general uptake by the community.
+
 
 # Acknowledgements
 
@@ -83,7 +84,6 @@ We thank A. J. Geer at the European Centre for Medium-Range Weather Forecasts (E
 # References
 
 
-
 [^1]: By WRF, we specifically mean the Advanced Research WRF (ARW). The Non-hydrostatic Mesoscale Model (NMM) dynamical core, WRF-DA, WRFPLUS, WRF-Chem, and WRF-Hydro are not currently supported in WRF-CMake.
 
-[^2]: Windows support is only available when building with CMake.
+[^2]: Comparison on Windows was not made as Windows support is only available in WRF-CMake.
