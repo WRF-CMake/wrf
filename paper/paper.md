@@ -73,7 +73,7 @@ Results from the evaluation show that the choice of operating system has the gre
 
 # Concluding remarks
 
-We introduce WRF-CMake as a modern replacement for the existing WRF build system. Its main goals are to simplify the build process involved in developing and building WRF and WPS, add support for automated testing using CI, and automate the generation of pre-built binary releases for Linux, macOS, and Windows. Results from the limited integration tests indicate that values of $\delta$ and NRMSE from outputs produced using WRF-CMake are consistent with those produced using the original build system. Future work may include support for WRF-DA, WRFPLUS, WRF-Chem, and WRF-Hydro, depending on feedback and general uptake by the community.
+We introduce WRF-CMake as a modern replacement for the existing WRF build system. Its main goals are to simplify the build process involved in developing and building WRF and WPS, add support for automated testing using CI, and automate the generation of pre-built binary releases for Linux, macOS, and Windows. Results from the limited integration tests indicate that values of $\delta$ and NRMSE from outputs of prognostic variables produced using WRF-CMake are consistent with those produced using the original build system. Future work may add support for WRF-DA, WRFPLUS, WRF-Chem, and WRF-Hydro, depending on feedback and general uptake by the community.
 
 
 # Acknowledgements
