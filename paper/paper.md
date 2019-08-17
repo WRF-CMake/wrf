@@ -65,10 +65,75 @@ As noted by Hodyss and Majumdar [-@Hodyss2007], and Geer [-@Geer2016], the high 
 Table: WRF prognostic variables evaluated during integration tests.
 
 
+\begin{tiny}
+\begin{longtable}{llrrrrrr}
+\caption{Make vs CMake Domain 2, 60 min}\\
+\toprule
+                          &     &  $p$ in $\mathsf{Pa}$ &  $\phi$ in $\mathsf{m^2\ s^{-2}}$ &  $\theta$ in $\mathsf{K}$ &  $u$ in $\mathsf{m\ s^{-1}}$ &  $v$ in $\mathsf{m\ s^{-1}}$ &  $w$ in $\mathsf{m\ s^{-1}}$ \\
+Configuration & Statistic &                       &                                   &                           &                              &                              &                              \\
+\midrule
+\endhead
+\midrule
+\multicolumn{8}{r}{{Continued on next page}} \\
+\midrule
+\endfoot
+
+\bottomrule
+\endlastfoot
+Linux/Debug/dmpar & Mean &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                    & SD &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                    & Max &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+Linux/Debug/dm\_sm & Mean &               5.0e-04 &                           1.6e-02 &                   1.9e-04 &                      3.3e-04 &                      2.8e-04 &                      9.4e-05 \\
+                    & SD &               3.6e-03 &                           9.4e-02 &                   2.5e-03 &                      4.9e-03 &                      3.3e-03 &                      7.7e-04 \\
+                    & Max &               1.2e+00 &                           9.1e+00 &                   4.7e-01 &                      1.1e+00 &                      7.6e-01 &                      1.3e-01 \\
+Linux/Debug/serial & Mean &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                    & SD &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                    & Max &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+Linux/Debug/smpar & Mean &               2.9e-04 &                           1.3e-02 &                   1.4e-04 &                      1.8e-04 &                      1.7e-04 &                      7.6e-05 \\
+                    & SD &               2.8e-03 &                           1.0e-01 &                   1.7e-03 &                      1.6e-03 &                      1.5e-03 &                      8.1e-04 \\
+                    & Max &               1.2e+00 &                           1.2e+01 &                   4.7e-01 &                      2.6e-01 &                      2.5e-01 &                      1.7e-01 \\
+Linux/Release/dmpar & Mean &               3.0e-04 &                           1.3e-02 &                   1.3e-04 &                      1.6e-04 &                      1.6e-04 &                      8.0e-05 \\
+                    & SD &               3.0e-03 &                           1.1e-01 &                   1.8e-03 &                      1.4e-03 &                      1.4e-03 &                      8.3e-04 \\
+                    & Max &               1.2e+00 &                           1.1e+01 &                   4.6e-01 &                      2.1e-01 &                      2.6e-01 &                      1.3e-01 \\
+Linux/Release/dm\_sm & Mean &               5.1e-04 &                           1.8e-02 &                   2.0e-04 &                      3.4e-04 &                      3.0e-04 &                      1.0e-04 \\
+                    & SD &               3.6e-03 &                           1.1e-01 &                   2.5e-03 &                      4.7e-03 &                      3.5e-03 &                      8.4e-04 \\
+                    & Max &               1.2e+00 &                           1.1e+01 &                   5.1e-01 &                      1.1e+00 &                      7.1e-01 &                      1.3e-01 \\
+Linux/Release/serial & Mean &               3.0e-04 &                           1.3e-02 &                   1.3e-04 &                      1.6e-04 &                      1.6e-04 &                      8.0e-05 \\
+                    & SD &               3.0e-03 &                           1.1e-01 &                   1.8e-03 &                      1.4e-03 &                      1.4e-03 &                      8.3e-04 \\
+                    & Max &               1.2e+00 &                           1.1e+01 &                   4.6e-01 &                      2.1e-01 &                      2.6e-01 &                      1.3e-01 \\
+Linux/Release/smpar & Mean &               3.0e-04 &                           1.3e-02 &                   1.3e-04 &                      1.6e-04 &                      1.6e-04 &                      8.0e-05 \\
+                    & SD &               3.0e-03 &                           1.1e-01 &                   1.8e-03 &                      1.4e-03 &                      1.4e-03 &                      8.3e-04 \\
+                    & Max &               1.2e+00 &                           1.1e+01 &                   4.6e-01 &                      2.1e-01 &                      2.6e-01 &                      1.3e-01 \\
+macOS/Debug/dmpar & Mean &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                    & SD &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                    & Max &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+macOS/Debug/dm\_sm & Mean &               5.0e-04 &                           1.7e-02 &                   2.1e-04 &                      3.6e-04 &                      3.1e-04 &                      1.0e-04 \\
+                    & SD &               3.5e-03 &                           9.4e-02 &                   2.5e-03 &                      5.0e-03 &                      3.7e-03 &                      7.9e-04 \\
+                    & Max &               1.2e+00 &                           8.4e+00 &                   4.7e-01 &                      1.1e+00 &                      9.1e-01 &                      1.3e-01 \\
+macOS/Debug/serial & Mean &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                    & SD &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                    & Max &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+macOS/Debug/smpar & Mean &               3.0e-04 &                           1.3e-02 &                   1.4e-04 &                      1.8e-04 &                      1.7e-04 &                      8.0e-05 \\
+                    & SD &               2.8e-03 &                           1.0e-01 &                   1.6e-03 &                      1.5e-03 &                      1.5e-03 &                      8.1e-04 \\
+                    & Max &               1.3e+00 &                           1.0e+01 &                   4.6e-01 &                      2.2e-01 &                      3.3e-01 &                      1.7e-01 \\
+macOS/Release/dmpar & Mean &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                    & SD &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                    & Max &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+macOS/Release/dm\_sm & Mean &               2.2e-04 &                           4.6e-03 &                   7.4e-05 &                      1.9e-04 &                      1.6e-04 &                      2.6e-05 \\
+                    & SD &               2.1e-03 &                           2.6e-02 &                   2.1e-03 &                      5.1e-03 &                      3.8e-03 &                      1.5e-04 \\
+                    & Max &               5.8e-01 &                           2.1e+00 &                   4.3e-01 &                      9.2e-01 &                      7.9e-01 &                      1.9e-02 \\
+macOS/Release/serial & Mean &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                    & SD &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                    & Max &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+macOS/Release/smpar & Mean &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                    & SD &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                    & Max &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+\end{longtable}
+\end{tiny}
+
+
+
 Results from the evaluation show that the choice of operating system has the greatest impact on both $\delta$ and NRMSE (Figure 1) over compiler optimization strategies and build tool used. A change in build tool to CMake appears to produce values of $\delta$ and NRMSE consistent with those obtained from versions of WRF built with the original build scripts[^2]. High values of NRMSE for $w$ are caused by small absolute values of $w$ (i.e. small absolute errors yield high NRMSE values). Large values of $\delta$ and NRMSE between operating systems, particularly when considering `Debug` configurations, appear to be a general property of WRF (i.e. with/without CMake support) and should be investigated further.
-
-
-![`A`: extended box plots of relative percentage errors ($\boldsymbol{\delta}$) against the reference configuration (`Linux/Make/Debug/serial`) for the domain with highest errors only (domain 2). `B`: normalised root mean-square error (NRMSE). 0 and 60 show the number of minutes elapsed since the start of the simulation. Extended boxplots show minimum, maximum, median, and percentiles at [99.9, 99, 75, 25, 5, 1, 0.1].](wrf-cmake-stats-plots.pdf)
 
 
 # Concluding remarks
@@ -80,6 +145,280 @@ We introduce WRF-CMake as a modern replacement for the existing WRF build system
 
 We thank A. J. Geer at the European Centre for Medium-Range Weather Forecasts (ECMWF) for the useful discussion and feedback concerning the topic of error growth in dynamical systems.
 
+# Appendix
+
+\begin{tiny}
+\begin{longtable}{llrrrrrr}
+\caption{Single ref, t 0min}\\
+\toprule
+                            &     &  $p$ in $\mathsf{Pa}$ &  $\phi$ in $\mathsf{m^2\ s^{-2}}$ &  $\theta$ in $\mathsf{K}$ &  $u$ in $\mathsf{m\ s^{-1}}$ &  $v$ in $\mathsf{m\ s^{-1}}$ &  $w$ in $\mathsf{m\ s^{-1}}$ \\
+Configuration & Statistic &                       &                                   &                           &                              &                              &                              \\
+\midrule
+\endhead
+\midrule
+\multicolumn{8}{r}{{Continued on next page}} \\
+\midrule
+\endfoot
+
+\bottomrule
+\endlastfoot
+Linux/CMake/Debug/dmpar & Mean &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & SD &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & Max &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+Linux/CMake/Debug/dm\_sm & Mean &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & SD &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & Max &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+Linux/CMake/Debug/serial & Mean &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & SD &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & Max &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+Linux/CMake/Debug/smpar & Mean &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & SD &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & Max &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+Linux/CMake/Release/dmpar & Mean &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & SD &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & Max &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+Linux/CMake/Release/dm\_sm & Mean &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & SD &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & Max &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+Linux/CMake/Release/serial & Mean &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & SD &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & Max &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+Linux/CMake/Release/smpar & Mean &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & SD &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & Max &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+Linux/Make/Debug/dmpar & Mean &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & SD &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & Max &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+Linux/Make/Debug/dm\_sm & Mean &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & SD &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & Max &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+Linux/Make/Debug/smpar & Mean &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & SD &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & Max &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+Linux/Make/Release/dmpar & Mean &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & SD &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & Max &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+Linux/Make/Release/dm\_sm & Mean &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & SD &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & Max &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+Linux/Make/Release/serial & Mean &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & SD &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & Max &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+Linux/Make/Release/smpar & Mean &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & SD &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & Max &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+macOS/CMake/Debug/dmpar & Mean &               4.9e-05 &                           1.8e-03 &                   2.7e-06 &                      7.4e-07 &                      6.9e-07 &                      1.3e-08 \\
+                            & SD &               2.0e-04 &                           5.4e-03 &                   1.0e-05 &                      6.3e-06 &                      6.2e-06 &                      9.5e-08 \\
+                            & Max &               2.4e-02 &                           6.2e-02 &                   2.7e-04 &                      3.9e-04 &                      5.1e-04 &                      4.7e-06 \\
+macOS/CMake/Debug/dm\_sm & Mean &               4.9e-05 &                           1.8e-03 &                   2.7e-06 &                      7.4e-07 &                      6.9e-07 &                      1.3e-08 \\
+                            & SD &               2.0e-04 &                           5.4e-03 &                   1.0e-05 &                      6.3e-06 &                      6.2e-06 &                      9.5e-08 \\
+                            & Max &               2.4e-02 &                           6.2e-02 &                   2.7e-04 &                      3.9e-04 &                      5.1e-04 &                      4.7e-06 \\
+macOS/CMake/Debug/serial & Mean &               4.9e-05 &                           1.8e-03 &                   2.7e-06 &                      7.4e-07 &                      6.9e-07 &                      1.3e-08 \\
+                            & SD &               2.0e-04 &                           5.4e-03 &                   1.0e-05 &                      6.3e-06 &                      6.2e-06 &                      9.5e-08 \\
+                            & Max &               2.4e-02 &                           6.2e-02 &                   2.7e-04 &                      3.9e-04 &                      5.1e-04 &                      4.7e-06 \\
+macOS/CMake/Debug/smpar & Mean &               4.9e-05 &                           1.8e-03 &                   2.7e-06 &                      7.4e-07 &                      6.9e-07 &                      1.3e-08 \\
+                            & SD &               2.0e-04 &                           5.4e-03 &                   1.0e-05 &                      6.3e-06 &                      6.2e-06 &                      9.5e-08 \\
+                            & Max &               2.4e-02 &                           6.2e-02 &                   2.7e-04 &                      3.9e-04 &                      5.1e-04 &                      4.7e-06 \\
+macOS/CMake/Release/dmpar & Mean &               4.9e-05 &                           1.8e-03 &                   2.7e-06 &                      7.4e-07 &                      6.9e-07 &                      1.3e-08 \\
+                            & SD &               2.0e-04 &                           5.4e-03 &                   1.0e-05 &                      6.3e-06 &                      6.2e-06 &                      9.5e-08 \\
+                            & Max &               2.4e-02 &                           6.2e-02 &                   2.7e-04 &                      3.9e-04 &                      5.1e-04 &                      4.7e-06 \\
+macOS/CMake/Release/dm\_sm & Mean &               4.9e-05 &                           1.8e-03 &                   2.7e-06 &                      7.4e-07 &                      6.9e-07 &                      1.3e-08 \\
+                            & SD &               2.0e-04 &                           5.4e-03 &                   1.0e-05 &                      6.3e-06 &                      6.2e-06 &                      9.5e-08 \\
+                            & Max &               2.4e-02 &                           6.2e-02 &                   2.7e-04 &                      3.9e-04 &                      5.1e-04 &                      4.7e-06 \\
+macOS/CMake/Release/serial & Mean &               4.9e-05 &                           1.8e-03 &                   2.7e-06 &                      7.4e-07 &                      6.9e-07 &                      1.3e-08 \\
+                            & SD &               2.0e-04 &                           5.4e-03 &                   1.0e-05 &                      6.3e-06 &                      6.2e-06 &                      9.5e-08 \\
+                            & Max &               2.4e-02 &                           6.2e-02 &                   2.7e-04 &                      3.9e-04 &                      5.1e-04 &                      4.7e-06 \\
+macOS/CMake/Release/smpar & Mean &               4.9e-05 &                           1.8e-03 &                   2.7e-06 &                      7.4e-07 &                      6.9e-07 &                      1.3e-08 \\
+                            & SD &               2.0e-04 &                           5.4e-03 &                   1.0e-05 &                      6.3e-06 &                      6.2e-06 &                      9.5e-08 \\
+                            & Max &               2.4e-02 &                           6.2e-02 &                   2.7e-04 &                      3.9e-04 &                      5.1e-04 &                      4.7e-06 \\
+macOS/Make/Debug/dmpar & Mean &               4.9e-05 &                           1.8e-03 &                   2.7e-06 &                      7.4e-07 &                      6.9e-07 &                      1.3e-08 \\
+                            & SD &               2.0e-04 &                           5.4e-03 &                   1.0e-05 &                      6.3e-06 &                      6.2e-06 &                      9.5e-08 \\
+                            & Max &               2.4e-02 &                           6.2e-02 &                   2.7e-04 &                      3.9e-04 &                      5.1e-04 &                      4.7e-06 \\
+macOS/Make/Debug/dm\_sm & Mean &               4.9e-05 &                           1.8e-03 &                   2.7e-06 &                      7.4e-07 &                      6.9e-07 &                      1.3e-08 \\
+                            & SD &               2.0e-04 &                           5.4e-03 &                   1.0e-05 &                      6.3e-06 &                      6.2e-06 &                      9.5e-08 \\
+                            & Max &               2.4e-02 &                           6.2e-02 &                   2.7e-04 &                      3.9e-04 &                      5.1e-04 &                      4.7e-06 \\
+macOS/Make/Debug/serial & Mean &               4.9e-05 &                           1.8e-03 &                   2.7e-06 &                      7.4e-07 &                      6.9e-07 &                      1.3e-08 \\
+                            & SD &               2.0e-04 &                           5.4e-03 &                   1.0e-05 &                      6.3e-06 &                      6.2e-06 &                      9.5e-08 \\
+                            & Max &               2.4e-02 &                           6.2e-02 &                   2.7e-04 &                      3.9e-04 &                      5.1e-04 &                      4.7e-06 \\
+macOS/Make/Debug/smpar & Mean &               4.9e-05 &                           1.8e-03 &                   2.7e-06 &                      7.4e-07 &                      6.9e-07 &                      1.3e-08 \\
+                            & SD &               2.0e-04 &                           5.4e-03 &                   1.0e-05 &                      6.3e-06 &                      6.2e-06 &                      9.5e-08 \\
+                            & Max &               2.4e-02 &                           6.2e-02 &                   2.7e-04 &                      3.9e-04 &                      5.1e-04 &                      4.7e-06 \\
+macOS/Make/Release/dmpar & Mean &               4.9e-05 &                           1.8e-03 &                   2.7e-06 &                      7.4e-07 &                      6.9e-07 &                      1.3e-08 \\
+                            & SD &               2.0e-04 &                           5.4e-03 &                   1.0e-05 &                      6.3e-06 &                      6.2e-06 &                      9.5e-08 \\
+                            & Max &               2.4e-02 &                           6.2e-02 &                   2.7e-04 &                      3.9e-04 &                      5.1e-04 &                      4.7e-06 \\
+macOS/Make/Release/dm\_sm & Mean &               4.9e-05 &                           1.8e-03 &                   2.7e-06 &                      7.4e-07 &                      6.9e-07 &                      1.3e-08 \\
+                            & SD &               2.0e-04 &                           5.4e-03 &                   1.0e-05 &                      6.3e-06 &                      6.2e-06 &                      9.5e-08 \\
+                            & Max &               2.4e-02 &                           6.2e-02 &                   2.7e-04 &                      3.9e-04 &                      5.1e-04 &                      4.7e-06 \\
+macOS/Make/Release/serial & Mean &               4.9e-05 &                           1.8e-03 &                   2.7e-06 &                      7.4e-07 &                      6.9e-07 &                      1.3e-08 \\
+                            & SD &               2.0e-04 &                           5.4e-03 &                   1.0e-05 &                      6.3e-06 &                      6.2e-06 &                      9.5e-08 \\
+                            & Max &               2.4e-02 &                           6.2e-02 &                   2.7e-04 &                      3.9e-04 &                      5.1e-04 &                      4.7e-06 \\
+macOS/Make/Release/smpar & Mean &               4.9e-05 &                           1.8e-03 &                   2.7e-06 &                      7.4e-07 &                      6.9e-07 &                      1.3e-08 \\
+                            & SD &               2.0e-04 &                           5.4e-03 &                   1.0e-05 &                      6.3e-06 &                      6.2e-06 &                      9.5e-08 \\
+                            & Max &               2.4e-02 &                           6.2e-02 &                   2.7e-04 &                      3.9e-04 &                      5.1e-04 &                      4.7e-06 \\
+Windows/CMake/Debug/dmpar & Mean &               4.8e-05 &                           1.8e-03 &                   2.7e-06 &                      7.4e-07 &                      6.9e-07 &                      1.3e-08 \\
+                            & SD &               1.9e-04 &                           5.4e-03 &                   1.0e-05 &                      6.3e-06 &                      6.2e-06 &                      9.5e-08 \\
+                            & Max &               7.4e-03 &                           6.2e-02 &                   2.7e-04 &                      3.9e-04 &                      5.1e-04 &                      4.7e-06 \\
+Windows/CMake/Debug/dm\_sm & Mean &               4.8e-05 &                           1.8e-03 &                   2.7e-06 &                      7.4e-07 &                      6.9e-07 &                      1.3e-08 \\
+                            & SD &               1.9e-04 &                           5.4e-03 &                   1.0e-05 &                      6.3e-06 &                      6.2e-06 &                      9.5e-08 \\
+                            & Max &               7.4e-03 &                           6.2e-02 &                   2.7e-04 &                      3.9e-04 &                      5.1e-04 &                      4.7e-06 \\
+Windows/CMake/Debug/serial & Mean &               4.8e-05 &                           1.8e-03 &                   2.7e-06 &                      7.4e-07 &                      6.9e-07 &                      1.3e-08 \\
+                            & SD &               1.9e-04 &                           5.4e-03 &                   1.0e-05 &                      6.3e-06 &                      6.2e-06 &                      9.5e-08 \\
+                            & Max &               7.4e-03 &                           6.2e-02 &                   2.7e-04 &                      3.9e-04 &                      5.1e-04 &                      4.7e-06 \\
+Windows/CMake/Debug/smpar & Mean &               4.8e-05 &                           1.8e-03 &                   2.7e-06 &                      7.4e-07 &                      6.9e-07 &                      1.3e-08 \\
+                            & SD &               1.9e-04 &                           5.4e-03 &                   1.0e-05 &                      6.3e-06 &                      6.2e-06 &                      9.5e-08 \\
+                            & Max &               7.4e-03 &                           6.2e-02 &                   2.7e-04 &                      3.9e-04 &                      5.1e-04 &                      4.7e-06 \\
+Windows/CMake/Release/dmpar & Mean &               4.8e-05 &                           1.8e-03 &                   2.7e-06 &                      7.4e-07 &                      6.9e-07 &                      1.3e-08 \\
+                            & SD &               1.9e-04 &                           5.4e-03 &                   1.0e-05 &                      6.3e-06 &                      6.2e-06 &                      9.5e-08 \\
+                            & Max &               7.4e-03 &                           6.2e-02 &                   2.7e-04 &                      3.9e-04 &                      5.1e-04 &                      4.7e-06 \\
+Windows/CMake/Release/dm\_sm & Mean &               4.8e-05 &                           1.8e-03 &                   2.7e-06 &                      7.4e-07 &                      6.9e-07 &                      1.3e-08 \\
+                            & SD &               1.9e-04 &                           5.4e-03 &                   1.0e-05 &                      6.3e-06 &                      6.2e-06 &                      9.5e-08 \\
+                            & Max &               7.4e-03 &                           6.2e-02 &                   2.7e-04 &                      3.9e-04 &                      5.1e-04 &                      4.7e-06 \\
+Windows/CMake/Release/serial & Mean &               4.8e-05 &                           1.8e-03 &                   2.7e-06 &                      7.4e-07 &                      6.9e-07 &                      1.3e-08 \\
+                            & SD &               1.9e-04 &                           5.4e-03 &                   1.0e-05 &                      6.3e-06 &                      6.2e-06 &                      9.5e-08 \\
+                            & Max &               7.4e-03 &                           6.2e-02 &                   2.7e-04 &                      3.9e-04 &                      5.1e-04 &                      4.7e-06 \\
+Windows/CMake/Release/smpar & Mean &               4.8e-05 &                           1.8e-03 &                   2.7e-06 &                      7.4e-07 &                      6.9e-07 &                      1.3e-08 \\
+                            & SD &               1.9e-04 &                           5.4e-03 &                   1.0e-05 &                      6.3e-06 &                      6.2e-06 &                      9.5e-08 \\
+                            & Max &               7.4e-03 &                           6.2e-02 &                   2.7e-04 &                      3.9e-04 &                      5.1e-04 &                      4.7e-06 \\
+\end{longtable}
+\end{tiny}
+
+
+
+
+\begin{tiny}
+\begin{longtable}{llrrrrrr}
+\caption{Single Ref, Domain 2, 60 min}\\
+\toprule
+                            &     &  $p$ in $\mathsf{Pa}$ &  $\phi$ in $\mathsf{m^2\ s^{-2}}$ &  $\theta$ in $\mathsf{K}$ &  $u$ in $\mathsf{m\ s^{-1}}$ &  $v$ in $\mathsf{m\ s^{-1}}$ &  $w$ in $\mathsf{m\ s^{-1}}$ \\
+Configuration & Statistic &                       &                                   &                           &                              &                              &                              \\
+\midrule
+\endhead
+\midrule
+\multicolumn{8}{r}{{Continued on next page}} \\
+\midrule
+\endfoot
+
+\bottomrule
+\endlastfoot
+Linux/CMake/Debug/dmpar & Mean &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & SD &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & Max &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+Linux/CMake/Debug/dm\_sm & Mean &               2.8e-04 &                           1.1e-02 &                   1.2e-04 &                      1.4e-04 &                      1.4e-04 &                      7.0e-05 \\
+                            & SD &               2.6e-03 &                           8.9e-02 &                   1.6e-03 &                      1.4e-03 &                      1.3e-03 &                      7.6e-04 \\
+                            & Max &               1.2e+00 &                           9.7e+00 &                   4.6e-01 &                      2.1e-01 &                      2.1e-01 &                      1.7e-01 \\
+Linux/CMake/Debug/serial & Mean &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & SD &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & Max &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+Linux/CMake/Debug/smpar & Mean &               2.7e-04 &                           1.1e-02 &                   1.3e-04 &                      1.6e-04 &                      1.6e-04 &                      6.7e-05 \\
+                            & SD &               2.6e-03 &                           8.3e-02 &                   1.7e-03 &                      1.4e-03 &                      1.5e-03 &                      7.2e-04 \\
+                            & Max &               8.6e-01 &                           8.3e+00 &                   4.3e-01 &                      2.1e-01 &                      4.9e-01 &                      1.7e-01 \\
+Linux/CMake/Release/dmpar & Mean &               1.8e-03 &                           1.0e-01 &                   8.1e-04 &                      2.3e-03 &                      2.7e-03 &                      4.7e-04 \\
+                            & SD &               5.7e-03 &                           4.8e-01 &                   7.2e-03 &                      2.1e-02 &                      3.5e-02 &                      2.6e-03 \\
+                            & Max &               1.2e+00 &                           3.0e+01 &                   1.1e+00 &                      5.6e+00 &                      1.0e+01 &                      2.3e-01 \\
+Linux/CMake/Release/dm\_sm & Mean &               1.8e-03 &                           1.1e-01 &                   8.1e-04 &                      2.3e-03 &                      2.7e-03 &                      4.7e-04 \\
+                            & SD &               5.7e-03 &                           4.8e-01 &                   7.2e-03 &                      2.1e-02 &                      3.5e-02 &                      2.6e-03 \\
+                            & Max &               1.2e+00 &                           3.0e+01 &                   1.1e+00 &                      5.6e+00 &                      1.0e+01 &                      2.3e-01 \\
+Linux/CMake/Release/serial & Mean &               1.8e-03 &                           1.0e-01 &                   8.1e-04 &                      2.3e-03 &                      2.7e-03 &                      4.7e-04 \\
+                            & SD &               5.7e-03 &                           4.8e-01 &                   7.2e-03 &                      2.1e-02 &                      3.5e-02 &                      2.6e-03 \\
+                            & Max &               1.2e+00 &                           3.0e+01 &                   1.1e+00 &                      5.6e+00 &                      1.0e+01 &                      2.3e-01 \\
+Linux/CMake/Release/smpar & Mean &               1.8e-03 &                           1.0e-01 &                   8.1e-04 &                      2.3e-03 &                      2.7e-03 &                      4.7e-04 \\
+                            & SD &               5.7e-03 &                           4.8e-01 &                   7.2e-03 &                      2.1e-02 &                      3.5e-02 &                      2.6e-03 \\
+                            & Max &               1.2e+00 &                           3.0e+01 &                   1.1e+00 &                      5.6e+00 &                      1.0e+01 &                      2.3e-01 \\
+Linux/Make/Debug/dmpar & Mean &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & SD &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+                            & Max &               0.0e+00 &                           0.0e+00 &                   0.0e+00 &                      0.0e+00 &                      0.0e+00 &                      0.0e+00 \\
+Linux/Make/Debug/dm\_sm & Mean &               5.0e-04 &                           1.5e-02 &                   1.9e-04 &                      3.3e-04 &                      2.8e-04 &                      9.4e-05 \\
+                            & SD &               3.4e-03 &                           9.2e-02 &                   2.5e-03 &                      4.9e-03 &                      3.3e-03 &                      7.5e-04 \\
+                            & Max &               9.9e-01 &                           8.9e+00 &                   4.6e-01 &                      1.1e+00 &                      7.6e-01 &                      1.3e-01 \\
+Linux/Make/Debug/smpar & Mean &               3.0e-04 &                           1.3e-02 &                   1.4e-04 &                      1.8e-04 &                      1.8e-04 &                      8.2e-05 \\
+                            & SD &               3.0e-03 &                           1.1e-01 &                   1.7e-03 &                      1.6e-03 &                      1.5e-03 &                      8.2e-04 \\
+                            & Max &               1.3e+00 &                           1.2e+01 &                   4.7e-01 &                      2.8e-01 &                      2.4e-01 &                      1.4e-01 \\
+Linux/Make/Release/dmpar & Mean &               1.8e-03 &                           1.0e-01 &                   7.9e-04 &                      2.2e-03 &                      2.7e-03 &                      4.5e-04 \\
+                            & SD &               5.7e-03 &                           4.7e-01 &                   7.1e-03 &                      2.1e-02 &                      3.5e-02 &                      2.6e-03 \\
+                            & Max &               1.2e+00 &                           3.0e+01 &                   1.1e+00 &                      5.6e+00 &                      1.0e+01 &                      2.3e-01 \\
+Linux/Make/Release/dm\_sm & Mean &               1.8e-03 &                           1.0e-01 &                   7.9e-04 &                      2.2e-03 &                      2.7e-03 &                      4.5e-04 \\
+                            & SD &               5.6e-03 &                           4.7e-01 &                   7.1e-03 &                      2.1e-02 &                      3.5e-02 &                      2.6e-03 \\
+                            & Max &               1.2e+00 &                           3.0e+01 &                   1.1e+00 &                      5.6e+00 &                      1.0e+01 &                      2.3e-01 \\
+Linux/Make/Release/serial & Mean &               1.8e-03 &                           1.0e-01 &                   7.9e-04 &                      2.2e-03 &                      2.7e-03 &                      4.5e-04 \\
+                            & SD &               5.7e-03 &                           4.7e-01 &                   7.1e-03 &                      2.1e-02 &                      3.5e-02 &                      2.6e-03 \\
+                            & Max &               1.2e+00 &                           3.0e+01 &                   1.1e+00 &                      5.6e+00 &                      1.0e+01 &                      2.3e-01 \\
+Linux/Make/Release/smpar & Mean &               1.8e-03 &                           1.0e-01 &                   7.9e-04 &                      2.2e-03 &                      2.7e-03 &                      4.5e-04 \\
+                            & SD &               5.7e-03 &                           4.7e-01 &                   7.1e-03 &                      2.1e-02 &                      3.5e-02 &                      2.6e-03 \\
+                            & Max &               1.2e+00 &                           3.0e+01 &                   1.1e+00 &                      5.6e+00 &                      1.0e+01 &                      2.3e-01 \\
+macOS/CMake/Debug/dmpar & Mean &               2.7e-03 &                           1.7e-01 &                   1.4e-03 &                      4.2e-03 &                      5.5e-03 &                      7.7e-04 \\
+                            & SD &               6.8e-03 &                           5.5e-01 &                   8.5e-03 &                      2.7e-02 &                      6.9e-02 &                      3.6e-03 \\
+                            & Max &               7.4e-01 &                           3.0e+01 &                   1.1e+00 &                      6.5e+00 &                      1.6e+01 &                      3.6e-01 \\
+macOS/CMake/Debug/dm\_sm & Mean &               2.7e-03 &                           1.7e-01 &                   1.4e-03 &                      4.2e-03 &                      5.6e-03 &                      7.8e-04 \\
+                            & SD &               7.1e-03 &                           5.5e-01 &                   8.6e-03 &                      2.7e-02 &                      6.9e-02 &                      3.7e-03 \\
+                            & Max &               1.3e+00 &                           3.0e+01 &                   1.1e+00 &                      6.5e+00 &                      1.6e+01 &                      3.6e-01 \\
+macOS/CMake/Debug/serial & Mean &               2.7e-03 &                           1.7e-01 &                   1.4e-03 &                      4.2e-03 &                      5.5e-03 &                      7.7e-04 \\
+                            & SD &               6.8e-03 &                           5.5e-01 &                   8.5e-03 &                      2.7e-02 &                      6.9e-02 &                      3.6e-03 \\
+                            & Max &               7.4e-01 &                           3.0e+01 &                   1.1e+00 &                      6.5e+00 &                      1.6e+01 &                      3.6e-01 \\
+macOS/CMake/Debug/smpar & Mean &               2.7e-03 &                           1.7e-01 &                   1.4e-03 &                      4.2e-03 &                      5.6e-03 &                      7.8e-04 \\
+                            & SD &               6.9e-03 &                           5.5e-01 &                   8.5e-03 &                      2.7e-02 &                      6.9e-02 &                      3.7e-03 \\
+                            & Max &               1.3e+00 &                           3.0e+01 &                   1.1e+00 &                      6.5e+00 &                      1.6e+01 &                      3.6e-01 \\
+macOS/CMake/Release/dmpar & Mean &               2.8e-03 &                           1.7e-01 &                   1.4e-03 &                      4.2e-03 &                      5.7e-03 &                      8.0e-04 \\
+                            & SD &               7.2e-03 &                           6.0e-01 &                   9.2e-03 &                      2.7e-02 &                      9.0e-02 &                      4.3e-03 \\
+                            & Max &               1.3e+00 &                           5.1e+01 &                   1.8e+00 &                      6.4e+00 &                      3.9e+01 &                      5.2e-01 \\
+macOS/CMake/Release/dm\_sm & Mean &               2.8e-03 &                           1.7e-01 &                   1.4e-03 &                      4.3e-03 &                      5.8e-03 &                      8.1e-04 \\
+                            & SD &               7.2e-03 &                           6.0e-01 &                   9.3e-03 &                      2.7e-02 &                      9.0e-02 &                      4.3e-03 \\
+                            & Max &               1.3e+00 &                           5.1e+01 &                   1.8e+00 &                      6.4e+00 &                      3.9e+01 &                      5.2e-01 \\
+macOS/CMake/Release/serial & Mean &               2.8e-03 &                           1.7e-01 &                   1.4e-03 &                      4.2e-03 &                      5.7e-03 &                      8.0e-04 \\
+                            & SD &               7.2e-03 &                           6.0e-01 &                   9.2e-03 &                      2.7e-02 &                      9.0e-02 &                      4.3e-03 \\
+                            & Max &               1.3e+00 &                           5.1e+01 &                   1.8e+00 &                      6.4e+00 &                      3.9e+01 &                      5.2e-01 \\
+macOS/CMake/Release/smpar & Mean &               2.8e-03 &                           1.7e-01 &                   1.4e-03 &                      4.2e-03 &                      5.7e-03 &                      8.0e-04 \\
+                            & SD &               7.2e-03 &                           6.0e-01 &                   9.2e-03 &                      2.7e-02 &                      9.0e-02 &                      4.3e-03 \\
+                            & Max &               1.3e+00 &                           5.1e+01 &                   1.8e+00 &                      6.4e+00 &                      3.9e+01 &                      5.2e-01 \\
+macOS/Make/Debug/dmpar & Mean &               2.7e-03 &                           1.7e-01 &                   1.4e-03 &                      4.2e-03 &                      5.5e-03 &                      7.7e-04 \\
+                            & SD &               6.8e-03 &                           5.5e-01 &                   8.5e-03 &                      2.7e-02 &                      6.9e-02 &                      3.6e-03 \\
+                            & Max &               7.4e-01 &                           3.0e+01 &                   1.1e+00 &                      6.5e+00 &                      1.6e+01 &                      3.6e-01 \\
+macOS/Make/Debug/dm\_sm & Mean &               2.7e-03 &                           1.7e-01 &                   1.4e-03 &                      4.2e-03 &                      5.6e-03 &                      7.9e-04 \\
+                            & SD &               7.1e-03 &                           5.6e-01 &                   8.6e-03 &                      2.7e-02 &                      6.9e-02 &                      3.7e-03 \\
+                            & Max &               1.2e+00 &                           3.0e+01 &                   1.1e+00 &                      6.5e+00 &                      1.6e+01 &                      3.6e-01 \\
+macOS/Make/Debug/serial & Mean &               2.7e-03 &                           1.7e-01 &                   1.4e-03 &                      4.2e-03 &                      5.5e-03 &                      7.7e-04 \\
+                            & SD &               6.8e-03 &                           5.5e-01 &                   8.5e-03 &                      2.7e-02 &                      6.9e-02 &                      3.6e-03 \\
+                            & Max &               7.4e-01 &                           3.0e+01 &                   1.1e+00 &                      6.5e+00 &                      1.6e+01 &                      3.6e-01 \\
+macOS/Make/Debug/smpar & Mean &               2.7e-03 &                           1.7e-01 &                   1.4e-03 &                      4.2e-03 &                      5.6e-03 &                      7.7e-04 \\
+                            & SD &               6.7e-03 &                           5.5e-01 &                   8.5e-03 &                      2.7e-02 &                      6.9e-02 &                      3.6e-03 \\
+                            & Max &               7.4e-01 &                           3.0e+01 &                   1.1e+00 &                      6.5e+00 &                      1.6e+01 &                      3.6e-01 \\
+macOS/Make/Release/dmpar & Mean &               2.8e-03 &                           1.7e-01 &                   1.4e-03 &                      4.2e-03 &                      5.7e-03 &                      8.0e-04 \\
+                            & SD &               7.2e-03 &                           6.0e-01 &                   9.2e-03 &                      2.7e-02 &                      9.0e-02 &                      4.3e-03 \\
+                            & Max &               1.3e+00 &                           5.1e+01 &                   1.8e+00 &                      6.4e+00 &                      3.9e+01 &                      5.2e-01 \\
+macOS/Make/Release/dm\_sm & Mean &               2.8e-03 &                           1.7e-01 &                   1.4e-03 &                      4.2e-03 &                      5.7e-03 &                      8.0e-04 \\
+                            & SD &               7.2e-03 &                           6.0e-01 &                   9.2e-03 &                      2.7e-02 &                      9.0e-02 &                      4.3e-03 \\
+                            & Max &               1.3e+00 &                           5.1e+01 &                   1.8e+00 &                      6.4e+00 &                      3.9e+01 &                      5.2e-01 \\
+macOS/Make/Release/serial & Mean &               2.8e-03 &                           1.7e-01 &                   1.4e-03 &                      4.2e-03 &                      5.7e-03 &                      8.0e-04 \\
+                            & SD &               7.2e-03 &                           6.0e-01 &                   9.2e-03 &                      2.7e-02 &                      9.0e-02 &                      4.3e-03 \\
+                            & Max &               1.3e+00 &                           5.1e+01 &                   1.8e+00 &                      6.4e+00 &                      3.9e+01 &                      5.2e-01 \\
+macOS/Make/Release/smpar & Mean &               2.8e-03 &                           1.7e-01 &                   1.4e-03 &                      4.2e-03 &                      5.7e-03 &                      8.0e-04 \\
+                            & SD &               7.2e-03 &                           6.0e-01 &                   9.2e-03 &                      2.7e-02 &                      9.0e-02 &                      4.3e-03 \\
+                            & Max &               1.3e+00 &                           5.1e+01 &                   1.8e+00 &                      6.4e+00 &                      3.9e+01 &                      5.2e-01 \\
+Windows/CMake/Debug/dmpar & Mean &               2.7e-03 &                           1.7e-01 &                   1.5e-03 &                      4.4e-03 &                      5.8e-03 &                      8.0e-04 \\
+                            & SD &               7.1e-03 &                           6.3e-01 &                   1.0e-02 &                      2.8e-02 &                      8.0e-02 &                      4.1e-03 \\
+                            & Max &               8.6e-01 &                           5.5e+01 &                   1.4e+00 &                      6.0e+00 &                      3.1e+01 &                      5.2e-01 \\
+Windows/CMake/Debug/dm\_sm & Mean &               2.7e-03 &                           1.7e-01 &                   1.5e-03 &                      4.4e-03 &                      5.8e-03 &                      8.1e-04 \\
+                            & SD &               7.1e-03 &                           6.3e-01 &                   1.0e-02 &                      2.8e-02 &                      8.0e-02 &                      4.1e-03 \\
+                            & Max &               1.2e+00 &                           5.5e+01 &                   1.4e+00 &                      6.0e+00 &                      3.1e+01 &                      5.2e-01 \\
+Windows/CMake/Debug/serial & Mean &               2.7e-03 &                           1.7e-01 &                   1.5e-03 &                      4.4e-03 &                      5.8e-03 &                      8.0e-04 \\
+                            & SD &               7.1e-03 &                           6.3e-01 &                   1.0e-02 &                      2.8e-02 &                      8.0e-02 &                      4.1e-03 \\
+                            & Max &               8.6e-01 &                           5.5e+01 &                   1.4e+00 &                      6.0e+00 &                      3.1e+01 &                      5.2e-01 \\
+Windows/CMake/Debug/smpar & Mean &               2.7e-03 &                           1.7e-01 &                   1.5e-03 &                      4.4e-03 &                      5.8e-03 &                      8.1e-04 \\
+                            & SD &               7.2e-03 &                           6.3e-01 &                   1.0e-02 &                      2.8e-02 &                      8.0e-02 &                      4.1e-03 \\
+                            & Max &               1.3e+00 &                           5.5e+01 &                   1.4e+00 &                      6.0e+00 &                      3.1e+01 &                      5.2e-01 \\
+Windows/CMake/Release/dmpar & Mean &               2.8e-03 &                           1.8e-01 &                   1.6e-03 &                      4.6e-03 &                      6.1e-03 &                      8.3e-04 \\
+                            & SD &               7.5e-03 &                           7.1e-01 &                   1.1e-02 &                      3.2e-02 &                      8.6e-02 &                      4.4e-03 \\
+                            & Max &               1.2e+00 &                           5.5e+01 &                   1.4e+00 &                      8.2e+00 &                      3.1e+01 &                      5.2e-01 \\
+Windows/CMake/Release/dm\_sm & Mean &               2.8e-03 &                           1.8e-01 &                   1.6e-03 &                      4.6e-03 &                      6.1e-03 &                      8.3e-04 \\
+                            & SD &               7.5e-03 &                           7.1e-01 &                   1.1e-02 &                      3.2e-02 &                      8.6e-02 &                      4.4e-03 \\
+                            & Max &               1.2e+00 &                           5.5e+01 &                   1.4e+00 &                      8.2e+00 &                      3.1e+01 &                      5.2e-01 \\
+Windows/CMake/Release/serial & Mean &               2.8e-03 &                           1.8e-01 &                   1.6e-03 &                      4.6e-03 &                      6.1e-03 &                      8.3e-04 \\
+                            & SD &               7.5e-03 &                           7.1e-01 &                   1.1e-02 &                      3.2e-02 &                      8.6e-02 &                      4.4e-03 \\
+                            & Max &               1.2e+00 &                           5.5e+01 &                   1.4e+00 &                      8.2e+00 &                      3.1e+01 &                      5.2e-01 \\
+Windows/CMake/Release/smpar & Mean &               2.8e-03 &                           1.8e-01 &                   1.6e-03 &                      4.6e-03 &                      6.1e-03 &                      8.3e-04 \\
+                            & SD &               7.5e-03 &                           7.1e-01 &                   1.1e-02 &                      3.2e-02 &                      8.6e-02 &                      4.4e-03 \\
+                            & Max &               1.2e+00 &                           5.5e+01 &                   1.4e+00 &                      8.2e+00 &                      3.1e+01 &                      5.2e-01 \\
+\end{longtable}
+\end{tiny}
 
 # References
 
