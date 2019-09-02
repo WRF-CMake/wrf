@@ -49,11 +49,11 @@ Build tests are performed for all supported build variants (Table 1) using CI se
 
 Table: Build variants used in build and regression tests. `Make`: original WRF build system files, `CMake`: this paper; `Debug`: compiler optimizations disabled, `Release`: enabled; `serial`: single processor, `dmpar`: multiple with distributed memory (MPI), `smpar`: multiple with shared memory (OpenMP), `dm_sm`: multiple with MPI and OpenMP.
 
-As a result, the impact of our changes are evaluated using the range-normalized relative percentage error $\boldsymbol{\delta}$ and range-normalized root-mean-square percentage error (NRMSPE; Appendix A). These are computed per domain for all grid points, and for all vertical levels. The errors are assessed by (a) comparing the outputs of prognostic-variable outputs (Table 2) from WRF (Make) against those from WRF-CMake and (b) comparing the outputs for all build variants (for both Make and CMake) against a reference build variant defined as `Linux/Make/Debug/serial`.
+As a result, the impact of our changes are evaluated using the range-normalized relative percentage error ($\boldsymbol{\delta}_{x}$) and range-normalized root-mean-square percentage error (NRMSPE; Appendix A). These are computed per domain for all grid points, and for all vertical levels. The errors are assessed by (a) comparing the outputs of prognostic-variable outputs (Table 2) from WRF (Make) against those from WRF-CMake and (b) comparing the outputs for all build variants (for both Make and CMake) against a reference build variant defined as `Linux/Make/Debug/serial`.
 
-These tests are then run for all supported build variants (Table 1) using the [WRF-CMake Automated Testing Suite (WATS)](https://github.com/WRF-CMake/wats) and a subset of namelists[^2] from the official [WRF Testing Framework](https://github.com/wrf-model/WTF). These are run on CI services at major code changes (e.g. before merging pull requests), and for 1 hour of simulation time, to constrain computing resources.
+ These tests are then run for all supported build variants (Table 1) using the [WRF-CMake Automated Testing Suite (WATS)](https://github.com/WRF-CMake/wats), and a subset of namelists[^2] from the official [WRF Testing Framework](https://github.com/wrf-model/WTF), using CI services at major code changes (e.g. before merging pull requests), and for 1 hour of simulation time, to constrain computing resources.
 
-Here, we report the summary results for the domain showing the greatest error (i.e. innermost; domain 2) after simulating for 60 minutes. Values of $\boldsymbol{\delta}$ in the extended boxplots (Figure 1 and 3) are aggregated for all quantities reported in Table 2.
+Here, we report summary results for the domain showing the greatest error (i.e. innermost; domain 2) after simulating 60 minutes. Values of $\boldsymbol{\delta}_{x}$ are aggregated for all quantities reported in Table 2 and referred to as $\boldsymbol{\delta}$.
 
 | Symbol           | Name                                  | Unit                   |
 | ---------------- | ------------------------------------- | ---------------------- |
@@ -66,11 +66,11 @@ Here, we report the summary results for the domain showing the greatest error (i
 
 Table: WRF prognostic variables evaluated during regression tests.
 
-At the start of the simulation, the NRMSPE between WRF (Make) and WRF-CMake is zero (Appendix B, Figure 5) but small when comparing WRF build variants (both Make and CMake) against a reference variant (`Linux/Make/Debug/serial`; Appendix B, Figure 6), thus suggesting an expected variability of outputs when running WRF across different platforms.
+At the start of the simulation, the NRMSPE between WRF (Make) and WRF-CMake is zero (Appendix B, Figure 5), but small, when comparing WRF build variants (both Make and CMake) against a reference variant (`Linux/Make/Debug/serial`; Appendix B, Figure 6), thus suggesting an expected variability of outputs when running WRF across different platforms.
 
-After 60 minutes (simulation time), WRF-CMake produces, on average, small values of $\boldsymbol{\delta}$ with a mean close to zero and most of the error (99.8 %) is between -0.05 and 0.05 % (Figure 1). On Linux, the only build variants showing no error are for `Debug/serial` and  `Debug/dmpar` (Figure 1 and 2). For NRMSPE (Figure 2), values of $\boldsymbol{w}$ show to be the most sensitive, however, the largest errors are shown for all components of wind velocity, on both, Linux and macOS.
+After 60 minutes (simulation time), WRF-CMake produces, on average, small values of $\boldsymbol{\delta}$, with mean close to zero, and most of the error (99.8 %) between -0.05 and 0.05 % (Figure 1). On Linux, the only build variants showing no error are for `Debug/serial` and  `Debug/dmpar` (Figure 1 and 2). For NRMSPE (Figure 2), values of $\boldsymbol{w}$ show to be the most sensitive, however, the largest errors are shown for all components of wind velocity, on both, Linux and macOS.
 
-Differences most likely arise due to inconsistent usage of compiler optimization options in WRF (Make) across its C and Fortran files, whereas with WRF-CMake such options are centrally applied. This applies in particular for `Release` build variants. Given that `Debug/serial` and `Debug/dmpar` show no error, we would expect the same to be true for the OpenMP variants `Debug/smpar` and `Debug/dm_sm`. Further investigation is required to establish the source of these differences.
+Differences most likely arise from an inconsistent use of compiler optimization options in WRF (Make) across its C and Fortran files, whereas in WRF-CMake, such options are centrally and consistently applied and is especially the case for for `Release` build variants. Given that `Debug/serial` and `Debug/dmpar` show no error, we would expect the same to be true for the OpenMP variants `Debug/smpar` and `Debug/dm_sm`. Further investigation is required to establish the source of these differences.
 
 When comparing both Make and CMake versions against the reference build variant (i.e. `Linux/Make/Debug/serial`; Figure 3 and 4), the errors appear to be of equal, or greater, magnitude than those shown when comparing WRF (Make) against WRF-CMake for both $\boldsymbol{\delta}$ (Figure 3) and NRMSPE (Figure 4), thus indicating that the variability across build variants may be more important and may also be an inherent feature of WRF.
 
@@ -100,26 +100,28 @@ We thank A. J. Geer at the European Centre for Medium-Range Weather Forecasts (E
 
 # Appendix A Statistics
 
-The vector of range-normalized relative percentage error ($\boldsymbol{\delta}$) between two vectors $\boldsymbol{x}_{1}$ and $\boldsymbol{x}_{2}$ of paired quantities $x_{1}$ and $x_{2}$ is defined as:
+The vector of range-normalized relative percentage error ($\boldsymbol{\delta}_{x}$) between two vectors $\boldsymbol{x}_{1}$ and $\boldsymbol{x}_{2}$ of paired quantities $x_{1}$ and $x_{2}$ is defined as:
 
 \begin{equation}
-\delta := \frac{x_1 - x_2}{R_{x_1}}\; \times 100\; \%,
+\boldsymbol{\delta}_{x} := \frac{\boldsymbol{x}_{1} - \boldsymbol{x}_{2}}{R_{\boldsymbol{x}_{1}}}\; \times 100\; \%,
 \end{equation}
 
-where $R_{x_1}$ is the range of $x_1$.
+where $R_{\boldsymbol{x}_{1}}$ is the range of $\boldsymbol{x}_{1}$.
 
 Similarly, the range-normalized root-mean-square percentage error (NRMSPE) is defined as:
 
 \begin{equation}
-\mathrm{NRMSPE} := \frac{\mathrm{RMSE}}{R_{x_1}}\; \times 100\; \%,
+\mathrm{NRMSPE} := \frac{\mathrm{RMSE}}{R_{\boldsymbol{x}_{1}}}\; \times 100\; \%,
 \end{equation}
 
 with the root-mean-square-error (RMSE) defined as:
 
 \begin{equation}
     \mathrm{RMSE} := \sqrt{
-        \frac{\sum_{i=1}^{N} (\boldsymbol{x}_{1} - \boldsymbol{x}_{2})^{2}}{N}}.
+        \frac{\sum_{i=1}^{N} (\boldsymbol{x}_{1,i} - \boldsymbol{x}_{2,i})^{2}}{N}},
 \end{equation}
+
+and $i$ as the index.
 
 # Appendix B Supplementary figures
 
