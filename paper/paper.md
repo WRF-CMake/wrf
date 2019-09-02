@@ -121,11 +121,9 @@ with the root-mean-square-error (RMSE) defined as:
         \frac{\sum_{i=1}^{N} (\boldsymbol{x}_{1,i} - \boldsymbol{x}_{2,i})^{2}}{N}},
 \end{equation}
 
-and $i$ as the index.
+and $N$ is the size of the vector.
 
 # Appendix B Supplementary figures
-
-TODO position of images
 
 ![WRF (Make) vs WRF-CMake: range-normalized root mean-square percentage error (NRMSPE) at 0 minutes (simulation time).](figures/nrmse_range_make_cmake_t0.pdf)
 
