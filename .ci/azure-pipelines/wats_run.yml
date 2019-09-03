@@ -29,6 +29,13 @@ steps:
 - bash: |
     set -ex
     if [[ $MODE == dm* ]]; then mpi_flag="--mpi"; fi
+    if [[ $OS_NAME == macOS ]]; then
+      # Work around Open MPI issue
+      # https://github.com/open-mpi/ompi/issues/6518
+      # https://github.com/open-mpi/ompi/issues/5798
+      # https://www.mail-archive.com/devel@lists.open-mpi.org/msg20760.html
+      export OMPI_MCA_btl=self,tcp
+    fi
     if [[ $BUILD_SYSTEM == "CMake" ]]; then dir_suffix="build/install"; fi
     python wats/wats/main.py run --mode $WATS_MODE --wrf-dir ./$dir_suffix --wps-dir ../WPS/$dir_suffix --wps-case-output-dir wats_wps_outputs/00 --work-dir wats_work $mpi_flag
   displayName: Run WATS
