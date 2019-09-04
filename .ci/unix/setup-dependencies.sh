@@ -51,15 +51,15 @@ if [ "$(uname)" == "Linux" ]; then
         else
             # From bionic onwards, libjasper is not available via apt-get.
             cd /tmp
-            curl --retry ${HTTP_RETRIES} https://www.ece.uvic.ca/~frodo/jasper/software/jasper-2.0.14.tar.gz | tar xz
-            cd jasper-2.0.14/build/
+            curl -L --retry ${HTTP_RETRIES} https://github.com/mdadams/jasper/archive/version-2.0.14.tar.gz | tar xz
+            cd jasper-version-2.0.14/build/
             cmake -DCMAKE_INSTALL_PREFIX=/usr ..
             sudo make install
         fi
 
         # Need to build netcdf-fortran manually as the Fortran compiler versions have to match.
         cd /tmp
-        curl --retry ${HTTP_RETRIES} https://www.unidata.ucar.edu/downloads/netcdf/ftp/netcdf-fortran-4.4.4.tar.gz | tar xz
+        curl -L --retry ${HTTP_RETRIES} https://github.com/Unidata/netcdf-fortran/archive/v4.4.4.tar.gz | tar xz
         cd netcdf-fortran-4.4.4
         sed -i 's/ADD_SUBDIRECTORY(examples)/#ADD_SUBDIRECTORY(examples)/' CMakeLists.txt
         mkdir build && cd build
@@ -69,19 +69,19 @@ if [ "$(uname)" == "Linux" ]; then
     elif [ "$(lsb_release -i -s)" == "CentOS" ]; then
         sudo yum install -y zlib-devel libpng-devel jasper-devel libjpeg-devel xz
 
-        curl https://cmake.org/files/v3.14/cmake-3.14.3-Linux-x86_64.sh -o cmake.sh
+        curl -L --retry ${HTTP_RETRIES} https://cmake.org/files/v3.14/cmake-3.14.3-Linux-x86_64.sh -o cmake.sh
         sudo bash cmake.sh --prefix=/usr --exclude-subdir --skip-license
         rm cmake.sh
 
         SZIP_VERSION=2.1.1
-        curl https://support.hdfgroup.org/ftp/lib-external/szip/${SZIP_VERSION}/src/szip-${SZIP_VERSION}.tar.gz | tar xz
+        curl -L --retry ${HTTP_RETRIES} https://support.hdfgroup.org/ftp/lib-external/szip/${SZIP_VERSION}/src/szip-${SZIP_VERSION}.tar.gz | tar xz
         pushd szip-${SZIP_VERSION}
         ./configure --prefix=/usr
         sudo make install -j$(nproc)
         popd
 
         HDF5_VERSION=1.10.5
-        curl https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.10/hdf5-${HDF5_VERSION}/src/CMake-hdf5-${HDF5_VERSION}.tar.gz | tar xz
+        curl -L --retry ${HTTP_RETRIES} https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.10/hdf5-${HDF5_VERSION}/src/CMake-hdf5-${HDF5_VERSION}.tar.gz | tar xz
         pushd CMake-hdf5-${HDF5_VERSION}/hdf5-${HDF5_VERSION}
         mkdir build
         cd build
@@ -105,7 +105,7 @@ if [ "$(uname)" == "Linux" ]; then
         popd
 
         NETCDF_C_VERSION=4.6.1
-        curl https://www.unidata.ucar.edu/downloads/netcdf/ftp/netcdf-${NETCDF_C_VERSION}.tar.gz | tar xz
+        curl -L --retry ${HTTP_RETRIES} https://www.unidata.ucar.edu/downloads/netcdf/ftp/netcdf-${NETCDF_C_VERSION}.tar.gz | tar xz
         pushd netcdf-${NETCDF_C_VERSION}
         ./configure --prefix=/usr \
             --disable-doxygen \
@@ -117,7 +117,7 @@ if [ "$(uname)" == "Linux" ]; then
         popd
 
         NETCDF_FORTRAN_VERSION=4.4.4
-        curl https://www.unidata.ucar.edu/downloads/netcdf/ftp/netcdf-fortran-${NETCDF_FORTRAN_VERSION}.tar.gz | tar xz
+        curl -L --retry ${HTTP_RETRIES} https://www.unidata.ucar.edu/downloads/netcdf/ftp/netcdf-fortran-${NETCDF_FORTRAN_VERSION}.tar.gz | tar xz
         pushd netcdf-fortran-${NETCDF_FORTRAN_VERSION}
         export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/lib
         ./configure --prefix=/usr --enable-static
@@ -144,7 +144,7 @@ if [ "$(uname)" == "Linux" ]; then
             # Need to build mpich manually as the Fortran compiler versions have to match.
             MPICH_VERSION=3.2.1
             cd /tmp
-            curl --retry ${HTTP_RETRIES} http://www.mpich.org/static/downloads/${MPICH_VERSION}/mpich-${MPICH_VERSION}.tar.gz | tar xz
+            curl -L --retry ${HTTP_RETRIES} https://www.mpich.org/static/downloads/${MPICH_VERSION}/mpich-${MPICH_VERSION}.tar.gz | tar xz
             cd mpich-${MPICH_VERSION}
             ./configure --prefix=/usr
             sudo make install -j$(nproc)
