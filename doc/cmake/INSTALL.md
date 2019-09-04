@@ -33,7 +33,7 @@ The general commands to download, configure and install WRF-CMake on Linux and m
 
 ``` sh
 git clone https://github.com/WRF-CMake/wrf.git
-cd WRF
+cd wrf
 mkdir build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=<install_directory> ..
 make install
