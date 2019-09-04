@@ -1,16 +1,26 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
+# WRF-CMake (https://github.com/WRF-CMake/wrf).
 # Copyright 2018 M. Riechert and D. Meyer. Licensed under the MIT License.
 
 set -ex
 
 SCRIPTDIR=$(dirname "$0")
 
+source $SCRIPTDIR/retry.sh
+
+HTTP_RETRIES=3
+
 if [ "$(uname)" == "Linux" ]; then
 
-    if [ "$(lsb_release -c -s)" == "trusty" ]; then
-        sudo apt-get update
+    echo "APT::Acquire::Retries \"${HTTP_RETRIES}\";" | sudo tee /etc/apt/apt.conf.d/80-retries
 
+    if [ "$(lsb_release -i -s)" == "Ubuntu" ]; then
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common curl cmake
+    fi
+
+    if [ "$(lsb_release -c -s)" == "trusty" ]; then
         # We don't use latest compiler versions for 14.04 as we would otherwise
         # also have to build both netcdf-c and netcdf-fortran, whereas on
         # newer Ubuntu these two are separate packages and we just have to
@@ -30,17 +40,26 @@ if [ "$(uname)" == "Linux" ]; then
     elif [ "$(lsb_release -i -s)" == "Ubuntu" ]; then
         # macOS (via Homebrew) and Windows (via MSYS2) always provide the latest
         # compiler versions. On Ubuntu, we need to opt-in explicitly. 
-        sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+        sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
 
         sudo apt-get update
-        sudo apt-get install gcc-8 gfortran-8 libpng-dev libjasper-dev 
-        sudo apt-get install libnetcdf-dev
+        sudo apt-get install -y $CC $FC libpng-dev
+        sudo apt-get install -y libnetcdf-dev
+
+        if [ "$(lsb_release -c -s)" == "xenial" ]; then
+            sudo apt-get install -y libjasper-dev 
+        else
+            # From bionic onwards, libjasper is not available via apt-get.
+            cd /tmp
+            curl --retry ${HTTP_RETRIES} https://www.ece.uvic.ca/~frodo/jasper/software/jasper-2.0.14.tar.gz | tar xz
+            cd jasper-2.0.14/build/
+            cmake -DCMAKE_INSTALL_PREFIX=/usr ..
+            sudo make install
+        fi
 
         # Need to build netcdf-fortran manually as the Fortran compiler versions have to match.
-        # TODO remove this once WRF 4.1 is out (as that switches from modules to .inc for netcdf & mpi)
         cd /tmp
-        wget ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-fortran-4.4.4.tar.gz
-        tar xvzf netcdf-fortran-4.4.4.tar.gz
+        curl --retry ${HTTP_RETRIES} https://www.unidata.ucar.edu/downloads/netcdf/ftp/netcdf-fortran-4.4.4.tar.gz | tar xz
         cd netcdf-fortran-4.4.4
         sed -i 's/ADD_SUBDIRECTORY(examples)/#ADD_SUBDIRECTORY(examples)/' CMakeLists.txt
         mkdir build && cd build
@@ -111,7 +130,7 @@ if [ "$(uname)" == "Linux" ]; then
 
     if [ $BUILD_SYSTEM == 'Make' ]; then
         if [ "$(lsb_release -i -s)" == "Ubuntu" ]; then
-            sudo apt-get install csh m4 libhdf5-serial-dev
+            sudo apt-get install -y csh m4 libhdf5-serial-dev
         elif [ "$(lsb_release -i -s)" == "CentOS" ]; then
             sudo yum install -y tcsh m4
             sudo ln -sf $(which cpp) /lib/cpp
@@ -120,13 +139,12 @@ if [ "$(uname)" == "Linux" ]; then
 
     if [[ $MODE == dm* ]]; then
         if [ "$(lsb_release -c -s)" == "trusty" ]; then
-            sudo apt-get install libmpich-dev
+            sudo apt-get install -y libmpich-dev
         else
             # Need to build mpich manually as the Fortran compiler versions have to match.
-            # TODO remove this once WRF 4.1 is out (as that switches from modules to .inc for netcdf & mpi)
             MPICH_VERSION=3.2.1
             cd /tmp
-            curl http://www.mpich.org/static/downloads/${MPICH_VERSION}/mpich-${MPICH_VERSION}.tar.gz | tar xz
+            curl --retry ${HTTP_RETRIES} http://www.mpich.org/static/downloads/${MPICH_VERSION}/mpich-${MPICH_VERSION}.tar.gz | tar xz
             cd mpich-${MPICH_VERSION}
             ./configure --prefix=/usr
             sudo make install -j$(nproc)
@@ -142,10 +160,20 @@ elif [ "$(uname)" == "Darwin" ]; then
     # Use the `-f` flag in case c++ is not present to avoid errors.
     rm -f /usr/local/include/c++
 
-    # disable automatic cleanup, just takes time
+    # Don't fall-back to source build if bottle download fails for some reason (e.g. network issues).
+    # Source builds generally take too long in CI. This setting let's brew fail immediately.
+    export HOMEBREW_NO_BOTTLE_SOURCE_FALLBACK=1
+
+    # Retry downloads if there was a failure.
+    # Used only for bottles, but not during 'brew update' which uses git internally.
+    export HOMEBREW_CURL_RETRIES=${HTTP_RETRIES}
+
+    # Disable automatic cleanup, just takes time.
     export HOMEBREW_NO_INSTALL_CLEANUP=1
 
-    brew update -v
+    # 'brew update' uses git and does not have a retry option, so we wrap it.
+    retry brew update -v
+
     # Since "brew install" can't silently ignore already installed packages
     # we're using this instead.
     # See https://github.com/Homebrew/brew/issues/2491#issuecomment-294264745.
