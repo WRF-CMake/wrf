@@ -49,15 +49,15 @@ if [ "$(uname)" == "Linux" ]; then
         else
             # From bionic onwards, libjasper is not available via apt-get.
             cd /tmp
-            curl --retry ${HTTP_RETRIES} https://www.ece.uvic.ca/~frodo/jasper/software/jasper-2.0.14.tar.gz | tar xz
-            cd jasper-2.0.14/build/
+            curl -L --retry ${HTTP_RETRIES} https://github.com/mdadams/jasper/archive/version-2.0.14.tar.gz | tar xz
+            cd jasper-version-2.0.14/build/
             cmake -DCMAKE_INSTALL_PREFIX=/usr ..
             sudo make install
         fi
 
         # Need to build netcdf-fortran manually as the Fortran compiler versions have to match.
         cd /tmp
-        curl --retry ${HTTP_RETRIES} https://www.unidata.ucar.edu/downloads/netcdf/ftp/netcdf-fortran-4.4.4.tar.gz | tar xz
+        curl -L --retry ${HTTP_RETRIES} https://github.com/Unidata/netcdf-fortran/archive/v4.4.4.tar.gz | tar xz
         cd netcdf-fortran-4.4.4
         sed -i 's/ADD_SUBDIRECTORY(examples)/#ADD_SUBDIRECTORY(examples)/' CMakeLists.txt
         mkdir build && cd build
@@ -77,7 +77,7 @@ if [ "$(uname)" == "Linux" ]; then
             # Need to build mpich manually as the Fortran compiler versions have to match.
             MPICH_VERSION=3.2.1
             cd /tmp
-            curl --retry ${HTTP_RETRIES} http://www.mpich.org/static/downloads/${MPICH_VERSION}/mpich-${MPICH_VERSION}.tar.gz | tar xz
+            curl -L --retry ${HTTP_RETRIES} https://www.mpich.org/static/downloads/${MPICH_VERSION}/mpich-${MPICH_VERSION}.tar.gz | tar xz
             cd mpich-${MPICH_VERSION}
             ./configure --prefix=/usr
             make -j 4

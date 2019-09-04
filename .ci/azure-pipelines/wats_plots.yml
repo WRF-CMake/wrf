@@ -3,7 +3,7 @@
 
 parameters:
   DOMAINS: [d01, d02]
-  TIMES: [0, 3, 6]
+  TIMES: [0, 6]
 
 jobs:
 - job: wats_plots
@@ -62,13 +62,6 @@ jobs:
                 itemPattern: 'wats_${{ OS_NAME }}_${{ BUILD_SYSTEM }}_${{ BUILD_TYPE }}_${{ MODE }}/**'
             
             - ${{ each DOMAIN in parameters.DOMAINS }}:
-              - script: |
-                  set -ex
-                  O=wats_outputs
-                  W="python wats/wats/plots.py compute --stats-dir wats_stats/${{ DOMAIN }}/TALL --filter ${{ DOMAIN }} --append"
-                  $W $O/wats_Linux_Make_Debug_serial $O/wats_${{ OS_NAME }}_${{ BUILD_SYSTEM }}_${{ BUILD_TYPE }}_${{ MODE }}
-                displayName: 'Run WATS: compute plot stats Linux/Make/Debug/serial vs ${{ OS_NAME }}/${{ BUILD_SYSTEM }}/${{ BUILD_TYPE }}/${{ MODE }} for domain ${{ DOMAIN }}'
-              
               - ${{ each TIME in parameters.TIMES }}:
                 - script: |
                     set -ex
@@ -85,32 +78,50 @@ jobs:
       rm -rf wats_outputs/wats_Linux_Make_Debug_serial
     displayName: Remove reference Linux/Make/Debug/serial WATS outputs 
 
-  - task: PublishBuildArtifacts@1
-    displayName: Store WATS plot stats
-    inputs:
-      pathtoPublish: wats_stats
-      artifactName: wats_stats
-
-  - ${{ each DOMAIN in parameters.DOMAINS }}:
-    - script: |
-        python wats/wats/plots.py plot --stats-dir wats_stats/${{ DOMAIN }}/TALL --plots-dir wats_plots/${{ DOMAIN }}/TALL/OSALL
-      displayName: 'Run WATS: create plots for domain ${{ DOMAIN }}'
-    
-    - ${{ each OS_NAME in parameters.OS_NAMES }}:
-      - script: |
-          python wats/wats/plots.py plot --stats-dir wats_stats/${{ DOMAIN }}/TALL --plots-dir wats_plots/${{ DOMAIN }}/TALL/${{ OS_NAME }} --filter ${{ OS_NAME }}
-        displayName: 'Run WATS: create plots for domain ${{ DOMAIN }} - ${{ OS_NAME }}'
-
+  - ${{ each DOMAIN in parameters.DOMAINS }}:   
     - ${{ each TIME in parameters.TIMES }}:
       - script: |
-          python wats/wats/plots.py plot --stats-dir wats_stats/${{ DOMAIN }}/T${{ TIME }} --plots-dir wats_plots/${{ DOMAIN }}/T${{ TIME }}/OSALL
-        displayName: 'Run WATS: create plots for domain ${{ DOMAIN }} - T${{ TIME }}'
-      
-      - ${{ each OS_NAME in parameters.OS_NAMES }}:
-        - script: |
-            python wats/wats/plots.py plot --stats-dir wats_stats/${{ DOMAIN }}/T${{ TIME }} --plots-dir wats_plots/${{ DOMAIN }}/T${{ TIME }}/${{ OS_NAME }} --filter ${{ OS_NAME }}
-          displayName: 'Run WATS: create plots for domain ${{ DOMAIN }} - T${{ TIME }} - ${{ OS_NAME }}'
+          python wats/wats/plots.py plot --stats-dir wats_stats/${{ DOMAIN }}/T${{ TIME }} --plots-dir wats_plots/single_ref/${{ DOMAIN }}/T${{ TIME }}
+        displayName: 'Run WATS: create Linux/Make/Debug/serial reference plots for domain ${{ DOMAIN }} - T${{ TIME }}'
+
+  - script: |
+      rm -rf wats_stats/
+    displayName: Remove WATS stats files
   
+  # Plot: CMake vs Make
+
+  - ${{ each OS_NAME in parameters.OS_NAMES }}:
+    - ${{ each BUILD_TYPE in parameters.BUILD_TYPES }}:
+      - ${{ each MODE in parameters.MODES }}:
+        # For Windows, since there is no Make-based build, skip that combination.
+        - ${{ if not(eq(OS_NAME, 'Windows')) }}:
+
+          - task: DownloadBuildArtifacts@0
+            displayName: Retrieve ${{ OS_NAME }}/{Make,CMake}/${{ BUILD_TYPE }}/${{ MODE }} WATS outputs
+            inputs:
+              downloadPath: wats_outputs
+              downloadType: specific
+              itemPattern: 'wats_${{ OS_NAME }}_*_${{ BUILD_TYPE }}_${{ MODE }}/**'
+
+          - ${{ each DOMAIN in parameters.DOMAINS }}:
+            - ${{ each TIME in parameters.TIMES }}:
+              - script: |
+                  set -ex
+                  O=wats_outputs
+                  W="python wats/wats/plots.py compute --stats-dir wats_stats/${{ DOMAIN }}/T${{ TIME }} --filter ${{ DOMAIN }} --time-idx ${{ TIME }} --append"
+                  $W $O/wats_${{ OS_NAME }}_Make_${{ BUILD_TYPE }}_${{ MODE }} $O/wats_${{ OS_NAME }}_CMake_${{ BUILD_TYPE }}_${{ MODE }}
+                displayName: 'Run WATS: compute plot stats ${{ OS_NAME }}/Make/${{ BUILD_TYPE }}/${{ MODE }} vs ${{ OS_NAME }}/CMake/${{ BUILD_TYPE }}/${{ MODE }} for domain ${{ DOMAIN }} - T${{ TIME }}'
+
+          - script: |
+              rm -rf wats_outputs/wats_${{ OS_NAME }}_*_${{ BUILD_TYPE }}_${{ MODE }}
+            displayName: Remove ${{ OS_NAME }}/{Make,CMake}/${{ BUILD_TYPE }}/${{ MODE }} WATS outputs 
+
+  - ${{ each DOMAIN in parameters.DOMAINS }}:   
+    - ${{ each TIME in parameters.TIMES }}:
+      - script: |
+          python wats/wats/plots.py plot --stats-dir wats_stats/${{ DOMAIN }}/T${{ TIME }} --plots-dir wats_plots/make_cmake/${{ DOMAIN }}/T${{ TIME }}
+        displayName: 'Run WATS: create Make vs CMake plots for domain ${{ DOMAIN }} - T${{ TIME }}'
+
   - task: PublishBuildArtifacts@1
     displayName: Store WATS plots
     inputs:
