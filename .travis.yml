@@ -58,7 +58,7 @@ jobs:
     
     - stage: build
       os: osx
-      osx_image: xcode9.2 # https://github.com/travis-ci/travis-ci/issues/9640
+      osx_image: xcode10
       language: generic
       env:
         - BUILD_SYSTEM=Make
@@ -70,7 +70,7 @@ jobs:
 
     - stage: build
       os: osx
-      osx_image: xcode9.2 # https://github.com/travis-ci/travis-ci/issues/9640
+      osx_image: xcode10
       language: generic
       env:
         - BUILD_SYSTEM=Make
@@ -144,7 +144,7 @@ jobs:
 
     - stage: build
       os: osx
-      osx_image: xcode9.2 # https://github.com/travis-ci/travis-ci/issues/9640
+      osx_image: xcode10
       language: generic
       env:
         - BUILD_SYSTEM=CMake
@@ -159,7 +159,7 @@ jobs:
 
     - stage: build
       os: osx
-      osx_image: xcode9.2 # https://github.com/travis-ci/travis-ci/issues/9640
+      osx_image: xcode10
       language: generic
       env:
         - BUILD_SYSTEM=CMake
