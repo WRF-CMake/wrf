@@ -35,13 +35,10 @@ parameters:
   
   # Loop/matrix parameters.
   # Note that these may be overridden by the including yml (typically azure-pipelines.yml).
-  #OS_NAMES: [Windows, Ubuntu, macOS]
-  OS_NAMES: [Ubuntu, CentOS]
+  OS_NAMES: [Windows, Ubuntu, CentOS, macOS]
   BUILD_SYSTEMS: [Make, CMake]
-  #BUILD_TYPES: [Debug, Release]
-  BUILD_TYPES: [Debug]
-  #MODES: [serial, smpar, dmpar, dm_sm]
-  MODES: [serial, dmpar]
+  BUILD_TYPES: [Debug, Release]
+  MODES: [serial, smpar, dmpar, dm_sm]
 
 jobs:
 - ${{ each OS_NAME in parameters.OS_NAMES }}:

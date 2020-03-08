@@ -10,7 +10,7 @@ pr: none
 jobs:
 - template: .ci/azure-pipelines/matrix.yml
   parameters:
-    OS_NAMES: [Windows, macOS] # TODO Linux
+    OS_NAMES: [Windows, macOS, CentOS]
     BUILD_SYSTEMS: [CMake]
     BUILD_TYPES: [Debug, Release]
     MODES: [serial, dmpar]
