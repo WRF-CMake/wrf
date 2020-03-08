@@ -46,6 +46,7 @@ else()
 endif()
 
 set(ARCH_CUSTOM "" CACHE STRING "Name of custom architecture configuration to use")
+option(USE_REAL8 "Use double precision reals" OFF)
 option(OPTIMIZE_C "Optimize C code even in Debug mode" ON)
 option(ENABLE_RUNTIME_CHECKS "Enable compiler runtime checks in Release mode" OFF)
 option(DEBUG_ARCH "Print arch files debug information" OFF)
@@ -113,7 +114,7 @@ endif()
 
 if (NOT ARCH_CUSTOM)
     set(ARCH_C_VARS debug optimized checked temps other)
-    set(ARCH_Fortran_VARS debug optimized preprocess io checked temps other)
+    set(ARCH_Fortran_VARS debug optimized preprocess io checked promotion temps other)
     foreach (language C Fortran)
         set(ARCHS
             "${CMAKE_${language}_COMPILER_ID}"
@@ -169,6 +170,10 @@ if (ENABLE_RUNTIME_CHECKS)
     set(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE} ${Fortran_checked}")
     set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} ${C_checked}")
     set(CMAKE_Fortran_FLAGS_RELWITHDEBINFO "${CMAKE_Fortran_FLAGS_RELWITHDEBINFO} ${Fortran_checked}")
+endif()
+
+if (USE_REAL8)
+    set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} ${Fortran_promotion}")
 endif()
 
 if (SAVE_TEMPS)
@@ -288,6 +293,12 @@ find_package(RPC)
 #  Common preprocessor definitions #
 ####################################
 
+if (USE_REAL8)
+    set(RWORDSIZE 8)
+else()
+    set(RWORDSIZE 4)
+endif()
+
 # Common definitions are globally defined such that they are inherited in subfolders and their targets.
 # Doing that (instead of providing definitions in a variable that subfolders may or may not use) prevents
 # accidental mistakes where code still compiles but some defaults are used that are incompatible with the rest.
@@ -308,7 +319,7 @@ add_definitions(
     -DIWORDSIZE=4
     -DDWORDSIZE=8
     -DLWORDSIZE=4
-    -DRWORDSIZE=4
+    -DRWORDSIZE=${RWORDSIZE}
     -DMAX_HISTORY=25
     -DWRF_USE_CLM
     -DLANDREAD_STUB=1

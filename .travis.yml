@@ -18,6 +18,7 @@ jobs:
         - CC=gcc
         - FC=gfortran
         - MODE=serial
+        - REAL8=0
 
     - stage: build
       os: linux
@@ -29,6 +30,7 @@ jobs:
         - CC=gcc
         - FC=gfortran
         - MODE=dm_sm
+        - REAL8=1
 
     - stage: build
       os: linux
@@ -40,6 +42,7 @@ jobs:
         - CC=gcc-9
         - FC=gfortran-9
         - MODE=serial
+        - REAL8=1
 
     - stage: build
       os: linux
@@ -51,10 +54,11 @@ jobs:
         - CC=gcc-9
         - FC=gfortran-9
         - MODE=dm_sm
+        - REAL8=0
     
     - stage: build
       os: osx
-      osx_image: xcode9.2 # https://github.com/travis-ci/travis-ci/issues/9640
+      osx_image: xcode10
       language: generic
       env:
         - BUILD_SYSTEM=Make
@@ -62,10 +66,11 @@ jobs:
         - CC=gcc-9 # GNU via Homebrew
         - FC=gfortran-9
         - MODE=serial
+        - REAL8=1
 
     - stage: build
       os: osx
-      osx_image: xcode9.2 # https://github.com/travis-ci/travis-ci/issues/9640
+      osx_image: xcode10
       language: generic
       env:
         - BUILD_SYSTEM=Make
@@ -73,6 +78,7 @@ jobs:
         - CC=gcc-9 # GNU via Homebrew
         - FC=gfortran-9
         - MODE=dm_sm
+        - REAL8=0
 
     # CMake builds
 
@@ -89,6 +95,7 @@ jobs:
         - GRIB2=1
         - MODE=serial
         - NESTING=basic
+        - REAL8=1
 
     - stage: build
       os: linux
@@ -103,6 +110,7 @@ jobs:
         - GRIB2=0
         - MODE=dm_sm
         - NESTING=basic
+        - REAL8=0
 
     - stage: build
       os: linux
@@ -117,6 +125,7 @@ jobs:
         - GRIB2=1
         - MODE=serial
         - NESTING=basic
+        - REAL8=0
 
     - stage: build
       os: linux
@@ -131,10 +140,11 @@ jobs:
         - GRIB2=0
         - MODE=dm_sm
         - NESTING=basic
+        - REAL8=1
 
     - stage: build
       os: osx
-      osx_image: xcode9.2 # https://github.com/travis-ci/travis-ci/issues/9640
+      osx_image: xcode10
       language: generic
       env:
         - BUILD_SYSTEM=CMake
@@ -145,10 +155,11 @@ jobs:
         - GRIB2=1
         - MODE=serial
         - NESTING=basic
+        - REAL8=0
 
     - stage: build
       os: osx
-      osx_image: xcode9.2 # https://github.com/travis-ci/travis-ci/issues/9640
+      osx_image: xcode10
       language: generic
       env:
         - BUILD_SYSTEM=CMake
@@ -159,6 +170,7 @@ jobs:
         - GRIB2=1
         - MODE=dmpar # not using dm_sm as Apple's Clang doesn't easily support OpenMP
         - NESTING=basic
+        - REAL8=1
 
 before_install:
   - .ci/unix/dump-vm-specs.sh

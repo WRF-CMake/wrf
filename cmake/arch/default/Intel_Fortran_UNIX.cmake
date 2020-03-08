@@ -5,4 +5,5 @@ set(checked "-check noarg_temp_created,bounds,format,output_conversion,pointers,
 set(preprocess "-fpp")
 set(io "-convert big_endian -assume byterecl")
 set(optimized "${optimized} -align all -fno-alias")
+set(promotion "-real-size 64")
 set(other "-fp-model precise -DNONSTANDARD_SYSTEM_FUNC")

@@ -16,7 +16,7 @@ if [ $BUILD_SYSTEM == "CMake" ]; then
     # Note that -DMODE alone decides whether MPI is used or not.
     cmake -G "MSYS Makefiles" \
         -DCMAKE_INSTALL_PREFIX=install -DCMAKE_BUILD_TYPE=${BUILD_TYPE} \
-        -DMODE=$MODE -DNESTING=${NESTING} \
+        -DMODE=$MODE -DNESTING=${NESTING} -DUSE_REAL8=${REAL8} \
         -DENABLE_GRIB1=${GRIB1} -DENABLE_GRIB2=${GRIB2} \
         -DMPI_INCLUDE_PATH=$MINGW_PREFIX/include -DMPI_C_LIBRARY="$MSMPI_LIB64/msmpi.lib" \
         -DMPI_Fortran_LIBRARY="$MSMPI_LIB64/msmpifec.lib" \

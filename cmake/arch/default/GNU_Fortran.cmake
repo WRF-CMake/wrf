@@ -4,4 +4,5 @@
 set(checked "-fcheck=bounds,do,mem,pointer")
 set(preprocess "-cpp")
 set(io "-fconvert=big-endian -frecord-marker=4")
+set(promotion "-fdefault-real-8")
 set(other "-ffree-line-length-none")

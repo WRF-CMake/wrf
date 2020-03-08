@@ -1,4 +1,5 @@
-# WRF-CMake [![Build status Azure Pipelines](https://dev.azure.com/WRF-CMake/wrf/_apis/build/status/WRF%20(full)?branchName=wrf-cmake)](https://dev.azure.com/WRF-CMake/wrf/_build/latest?definitionId=5&branchName=wrf-cmake) [![Build status Appveyor](https://ci.appveyor.com/api/projects/status/86508wximkvmf95g/branch/wrf-cmake?svg=true)](https://ci.appveyor.com/project/WRF-CMake/wrf/branch/wrf-cmake) [![Build status Travis CI](https://travis-ci.com/WRF-CMake/wrf.svg?branch=wrf-cmake)](https://travis-ci.com/WRF-CMake/wrf)
+# WRF-CMake
+[![Build status Azure Pipelines](https://dev.azure.com/WRF-CMake/wrf/_apis/build/status/WRF%20(full)?branchName=wrf-cmake)](https://dev.azure.com/WRF-CMake/wrf/_build/latest?definitionId=5&branchName=wrf-cmake) [![Build status Appveyor](https://ci.appveyor.com/api/projects/status/86508wximkvmf95g/branch/wrf-cmake?svg=true)](https://ci.appveyor.com/project/WRF-CMake/wrf/branch/wrf-cmake) [![Build status Travis CI](https://travis-ci.com/WRF-CMake/wrf.svg?branch=wrf-cmake)](https://travis-ci.com/WRF-CMake/wrf) [![DOI](https://joss.theoj.org/papers/10.21105/joss.01468/status.svg)](https://doi.org/10.21105/joss.01468) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3403342.svg)](https://doi.org/10.5281/zenodo.3403342)
 
   - [Project overview](#project-overview)
     - [Currently supported platforms](#currently-supported-platforms)
@@ -37,7 +38,6 @@ For more details, please see the short summary paper [WRF-CMake: integrating CMa
 - WRFPLUS
 - WRF-Chem
 - WRF-Hydro
-- Promotion of Fortran's REAL to DOUBLE
 - File and line number in wrf_error_fatal() messages
 - WRF-NMM (discontinued -- see https://dtcenter.org/wrf-nmm/users/)
 - Automatic moving nests (via `TERRAIN_AND_LANDUSE` environment variable)
@@ -51,9 +51,11 @@ Please note that HPC users, or users seeking to run WRF in the 'most optimal' co
 
 
 ### Manually from source
+
 To build and install WRF-CMake or WPS-CMake manually from source, see [the install from source page](doc/cmake/INSTALL.md).
 
 ### Using Homebrew or Linuxbrew
+
 WRF-CMake and WPS-CMake can be built and installed using [Homebrew](https://docs.brew.sh/Installation) (macOS) or [Linuxbrew](https://docs.brew.sh/Homebrew-on-Linux#install) (Linux) with the following commands:
 
 ``` bash
@@ -81,7 +83,7 @@ If you want to launch WRF-CMake and WPS-CMake binary distributions built in `dmp
 
 ## Documentation
 
-- For the WRF model technical documentation, please refer to [A Description of the Advanced Research WRF Version 3](https://opensky.ucar.edu/islandora/object/technotes%3A500/datastream/PDF/view).
+- For the WRF model technical documentation, please refer to [A Description of the Advanced Research WRF Version 4](https://doi.org/10.5065/1dfh-6p97).
 - For the WRF model user documentation, please refer to [The Advanced Research WRF version 4 Modeling System User’s Guide](http://www2.mmm.ucar.edu/wrf/users/docs/user_guide_v4/contents.html).
 
 ## Example usage
@@ -95,17 +97,18 @@ Otherwise, if you are a beginner, we recommend going [through the basics](http:/
 
 When using WRF-CMake, please cite both model, and software (with version), e.g.:
 
-> We used the Weather Research and Forecasting (WRF) model (Skamarock et al., 2018) type WRF-CMake (Riechert and Meyer, 2019a), version x.x.x (Riechert and Meyer, 2019b) to ...
+> We used the Weather Research and Forecasting (WRF) model (Skamarock et al., 2018), WRF-CMake (Riechert and Meyer, 2019a) version 4.1.0 (Riechert and Meyer, 2019b) to ...
 
 The corresponding reference list should be as follows
 
-> Riechert, M., Meyer, D. (2019a). TODO: *In preparation*
+> Riechert, M., & Meyer, D. (2019a). WRF-CMake: Integrating CMake support into the Advanced Research WRF (ARW) modelling system. Journal of Open Source Software, 4(41), 1468. https://doi.org/10.21105/joss.01468
 >
-> Riechert, M., Meyer, D. (2019b). TODO: *In preparation*
+> Riechert, M., & Meyer, D. (2019b). WRF-CMake: integrating CMake support into the Advanced Research WRF (ARW) modelling system (Version WRF-CMake-4.1.0). Zenodo. http://doi.org/10.5281/zenodo.3403343
 >
-> Skamarock, W. C., Klemp, J. B., Dudhia, J., Gill, D. O., Liu, Z., Berner, J., Wang, W., et
-al. (2019). A description of the advanced research wrf model version 4 (p. 145). NCAR
-Technical Note NCAR/TN-556+STR. doi:10.5065/1dfh-6p97
+> Skamarock, W. C., Klemp, J. B., Dudhia, J., Gill, D. O., Liu, Z., Berner, J., … Huang, X.-Y. (2019). A Description of the Advanced Research WRF Model Version 4. NCAR Technical Note NCAR/TN-556+STR, 145. https://doi.org/10.5065/1dfh-6p97
+
+
+If you are looking to cite a different version of WRF-CMake, please see the list of WRF-CMake DOIs on Zenodo at https://doi.org/10.5281/zenodo.3403342.
 
 
 ## How to contribute

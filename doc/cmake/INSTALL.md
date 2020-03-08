@@ -96,6 +96,7 @@ By default WRF-CMake will compile in `serial` mode with `basic` nesting option. 
 | Name                    | Options                                | Default   | Description                                                 |
 | ----------------------- | -------------------------------------- | --------- | ----------------------------------------------------------- |
 | `MODE`                  | `serial`, `dmpar`, `smpar`, `dm_sm`    | `serial`  | Serial/parallel modes                                       |
+| `USE_REAL8`             | `ON`, `OFF`                            | `OFF`     | Whether to use double precision reals                       |
 | `NESTING`               | `none`, `basic`, `vortex`, `following` | `basic`   | Domain Options                                              |
 | `CMAKE_BUILD_TYPE`      | `Release`, `Debug`, `RelWithDebInfo`   | `Release` | Whether to optimise/build with debug flags.                 |
 | `ENABLE_RUNTIME_CHECKS` | `ON`, `OFF`                            | `OFF`     | Whether to enable compiler runtime checks in Release mode.  |

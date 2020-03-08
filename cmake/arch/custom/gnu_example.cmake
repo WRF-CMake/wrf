@@ -12,6 +12,7 @@ set(Fortran_optimized "-O2 -ftree-vectorize -funroll-loops")
 set(Fortran_checked "-fcheck=bounds,do,mem,pointer -ffpe-trap=invalid,zero,overflow")
 set(Fortran_preprocess "-cpp")
 set(Fortran_io "-fconvert=big-endian -frecord-marker=4")
+set(Fortran_promotion "-fdefault-real-8")
 set(Fortran_other "-ffree-line-length-none -DNONSTANDARD_SYSTEM_SUBR")
 
 set(linker "-Wl,--stack,0x64000000")

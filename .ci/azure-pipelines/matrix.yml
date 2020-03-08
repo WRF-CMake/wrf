@@ -29,6 +29,7 @@ parameters:
     NESTING: basic
     GRIB1: 0
     GRIB2: 1
+    REAL8: 0
 
   RELEASE: false
   

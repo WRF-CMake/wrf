@@ -13,6 +13,7 @@ if [ $BUILD_SYSTEM == 'CMake' ]; then
     mkdir build && cd build
     cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=install \
           -DENABLE_GRIB1=${GRIB1} -DENABLE_GRIB2=${GRIB2} -DMODE=${MODE} -DNESTING=${NESTING} \
+          -DUSE_REAL8=${REAL8} \
           -DDEBUG_ARCH=ON -DDEBUG_GLOBAL_DEFINITIONS=ON -LA ..
     
     # It sometimes happens that the compiler runs out of memory due to parallel compilation.
@@ -61,6 +62,12 @@ elif [ $BUILD_SYSTEM == 'Make' ]; then
         debug=
     fi
 
+    if [[ "$REAL8" == '1' ]]; then
+        real8=-r8
+    else
+        real8=
+    fi
+
     if [ "$(uname)" == "Linux" ]; then
 
         case $MODE in
@@ -107,8 +114,8 @@ elif [ $BUILD_SYSTEM == 'Make' ]; then
     fi
 
     # 1 = basic nesting
-    echo "./configure $debug <<< $cfg\n1\n"
-    ./configure $debug <<< $cfg$'\n1\n'
+    echo "./configure $debug $real8 <<< $cfg\n1\n"
+    ./configure $debug $real8 <<< $cfg$'\n1\n'
 
     echo "==== configure.wrf ===="
     cat configure.wrf
