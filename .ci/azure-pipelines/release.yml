@@ -21,13 +21,13 @@ steps:
       archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.SourceBranchName)-$(NESTING)_nesting-$(MODE)-x64-$(OS_NAME)-$(BUILD_TYPE).tar.xz' 
     displayName: Create distribution package
 
-- pwsh: |
-    dir $(Build.ArtifactStagingDirectory) -r | % { if ($_.Name.Contains("CentOS")) { ren $_.FullName $_.Name.replace("CentOS", "Linux") } }
-  displayName: Rename CentOS to Linux
-
-- pwsh: |
-    dir $(Build.ArtifactStagingDirectory) -r | % { if ($_.Name -cne $_.Name.ToLower()) { ren $_.FullName $_.Name.ToLower() } }
-  displayName: Rename to lowercase
+- bash: |
+    cd $(Build.ArtifactStagingDirectory)
+    # CentOS packages will run on most glibc-based Linux distributions
+    find . -name '*CentOS*' -exec bash -c ' mv $0 ${0/CentOS/Linux}' {} \;
+    # Rename all files to lowercase
+    for file in $(ls); do mv -i ${file} ${file,,}; done
+  displayName: Rename package files
 
 # not strictly needed
 - task: PublishBuildArtifacts@1
