@@ -22,6 +22,10 @@ steps:
     displayName: Create distribution package
 
 - pwsh: |
+    dir $(Build.ArtifactStagingDirectory) -r | % { if ($_.Name.Contains("CentOS")) { ren $_.FullName $_.Name.replace("CentOS", "Linux") } }
+  displayName: Rename CentOS to Linux
+
+- pwsh: |
     dir $(Build.ArtifactStagingDirectory) -r | % { if ($_.Name -cne $_.Name.ToLower()) { ren $_.FullName $_.Name.ToLower() } }
   displayName: Rename to lowercase
 
