@@ -105,7 +105,7 @@ if [ "$(uname)" == "Linux" ]; then
 
         NETCDF_C_VERSION=4.6.1
         curl -L --retry ${HTTP_RETRIES} https://github.com/Unidata/netcdf-c/archive/v${NETCDF_C_VERSION}.tar.gz | tar xz
-        pushd netcdf-${NETCDF_C_VERSION}
+        pushd netcdf-c-${NETCDF_C_VERSION}
         ./configure --prefix=/usr \
             --disable-doxygen \
             --enable-logging \
