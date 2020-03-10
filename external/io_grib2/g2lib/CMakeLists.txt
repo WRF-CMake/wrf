@@ -2,7 +2,7 @@
 # Copyright 2018 M. Riechert and D. Meyer. Licensed under the MIT License.
 
 include_directories(
-	${JASPER_INCLUDE_DIRS}
+	${JASPER_INCLUDE_DIR}
 	${PNG_INCLUDE_DIRS}
 	${ZLIB_INCLUDE_DIRS}
 )

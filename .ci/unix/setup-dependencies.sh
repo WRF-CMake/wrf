@@ -156,8 +156,9 @@ if [ "$(uname)" == "Linux" ]; then
 elif [ "$(uname)" == "Darwin" ]; then
 
     # If c++ is already present on the system, homebrew fails to install gcc.
-    # Use the `-f` flag in case c++ is not present to avoid errors.
-    rm -f /usr/local/include/c++
+    # Use the `-rf` flags to recursively remove dir/files without
+    # prompting for errors if c++ is not present.
+    rm -rf /usr/local/include/c++
 
     # Don't fall-back to source build if bottle download fails for some reason (e.g. network issues).
     # Source builds generally take too long in CI. This setting let's brew fail immediately.

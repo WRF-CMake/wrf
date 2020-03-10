@@ -9,9 +9,9 @@ jobs:
 
   pool:
     ${{ if or(eq(parameters.OS_NAME, 'Ubuntu'), eq(parameters.OS_NAME, 'CentOS')) }}:
-      vmImage: ubuntu-16.04
+      vmImage: ubuntu-latest
     ${{ if eq(parameters.OS_NAME, 'macOS') }}:
-      vmImage: macos-10.13
+      vmImage: macOS-10.14
 
   ${{ if eq(parameters.OS_NAME, 'Ubuntu') }}:
     container:
