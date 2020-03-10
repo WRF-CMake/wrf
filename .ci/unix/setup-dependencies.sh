@@ -104,7 +104,7 @@ if [ "$(uname)" == "Linux" ]; then
         popd
 
         NETCDF_C_VERSION=4.6.1
-        curl -L --retry ${HTTP_RETRIES} https://www.unidata.ucar.edu/downloads/netcdf/ftp/netcdf-${NETCDF_C_VERSION}.tar.gz | tar xz
+        curl -L --retry ${HTTP_RETRIES} https://github.com/Unidata/netcdf-c/archive/v${NETCDF_C_VERSION}.tar.gz | tar xz
         pushd netcdf-${NETCDF_C_VERSION}
         ./configure --prefix=/usr \
             --disable-doxygen \
@@ -116,7 +116,7 @@ if [ "$(uname)" == "Linux" ]; then
         popd
 
         NETCDF_FORTRAN_VERSION=4.4.4
-        curl -L --retry ${HTTP_RETRIES} https://www.unidata.ucar.edu/downloads/netcdf/ftp/netcdf-fortran-${NETCDF_FORTRAN_VERSION}.tar.gz | tar xz
+        curl -L --retry ${HTTP_RETRIES} https://github.com/Unidata/netcdf-fortran/archive/v${NETCDF_FORTRAN_VERSION}.tar.gz | tar xz
         pushd netcdf-fortran-${NETCDF_FORTRAN_VERSION}
         export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/lib
         ./configure --prefix=/usr --enable-static
