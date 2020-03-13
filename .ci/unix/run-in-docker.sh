@@ -6,7 +6,7 @@
 set -e
 
 SCRIPTDIR=$(dirname "$0")
-ROOTDIR=$SCRIPTDIR/../..
+ROOTDIR=$(realpath $SCRIPTDIR/../..)
 cd $ROOTDIR
 
 container=wrf-ci
