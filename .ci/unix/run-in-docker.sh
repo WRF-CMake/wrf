@@ -15,10 +15,10 @@ container=wrf-ci
 if [ ! "$(docker ps -q -f name=$container)" ]; then
     echo "Creating Docker container $container"
     set -x
-    docker run --name $container -d -v $ROOTDIR:$ROOTDIR -w $ROOTDIR -e DOCKER=1 $IMAGE
+    docker run --name $container -d -v $ROOTDIR:$ROOTDIR -w $ROOTDIR -e DOCKER=1 $IMAGE tail -f /dev/null
     set +x
     
-    echo "Installing sudo"
+    echo "Installing sudo inside container"
     if [[ $OS_NAME == CentOS ]]; then
       docker exec -t $container sh -c "yum install -y sudo"
     else
