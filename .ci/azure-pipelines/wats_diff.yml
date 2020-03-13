@@ -6,7 +6,7 @@ jobs:
   displayName: 'WATS ${{ parameters.OS_NAME_LEFT }}/${{ parameters.OS_NAME_RIGHT }} ${{ parameters.BUILD_SYSTEM_LEFT }}/${{ parameters.BUILD_SYSTEM_RIGHT }}: ${{ parameters.BUILD_TYPE }}, ${{ parameters.MODE }}'
   
   pool:
-    vmImage: ubuntu-16.04
+    vmImage: ubuntu-latest
   
   dependsOn:
   - ${{ parameters.OS_NAME_LEFT }}_${{ parameters.BUILD_SYSTEM_LEFT }}_${{ parameters.BUILD_TYPE }}_${{ parameters.MODE }}
