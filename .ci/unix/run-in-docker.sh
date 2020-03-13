@@ -27,5 +27,5 @@ if [ ! "$(docker ps -q -f name=$container)" ]; then
 fi
 
 echo "Running inside container: $@"
-host_envs=$(env | cut -f1 -d= | sed 's/^/-e /')
+host_envs=$(env | cut -f1 -d= | sed 's/^/-e /' | grep -v -e PATH -e HOME)
 docker exec $host_envs $container "$@"

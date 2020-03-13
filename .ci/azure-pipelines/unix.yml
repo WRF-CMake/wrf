@@ -26,7 +26,7 @@ jobs:
   - script: $(run) .ci/unix/dump-vm-specs.sh
     displayName: Dump VM specs
 
-  - script: $(run) printenv
+  - script: $(run) printenv | sort
     displayName: Dump environment variables
 
   - script: $(run) .ci/unix/setup-dependencies.sh
