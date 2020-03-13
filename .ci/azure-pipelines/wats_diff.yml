@@ -16,14 +16,10 @@ jobs:
     ${{ insert }}: ${{ parameters }}
 
   steps:
-  - bash: bash .ci/unix/use-conda.sh
+  - bash: .ci/unix/use-conda.sh
     displayName: Enable Conda
   
-  - bash: |
-      set -ex
-      curl -L --retry 3 https://github.com/$WATS_REPO/archive/$WATS_BRANCH.tar.gz | tar xz
-      mv wats-$WATS_BRANCH wats
-      conda env update -n base -f wats/environment.yml
+  - bash: .ci/unix/install-wats.sh
     displayName: Install WATS
 
   - task: DownloadBuildArtifacts@0

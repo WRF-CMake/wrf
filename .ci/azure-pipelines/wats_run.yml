@@ -2,14 +2,10 @@
 # Copyright 2019 M. Riechert and D. Meyer. Licensed under the MIT License.
 
 steps:
-- bash: bash .ci/unix/use-conda.sh
+- bash: $(run) .ci/unix/use-conda.sh
   displayName: Enable Conda
 
-- bash: |
-    set -ex
-    curl -L --retry 3 https://github.com/$WATS_REPO/archive/$WATS_BRANCH.tar.gz | tar xz
-    mv wats-$WATS_BRANCH wats
-    conda env update -n base -f wats/environment.yml
+- bash: $(run) .ci/unix/install-wats.sh
   displayName: Install WATS
 
 - task: UniversalPackages@0
@@ -26,21 +22,7 @@ steps:
     find . -type f
   displayName: List WPS output files
 
-- bash: |
-    set -ex
-    if [[ $MODE == dm* ]]; then mpi_flag="--mpi"; fi
-    if [[ $OS_NAME == macOS ]]; then
-      # Work around Open MPI issue
-      # https://github.com/open-mpi/ompi/issues/6518
-      # https://github.com/open-mpi/ompi/issues/5798
-      # https://www.mail-archive.com/devel@lists.open-mpi.org/msg20760.html
-      export OMPI_MCA_btl=self,tcp
-      # Disable new shared memory component of Open MPI to work around issue
-      # https://github.com/open-mpi/ompi/issues/7516
-      export PMIX_MCA_gds=hash
-    fi
-    if [[ $BUILD_SYSTEM == "CMake" ]]; then dir_suffix="build/install"; fi
-    python wats/wats/main.py run --mode $WATS_MODE --wrf-dir ./$dir_suffix --wps-dir ../WPS/$dir_suffix --wps-case-output-dir wats_wps_outputs/00 --work-dir wats_work $mpi_flag
+- bash: $(run) .ci/unix/run-wats.sh
   displayName: Run WATS
 
 - task: PublishBuildArtifacts@1

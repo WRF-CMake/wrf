@@ -17,7 +17,11 @@ elif [ "$(uname)" == "Linux" ]; then
         sudo ./miniconda.sh -b -p /usr/share/miniconda
         rm miniconda.sh
     fi
-    echo "##vso[task.prependpath]/usr/share/miniconda/bin"
+    if [[ "$DOCKER" == "1" ]]; then
+        echo 'export PATH=/usr/share/miniconda/bin:$PATH' >> ~/.bashrc
+    else
+        echo "##vso[task.prependpath]/usr/share/miniconda/bin"
+    fi
     sudo chown -R $(id -u -n) /usr/share/miniconda
 else
     echo "##vso[task.prependpath]$CONDA\Scripts"

@@ -9,7 +9,7 @@ steps:
     displayName: Create distribution package
 
 - ${{ if not(eq(parameters.OS_NAME, 'Windows')) }}:
-  - bash: bash .ci/unix/delocate.sh
+  - bash: $(run) .ci/unix/delocate.sh
     displayName: Delocate
 
   - task: ArchiveFiles@2
