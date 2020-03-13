@@ -3,7 +3,7 @@
 # WRF-CMake (https://github.com/WRF-CMake/wrf).
 # Copyright 2018 M. Riechert and D. Meyer. Licensed under the MIT License.
 
-set -ex
+set -e
 
 SCRIPTDIR=$(dirname "$0")
 ROOTDIR=$SCRIPTDIR/../..
@@ -13,9 +13,12 @@ container=wrf-ci
 
 # Create container if it doesn't exist
 if [ ! "$(docker ps -q -f name=$container)" ]; then
-    docker run -n $container -d -v $ROOTDIR:$ROOTDIR -w $ROOTDIR -e DOCKER=1 $IMAGE
+    echo "Creating Docker container $container"
+    set -x
+    docker run --name $container -d -v $ROOTDIR:$ROOTDIR -w $ROOTDIR -e DOCKER=1 $IMAGE
+    set +x
     
-    # Install sudo
+    echo "Installing sudo"
     if [[ $OS_NAME == CentOS ]]; then
       docker exec -t $container sh -c "yum install -y sudo"
     else
@@ -23,5 +26,5 @@ if [ ! "$(docker ps -q -f name=$container)" ]; then
     fi
 fi
 
-# Run command in container
+echo "Running inside container: $@"
 docker exec -t $container "$@"
