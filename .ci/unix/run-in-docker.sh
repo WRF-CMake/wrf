@@ -28,4 +28,6 @@ fi
 
 echo "Running inside container: $@"
 host_envs=$(env | cut -f1 -d= | sed 's/^/-e /' | grep -v -e PATH -e HOME)
-docker exec $host_envs $container "$@"
+# Use login shell so that ~/.bash_profile is read.
+# use-conda.sh appends to that file to modify the PATH.
+docker exec $host_envs $container bash --login -c "$@"

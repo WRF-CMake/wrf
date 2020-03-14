@@ -18,7 +18,7 @@ elif [ "$(uname)" == "Linux" ]; then
         rm miniconda.sh
     fi
     if [[ "$DOCKER" == "1" ]]; then
-        echo 'export PATH=/usr/share/miniconda/bin:$PATH' >> ~/.bashrc
+        echo 'export PATH=/usr/share/miniconda/bin:$PATH' >> ~/.bash_profile
     else
         echo "##vso[task.prependpath]/usr/share/miniconda/bin"
     fi
