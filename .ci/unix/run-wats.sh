@@ -8,6 +8,11 @@ set -ex
 SCRIPTDIR=$(dirname "$0")
 cd $SCRIPTDIR/../..
 
+if [ "$(lsb_release -i -s)" == "CentOS" ]; then
+    # CentOS uses /usr/lib64 but some manually installed dependencies end up in /usr/lib
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib
+fi
+
 if [[ $MODE == dm* ]]; then
     mpi_flag="--mpi"
 fi
