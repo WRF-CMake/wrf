@@ -20,7 +20,7 @@ elif [ "$(lsb_release -i -s)" == "CentOS" ]; then
     # Assumes we're in the manylinux Docker image.
     pys=(/opt/python/cp*)
     # Use the newest Python available in the image (last item).
-    py=${x[@]:(-1)}/bin/python
+    py=${pys[@]:(-1)}/bin/python
 
     root_dir=$(pwd)
     tmp_dir=$(mktemp -d)
