@@ -22,11 +22,12 @@ steps:
     displayName: Create distribution package
 
 - bash: |
-    cd $(Build.ArtifactStagingDirectory)
+    set -ex
+    cd "$(Build.ArtifactStagingDirectory)"
     # CentOS packages will run on most glibc-based Linux distributions
-    find . -name '*CentOS*' -exec bash -c ' mv $0 ${0/CentOS/Linux}' {} \;
+    find . -name '*CentOS*' -exec bash -c 'mv $0 ${0/CentOS/Linux}' {} \;
     # Rename all files to lowercase
-    for file in $(ls); do mv -i ${file} $(echo ${file} | tr '[:upper:]' '[:lower:]'); done
+    for file in $(ls); do mv ${file} $(echo ${file} | tr '[:upper:]' '[:lower:]'); done
   displayName: Rename package files
 
 # not strictly needed
