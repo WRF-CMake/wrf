@@ -18,7 +18,9 @@ if [ "$(uname)" == "Darwin" ]; then
 elif [ "$(lsb_release -i -s)" == "CentOS" ]; then
 
     # Assumes we're in the manylinux Docker image.
-    py=/opt/python/cp38-cp38/bin/python
+    pys=(/opt/python/cp*)
+    # Use the newest Python available in the image (last item).
+    py=${x[@]:(-1)}/bin/python
 
     root_dir=$(pwd)
     tmp_dir=$(mktemp -d)
