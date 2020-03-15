@@ -27,7 +27,7 @@ elif [ "$(lsb_release -i -s)" == "CentOS" ]; then
     cd $tmp_dir
 
     echo "from setuptools import setup; setup(name='app', packages=['main'], package_data={'main': ['*.exe']})" > setup.py
-    ln -s build/install/main main
+    ln -s $root_dir/build/install/main main
     $py setup.py bdist_wheel
 
     # CentOS uses /usr/lib64 but some manually installed dependencies end up in /usr/lib
