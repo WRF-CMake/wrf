@@ -17,7 +17,7 @@ if [ "$(uname)" == "Darwin" ]; then
 
 elif [ "$(lsb_release -i -s)" == "CentOS" ]; then
 
-    root_dir=$(cwd)
+    root_dir=$(pwd)
     tmp_dir=$(mktemp -d)
     cd $tmp_dir
 
