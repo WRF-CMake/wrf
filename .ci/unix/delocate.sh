@@ -17,15 +17,16 @@ if [ "$(uname)" == "Darwin" ]; then
 
 elif [ "$(lsb_release -i -s)" == "CentOS" ]; then
 
+    # Assumes we're in the manylinux Docker image.
+    py=/opt/python/cp38-cp38/bin/python
+
     root_dir=$(pwd)
     tmp_dir=$(mktemp -d)
     cd $tmp_dir
 
-    pip install auditwheel
-
     echo "from setuptools import setup; setup(name='app', packages=['main'], package_data={'main': ['*.exe']})" > setup.py
     ln -s build/install/main main
-    python setup.py bdist_wheel
+    $py setup.py bdist_wheel
 
     # CentOS uses /usr/lib64 but some manually installed dependencies end up in /usr/lib
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib
