@@ -137,5 +137,6 @@ mpiexec -n 2 example1.exe
 mpiexec -n 2 example2.exe
 ```
 
-If everything went OK, you can now build WRF with MPI. You can go back to [Build and Install WRF-CMake](INSTALL.md#build-and-install-wrf-cmake
-).
+If everything went OK, you can now build WRF with MPI. You can go back to [Build and Install WRF-CMake].
+
+[Build and Install WRF-CMake]:INSTALL.md#build-and-install-wrf-cmake
