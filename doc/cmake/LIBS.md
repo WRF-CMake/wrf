@@ -1,11 +1,10 @@
 # How to install required libraries for WRF-CMake
-The following libraries are required on your system to install WRF-CMake from source: [Git](https://git-scm.com/), [JasPer](https://www.ece.uvic.ca/~frodo/jasper/), [libpng](http://www.libpng.org/pub/png/libpng.html), [libjpeg](http://libjpeg.sourceforge.net/), [zlib](https://zlib.net/), [HDF5](https://support.hdfgroup.org/HDF5/), [NetCDF-C](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp), [NetCDF-Fortran](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp), and MPI (required if building in `dmpar` or `dm_sm` mode).
+The following libraries are required on your system to install WRF-CMake from source: [CMake](https://cmake.org/), [Ninja](https://ninja-build.org/), [Git](https://git-scm.com/), [JasPer](https://www.ece.uvic.ca/~frodo/jasper/), [libpng](http://www.libpng.org/pub/png/libpng.html), [libjpeg](http://libjpeg.sourceforge.net/), [zlib](https://zlib.net/), [HDF5](https://support.hdfgroup.org/HDF5/), [NetCDF-C](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp), [NetCDF-Fortran](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp), and MPI (required if building in `dmpar` or `dm_sm` mode).
 
 For the installation of libraries, we rely on your system's package managers (APT, YUM, Homebrew). We assume that you have administrative privileges on your computer. If you do not have administrative privileges you should request these libraries to be installed by your system administrator so that they can tare of this for you and manage updates on your behalf.
 
 ## Table of contents
 - [Ubuntu](#ubuntu)
-    - [14.04 LTS (Trusty)](#1404-lts-trusty)
     - [16.04 LTS (Xenial)](#1604-lts-xenial)
     - [18.04 LTS (Bionic)](#1804-lts-bionic)
 - [macOS](#macOS)
@@ -14,25 +13,16 @@ For the installation of libraries, we rely on your system's package managers (AP
 
 ## Ubuntu
 
-### 14.04 LTS (Trusty)
-To install all the required dependencies, including support for MPI, run the following commands from your terminal prompt:
-
-```sh
-sudo apt-get update && sudo apt-get upgrade -y
-sudo apt-get install -y git cmake3 gfortran libnetcdf-dev libpng-dev libjasper-dev libmpich-dev
-```
-
-After the installtion is complete, you can go back to [Build and Install WRF-CMake].
-
 ### 16.04 LTS (Xenial)
 To install all the required dependencies, including support for MPI, run the following commands from your terminal prompt:
 
 ```sh
 sudo apt-get update && sudo apt-get upgrade -y
-sudo apt-get install -y git cmake gfortran libnetcdf-dev libnetcdff-dev libpng-dev libjasper-dev libjpeg-dev zlib1g-dev libmpich-dev
+sudo apt-get install -y git cmake ninja-build gfortran libnetcdf-dev libnetcdff-dev libpng-dev libjasper-dev libjpeg-dev zlib1g-dev libmpich-dev
 ```
 
 After the installtion is complete, you can go back to [Build and Install WRF-CMake].
+
 
 ### 18.04 LTS (Bionic)
 
@@ -40,7 +30,7 @@ To install all the required dependencies except for JasPer (installed manually, 
 
 ```sh
 sudo apt-get update && sudo apt-get upgrade -y
-sudo apt-get install -y git cmake gfortran libnetcdf-dev libnetcdff-dev libpng-dev libjpeg-dev zlib1g-dev libmpich-dev
+sudo apt-get install -y git cmake ninja-build gfortran libnetcdf-dev libnetcdff-dev libpng-dev libjpeg-dev zlib1g-dev libmpich-dev
 ```
 
 NOTE: `libjasper-dev` is currently not provided though APT and you will need to install it from source. For the moment, you can simply [download the latest version of JasPer](https://www.ece.uvic.ca/~frodo/jasper/#download) and install it manually from source. To do this you can use the following commands:
@@ -62,7 +52,7 @@ On macOS, we can use Homebrew to install the required libraries. If you do not h
 
 ```sh
 brew update
-brew install git cmake gcc netcdf jasper open-mpi
+brew install git cmake ninja gcc netcdf jasper open-mpi
 ```
 
 After the installation is complete, you can go back to [Build and Install WRF-CMake].
@@ -73,7 +63,7 @@ After the installation is complete, you can go back to [Build and Install WRF-CM
 - Inside the MSYS2 **MinGW 64-bit** shell, run `pacman -Syu`
 - Restart the shell
 - Run `pacman -Syu` again to finish upgrading
-- Run `pacman -S --noconfirm --needed make unzip git mingw-w64-x86_64-toolchain mingw64/mingw-w64-x86_64-cmake mingw64/mingw-w64-x86_64-portablexdr`
+- Run `pacman -S --noconfirm --needed make mingw-w64-x86_64-ninja unzip git mingw-w64-x86_64-toolchain mingw-w64-x86_64-cmake mingw-w64-x86_64-portablexdr`
 - Run `pacman -S --noconfirm --needed mingw-w64-x86_64-libpng mingw-w64-x86_64-libjpeg-turbo mingw-w64-x86_64-jasper` (for WPS; or WRF with GRIB 2 support)
 - Run `pacman -S --noconfirm --needed mingw-w64-x86_64-hdf5 mingw-w64-x86_64-libtool tar` (only needed for temporary netCDF compilation below)
 
