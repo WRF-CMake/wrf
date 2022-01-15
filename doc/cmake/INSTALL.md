@@ -25,7 +25,7 @@ The following libraries are required on your system to install WRF-CMake from so
 | `./compile`   | `cmake --install .` |
 
 Further notes:
-- `cmake --install` is available from CMake version 3.15. For older CMake versions use `cmake --target install` instead.
+- `cmake --install` is available from CMake version 3.15. For older CMake versions use `cmake --build . --target install` instead.
 - The [Ninja](https://ninja-build.org/) generator needs to be specified at configure time with the `-G` option, i.e. `-GNinja`.
 - The original build system uses a series of terminal prompts when running `./configure` whereas for CMake any non-default options need to be specified as command-line arguments.
 - If you change any registry files, then just re-run `cmake --install .`.
@@ -40,7 +40,7 @@ mkdir build && cd build
 cmake -GNinja -DCMAKE_INSTALL_PREFIX=<install_directory> ..
 cmake --install .
 ```
-where `<install_directory>` is the directory where to install WRF. Depending on your system's configuration, you may need to specify [WRF-CMake options](#wrf-cmake-options). If multiple compilers are available on the system, use the `CC` (C compiler) and/or `FC` (Fortran compiler) environment variables to specify them. For example, to use Intel C and Fortran compilers run `CC=icc FC=ifort cmake -GNinja -DCMAKE_INSTALL_PREFIX=<install_directory> ..`. On macOS, use `CC=gcc-8 FC=gfortran-8` to use the GNU compilers installed with Homebrew. If your system has enough memory you can enable parallel compilation with `cmake --install . -- -j <n>` where `<n>` is the maximum number of jobs you like to run in parallel.
+where `<install_directory>` is the directory where to install WRF. Depending on your system's configuration, you may need to specify [WRF-CMake options](#wrf-cmake-options). If multiple compilers are available on the system, use the `CC` (C compiler) and/or `FC` (Fortran compiler) environment variables to specify them. For example, to use Intel C and Fortran compilers run `CC=icc FC=ifort cmake -GNinja -DCMAKE_INSTALL_PREFIX=<install_directory> ..`. On macOS, use `CC=gcc-8 FC=gfortran-8` to use the GNU compilers installed with Homebrew. By default Ninja runs in parallel. If your system does not have enough memory you can restrict the number of parallel processes with the `-j` flag. For example, to compile with 2 parallel processes run `cmake --install . -j 2`.
 
 #### Note for HPC users relying on the Modules package
 If you are using `modules` for the dynamic modification of the user's environment via modulefiles, you will need to specify the path to the NetCDF manually _after_ loading all the libraries required to compile WRF/WPS. For example:
@@ -76,7 +76,7 @@ cmake -GNinja -DCMAKE_INSTALL_PREFIX=<install_directory> ..
 cmake --install .
 ```
 The folder `<install_directory>` now contains the WRF installation and is ready to use.
-If your system has enough memory you can enable parallel compilation with `cmake --install . --j <n>` where `<n>` is the maximum number of jobs you like to run in parallel.
+By default Ninja runs in parallel. If your system does not have enough memory you can restrict the number of parallel processes with the `-j` flag. For example, to compile with 2 parallel processes run `cmake --install . -j 2`.
 
 #### Build WRF-CMake with MPI support
 Open an MSYS2 **MinGW 64-bit** shell and run:
@@ -90,7 +90,7 @@ cmake -GNinja -DMODE=dmpar -DCMAKE_INSTALL_PREFIX=<install_directory> \
 cmake --install .
 ```
 The folder `<install_directory>` now contains the WRF installation and is ready to use.
-If your system has enough memory you can enable parallel compilation with `cmake --install . --j <n>` where `<n>` is the maximum number of jobs you like to run in parallel.
+By default Ninja runs in parallel. If your system does not have enough memory you can restrict the number of parallel processes with the `-j` flag. For example, to compile with 2 parallel processes run `cmake --install . -j 2`.
 
 ### WRF-CMake options
 By default WRF-CMake will compile in `serial` mode with `basic` nesting option. You can change this by specifying the option (or flag) at configure time. The general syntax for specifying an option in CMake is `-D<flag_name>=<flag_value>` where `<flag_name>` is the option/flag name and `<flag_value>` is the option/flag value. The following options can be specified when configuring WRF-CMake:
@@ -129,7 +129,6 @@ cmake --install .
 ```
 
 where `<install_directory>` is the directory where to install WPS and `<wrf_cmake_build_directory>` is the path to the `build` folder of WRF (relative or absolute). To specify more options, please see the [WPS-CMake options](#wps-cmake-options).
-You can enable parallel compilation with `cmake --install . --j <n>` where `<n>` is the maximum number of jobs you like to run in parallel.
 
 ### WPS-CMake options
 
