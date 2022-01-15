@@ -29,7 +29,7 @@ Further notes:
 - `cmake --install` is available from CMake version 3.15. For older versions use `cmake --build . --target install` instead.
 - The [Ninja](https://ninja-build.org/) generator needs to be specified at configure time with the `-G` option, i.e. `-GNinja`.
 - The original build system uses a series of terminal prompts when running `./configure` whereas for CMake any non-default options need to be specified as command-line arguments.
-- If you change any registry files, then just re-run `cmake --build .`.
+- If you change any registry files, then just re-run `cmake --install .`.
 
 ### On Linux and macOS
 The general commands to download, configure and install WRF-CMake on Linux and macOS are:
@@ -42,7 +42,7 @@ cmake -GNinja -DCMAKE_INSTALL_PREFIX=<install_directory> ..
 cmake --build .
 cmake --install .
 ```
-where `<install_directory>` is the directory where to install WRF. Depending on your system's configuration, you may need to specify [WRF-CMake options](#wrf-cmake-options). If multiple compilers are available on the system, use the `CC` (C compiler) and/or `FC` (Fortran compiler) environment variables to specify them. For example, to use Intel C and Fortran compilers run `CC=icc FC=ifort cmake -GNinja -DCMAKE_INSTALL_PREFIX=<install_directory> ..`. On macOS, use `CC=gcc-8 FC=gfortran-8` to use the GNU compilers installed with Homebrew. If your system has enough memory you can enable parallel compilation with `cmake --build . --j <n>` where `<n>` is the maximum number of jobs you like to run in parallel.
+where `<install_directory>` is the directory where to install WRF. Depending on your system's configuration, you may need to specify [WRF-CMake options](#wrf-cmake-options). If multiple compilers are available on the system, use the `CC` (C compiler) and/or `FC` (Fortran compiler) environment variables to specify them. For example, to use Intel C and Fortran compilers run `CC=icc FC=ifort cmake -GNinja -DCMAKE_INSTALL_PREFIX=<install_directory> ..`. On macOS, use `CC=gcc-8 FC=gfortran-8` to use the GNU compilers installed with Homebrew. If your system has enough memory you can enable parallel compilation with `cmake --build . -- -j <n>` where `<n>` is the maximum number of jobs you like to run in parallel.
 
 #### Note for HPC users relying on the Modules package
 If you are using `modules` for the dynamic modification of the user's environment via modulefiles, you will need to specify the path to the NetCDF manually _after_ loading all the libraries required to compile WRF/WPS. For example:
