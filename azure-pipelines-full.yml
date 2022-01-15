@@ -8,8 +8,7 @@ trigger:
     - wrf-cmake
   paths:
     exclude:
-    - 'doc/'
-    - 'README*'
+    - '**/*.md'
 
 # Run every week even if there are no code changes.
 # Catches any problems due to new dependency versions from package managers.
