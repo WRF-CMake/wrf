@@ -4,11 +4,13 @@ The following libraries are required on your system to install WRF-CMake from so
 For the installation of libraries, we rely on your system's package managers (APT, YUM, Homebrew). We assume that you have administrative privileges on your computer. If you do not have administrative privileges you should request these libraries to be installed by your system administrator so that they can tare of this for you and manage updates on your behalf.
 
 ## Table of contents
-- [Ubuntu](#ubuntu)
+- [How to install required libraries for WRF-CMake](#how-to-install-required-libraries-for-wrf-cmake)
+  - [Table of contents](#table-of-contents)
+  - [Ubuntu](#ubuntu)
     - [16.04 LTS (Xenial)](#1604-lts-xenial)
     - [18.04 LTS (Bionic)](#1804-lts-bionic)
-- [macOS](#macOS)
-- [Windows](#windows)
+  - [macOS](#macos)
+  - [Windows](#windows)
     - [Microsoft MPI support](#microsoft-mpi-support)
 
 ## Ubuntu
@@ -135,6 +137,5 @@ mpiexec -n 2 example1.exe
 mpiexec -n 2 example2.exe
 ```
 
-If everything went OK, you can now build WRF with MPI. You can go back to [Build and Install WRF-CMake].
-
-[Build and Install WRF-CMake]:INSTALL.md#build-and-install-wrf-cmake
+If everything went OK, you can now build WRF with MPI. You can go back to [Build and Install WRF-CMake](INSTALL.md#build-and-install-wrf-cmake
+).
