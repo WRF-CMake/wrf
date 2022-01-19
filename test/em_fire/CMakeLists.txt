@@ -7,11 +7,14 @@ install(FILES namelist.input_hill_simple DESTINATION test/em_fire RENAME namelis
 
 install(FILES
     input_sounding_hill_simple
+    input_sounding_rain
     input_sounding_two_fires
     namelist.fire
+    namelist.fire_fmc
     namelist.fire_hill_simple
     namelist.fire_two_fires
     namelist.input_hill_simple
+    namelist.input_rain
     namelist.input_two_fires
     README.txt
     DESTINATION test/em_fire

@@ -1035,6 +1035,7 @@ if [ -n "$NETCDF4" ] ; then
       rm -f tools/nc4_test.log
     fi
     if [ $retval -ne 0  ] ; then
+      cat tools/nc4_test.log
       echo "************************** W A R N I N G ************************************"
       echo "NETCDF4 IO features are requested, but this installation of NetCDF           "
       echo "  $NETCDF"

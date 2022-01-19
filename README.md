@@ -41,6 +41,7 @@ For more details, please see the short summary paper [WRF-CMake: integrating CMa
 - File and line number in wrf_error_fatal() messages
 - WRF-NMM (discontinued -- see https://dtcenter.org/wrf-nmm/users/)
 - Automatic moving nests (via `TERRAIN_AND_LANDUSE` environment variable)
+- CTSM land surface model
 
 
 ## Installation

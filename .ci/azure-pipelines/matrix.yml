@@ -9,14 +9,14 @@ parameters:
     Windows: windows.yml
   
   Ubuntu:
-    CC: gcc-10
-    FC: gfortran-10
+    CC: gcc-11
+    FC: gfortran-11
   CentOS:
     CC: gcc
     FC: gfortran
   macOS:
-    CC: gcc-10
-    FC: gfortran-10
+    CC: gcc-11
+    FC: gfortran-11
   Windows:
     CC: gcc
     FC: gfortran
@@ -35,7 +35,9 @@ parameters:
   
   # Loop/matrix parameters.
   # Note that these may be overridden by the including yml (typically azure-pipelines.yml).
-  OS_NAMES: [Windows, Ubuntu, CentOS, macOS]
+  #OS_NAMES: [Windows, Ubuntu, CentOS, macOS]
+  # macOS temporarily disabled due to segfaults.
+  OS_NAMES: [Windows, Ubuntu, CentOS]
   BUILD_SYSTEMS: [Make, CMake]
   BUILD_TYPES: [Debug, Release]
   MODES: [serial, smpar, dmpar, dm_sm]

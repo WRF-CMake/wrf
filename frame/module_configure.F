@@ -44,10 +44,6 @@ CONTAINS
   END SUBROUTINE init_module_irr_diag
 
 END MODULE module_irr_diag
-#else
-! Work-around to support CMake, see https://gitlab.kitware.com/cmake/cmake/issues/17398.
-MODULE module_irr_diag
-END MODULE module_irr_diag
 #endif
 
 MODULE module_configure

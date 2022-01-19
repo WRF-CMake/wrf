@@ -21,6 +21,13 @@ elif [ "$(uname)" == "Linux" ]; then
             sudo apt install -y lsb-release
         fi
     fi
+    if [ "$(which free)" == "" ]; then
+        if [ "$(lsb_release -i -s)" == "CentOS" ]; then
+            sudo yum install -y procps
+        else
+            sudo apt-get install -y procps
+        fi
+    fi
     lsb_release -a
     free -m
     lscpu

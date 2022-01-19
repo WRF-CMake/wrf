@@ -266,7 +266,7 @@ include_directories(
 ##########################
 
 if (ENABLE_NETCDF)
-    find_package(NetCDF REQUIRED COMPONENTS F77 F90)
+    find_package(NetCDF REQUIRED COMPONENTS F77)
 
     # If we link against the static netCDF-C library (currently required on mingw64) then its
     # HDF5 dependency is not linked into the netCDF-C library (not exactly sure why).
@@ -276,7 +276,6 @@ if (ENABLE_NETCDF)
     if (match)
         find_package(HDF5 REQUIRED COMPONENTS C HL)
         set(NETCDF_F77_LIBRARIES ${NETCDF_F77_LIBRARIES} ${NETCDF_C_LIBRARIES} ${HDF5_LIBRARIES} ${HDF5_HL_LIBRARIES})
-        set(NETCDF_F99_LIBRARIES ${NETCDF_F99_LIBRARIES} ${NETCDF_C_LIBRARIES} ${HDF5_LIBRARIES} ${HDF5_HL_LIBRARIES})
         set(NETCDF_LIBRARIES ${NETCDF_LIBRARIES} ${HDF5_LIBRARIES} ${HDF5_HL_LIBRARIES})
     endif()
 endif()
@@ -476,6 +475,7 @@ add_subdirectory(Registry)
 add_subdirectory(tools)
 add_subdirectory(inc)
 add_subdirectory(frame)
+add_subdirectory(run)
 add_subdirectory(share)
 add_subdirectory(phys)
 add_subdirectory(dyn_em)
