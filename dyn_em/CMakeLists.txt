@@ -16,6 +16,7 @@ file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/module_advect_em.F ${module_advect_em_pat
 
 add_library(dyn_em STATIC
 	${CMAKE_CURRENT_BINARY_DIR}/module_advect_em.F
+	module_ieva_em.F
 	module_diffusion_em.F
 	module_small_step_em.F
 	module_big_step_utilities_em.F

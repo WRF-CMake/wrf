@@ -1,25 +1,35 @@
 # WRF-CMake (https://github.com/WRF-CMake/wrf).
 # Copyright 2018 M. Riechert and D. Meyer. Licensed under the MIT License.
 
-# real
-add_executable(real_em
-	real_em.F
+set_source_files_properties(${CMAKE_BINARY_DIR}/inc/actual_new_args.inc PROPERTIES GENERATED 1)
+
+# 'real' and associated tools
+add_library(real_em_base STATIC
 	# The 'case' module is not part of the dyn_em library and hence is included here.
 	../dyn_em/module_initialize_real.F
 	${CMAKE_BINARY_DIR}/inc/actual_new_args.inc
 )
-
-set_property(TARGET real_em PROPERTY Fortran_FORMAT FREE)
-set_property(TARGET real_em PROPERTY OUTPUT_NAME "real")
-
-set_source_files_properties(${CMAKE_BINARY_DIR}/inc/actual_new_args.inc PROPERTIES GENERATED 1)
-add_dependencies(real_em generate_inc)
-
-target_link_libraries(real_em ${WRF_LIBRARIES})
-
-install( TARGETS real_em
-	RUNTIME DESTINATION ${BIN_INSTALL_DIR}
+set_property(TARGET real_em_base PROPERTY Fortran_FORMAT FREE)
+target_link_libraries(real_em_base ${WRF_LIBRARIES})
+set(tools
+    real ndown tc
 )
+foreach(tool ${tools})
+	add_executable(${tool}_em
+		${tool}_em.F
+	)
+
+	set_property(TARGET ${tool}_em PROPERTY Fortran_FORMAT FREE)
+	set_property(TARGET ${tool}_em PROPERTY OUTPUT_NAME "${tool}")
+
+	add_dependencies(${tool}_em generate_inc)
+
+	target_link_libraries(${tool}_em real_em_base ${WRF_LIBRARIES})
+
+	install(TARGETS ${tool}_em
+		RUNTIME DESTINATION ${BIN_INSTALL_DIR}
+	)
+endforeach()
 
 # ideal
 add_custom_target(ideal)

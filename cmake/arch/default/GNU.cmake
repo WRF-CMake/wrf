@@ -4,7 +4,3 @@
 set(debug "-g")
 set(optimized "-O3")
 set(temps "-save-temps")
-
-if (CMAKE_Fortran_COMPILER_VERSION VERSION_GREATER_EQUAL 10)
-    set(other "-fallow-argument-mismatch -fallow-invalid-boz")
-endif()

@@ -10,4 +10,6 @@ cd $SCRIPTDIR/../..
 
 curl -L --retry 3 https://github.com/$WATS_REPO/archive/$WATS_BRANCH.tar.gz | tar xz
 mv wats-$WATS_BRANCH wats
+
+conda install -y python=3.8
 conda env update -n base -f wats/environment.yml

@@ -33,7 +33,6 @@ add_library(frame_c STATIC
     collect_on_comm.c
 )
 
-# frame/ has lots of cyclic dependencies with share/ and can only be built as static library.
 add_library(frame STATIC
     ${NL_ROUTINE_FILES}
     ${CMAKE_BINARY_DIR}/frame/module_state_description.F

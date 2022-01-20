@@ -1,6 +1,21 @@
 # WRF-CMake (https://github.com/WRF-CMake/wrf).
 # Copyright 2018 M. Riechert and D. Meyer. Licensed under the MIT License.
 
+execute_process(
+    COMMAND git rev-parse HEAD
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    RESULT_VARIABLE ret
+    OUTPUT_VARIABLE GIT_OUTPUT
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+if (ret AND NOT ret EQUAL 0)
+    set(COMMIT_VERSION "No git found or not a git repository, git commit version not available.")
+else()
+    set(COMMIT_VERSION "git commit ${GIT_OUTPUT}")
+endif()
+
+configure_file(commit_decl.in commit_decl)
+
 set(REGISTRY Registry.EM)
 
 # Note that only those files are listed here which are referenced directly in other
@@ -39,5 +54,5 @@ foreach( gen_file ${GEN_FILES} )
     list( APPEND GEN_FILES_DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${gen_file} )
 endforeach()
 
-# see https://cmake.org/Wiki/CMake_FAQ#How_can_I_add_a_dependency_to_a_source_file_which_is_generated_in_a_subdirectory.3F
+# see https://gitlab.kitware.com/cmake/community/-/wikis/FAQ#how-can-i-add-a-dependency-to-a-source-file-which-is-generated-in-a-subdirectory
 add_custom_target(generate_inc DEPENDS ${GEN_FILES_DEPENDS})

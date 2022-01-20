@@ -7,6 +7,16 @@ include_directories(
 	${NETCDF_F77_INCLUDE_DIR}
 )
 
+add_library(phys_bep_bem_helper STATIC
+	module_bep_bem_helper.F
+)
+
+set_property(TARGET phys_bep_bem_helper PROPERTY Fortran_FORMAT FREE)
+
+target_include_directories(phys_bep_bem_helper
+	INTERFACE ${CMAKE_Fortran_MODULE_DIRECTORY}
+)
+
 add_library(phys STATIC
 	module_cam_shr_kind_mod.F
 	module_cam_support.F
@@ -44,11 +54,13 @@ add_library(phys STATIC
 	module_bl_mynn.F
 	module_bl_fogdes.F
 	module_bl_gwdo.F
+	module_bl_gwdo_gsl.F
 	module_bl_myjurb.F
 	module_bl_boulac.F
 	module_checkerror.F
 	module_bl_camuwpbl_driver.F
 	module_bl_mfshconvpbl.F
+	module_bl_eepsilon.F
 	module_shcu_camuwshcu_driver.F
 	module_shcu_camuwshcu.F
 	module_shcu_deng.F
@@ -66,6 +78,7 @@ add_library(phys STATIC
 	module_cu_tiedtke.F
 	module_cu_ntiedtke.F
 	module_cu_gd.F
+	module_cu_gf_ctrans.F
 	module_cu_gf_wrfdrv.F
 	module_cu_gf_deep.F
 	module_cu_gf_sh.F
@@ -76,6 +89,7 @@ add_library(phys STATIC
 	module_cu_scalesas.F
 	module_cu_osas.F
 	module_cu_kfcup.F
+	module_madwrf.F
 	module_mp_radar.F
 	module_mp_kessler.F
 	module_mp_lin.F
@@ -95,6 +109,7 @@ add_library(phys STATIC
 	module_mp_gsfcgce.F
 	module_mp_gsfcgce_4ice_nuwrf.F
 	module_mp_morr_two_moment.F
+	module_mp_ntu.F
 	module_mp_p3.F
 	module_mp_jensen_ishmael.F
 	module_mp_morr_two_moment_aero.F
@@ -107,6 +122,7 @@ add_library(phys STATIC
 	module_irrigation.F
 	module_ra_sw.F
 	module_ra_clWRF_support.F
+	module_ra_eclipse.F
 	module_ra_gsfcsw.F
 	module_ra_goddard.F
 	module_ra_effective_radius.F
@@ -134,6 +150,7 @@ add_library(phys STATIC
 	module_sf_noahdrv.F
 	module_sf_noahlsm.F
 	module_sf_clm.F
+	module_sf_ctsm.F
 	module_sf_ssib.F
 	module_sf_noah_seaice.F
 	module_sf_noah_seaice_drv.F
@@ -220,6 +237,7 @@ set_property(TARGET phys PROPERTY Fortran_FORMAT FREE)
 
 target_link_libraries(phys
 	${NETCDF_F77_LIBRARIES}
+	phys_bep_bem_helper
 	frame
 	share
 )
