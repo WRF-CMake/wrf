@@ -10,8 +10,7 @@ trigger:
     - wrf-cmake
   paths:
     exclude:
-    - 'doc/'
-    - 'README*'
+    - '**/*.md'
 pr: none
 
 jobs:
