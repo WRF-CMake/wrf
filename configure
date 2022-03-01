@@ -1035,6 +1035,7 @@ if [ -n "$NETCDF4" ] ; then
       rm -f tools/nc4_test.log
     fi
     if [ $retval -ne 0  ] ; then
+      cat tools/nc4_test.log
       echo "************************** W A R N I N G ************************************"
       echo "NETCDF4 IO features are requested, but this installation of NetCDF           "
       echo "  $NETCDF"
@@ -1044,8 +1045,8 @@ if [ -n "$NETCDF4" ] ; then
       echo "--enable-netcdf4                                                             "
       echo
       echo "OR set NETCDF_classic variable                                               "
-      echo "   bash/ksh : export NETCDF_classic=1
-      echo "        csh : setenv NETCDF_classic 1
+      echo "   bash/ksh : export NETCDF_classic=1                                        "
+      echo "        csh : setenv NETCDF_classic 1                                        "
       echo 
       echo "Then re-run this configure script                                            "
       echo

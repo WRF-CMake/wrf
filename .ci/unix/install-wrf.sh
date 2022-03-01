@@ -78,18 +78,8 @@ elif [ $BUILD_SYSTEM == 'Make' ]; then
             *) echo "Invalid: $MODE"; exit 1 ;;
         esac
 
-        if [ "$(lsb_release -c -s)" == "trusty" -o "$(lsb_release -i -s)" == "CentOS" ]; then
-            export HDF5=/usr
-            export NETCDF=/usr
-        else
-            # Need to create symlinked folder hierarchy that WRF expects...
-            mkdir netcdf
-            ln -s /usr/include netcdf/include
-            ln -s /usr/lib/x86_64-linux-gnu netcdf/lib
-
-            export HDF5=/usr/lib/x86_64-linux-gnu/hdf5/serial
-            export NETCDF=`pwd`/netcdf
-        fi
+        export HDF5=/usr
+        export NETCDF=/usr
 
     elif [ "$(uname)" == "Darwin" ]; then
 

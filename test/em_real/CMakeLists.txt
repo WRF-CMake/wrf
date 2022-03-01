@@ -2,6 +2,8 @@
 # Copyright 2018 M. Riechert and D. Meyer. Licensed under the MIT License.
 
 set(run_files
+    README.namelist
+    README.physics_files
     CAM_ABS_DATA 
     CAM_AEROPT_DATA 
     CAMtr_volume_mixing_ratio.RCP4.5 
@@ -24,6 +26,7 @@ set(run_files
     aerosol_lat.formatted 
     aerosol_lon.formatted 
     aerosol_plev.formatted 
+    eclipse_besselian_elements.dat
     capacity.asc 
     coeff_p.asc 
     coeff_q.asc 
@@ -35,8 +38,8 @@ set(run_files
     bulkdens.asc_s_0_03_0_9 
     bulkradii.asc_s_0_03_0_9 
     CCN_ACTIVATE.BIN 
-    p3_lookup_table_1.dat-v4.1
-    p3_lookup_table_2.dat-v4.1
+    p3_lookupTable_1.dat-5.3-2momI
+    p3_lookupTable_2.dat-2momI_v5.2.2
     HLC.TBL
     wind-turbine-1.tbl
     ishmael-gamma-tab.bin
@@ -47,6 +50,7 @@ set(run_files
     LANDUSE.TBL
     SOILPARM.TBL 
     URBPARM.TBL
+    URBPARM_LCZ.TBL
     VEGPARM.TBL
     MPTABLE.TBL
     tr49t67
@@ -58,6 +62,14 @@ set(run_files
 
 foreach (run_file ${run_files})
     install(FILES ${CMAKE_SOURCE_DIR}/run/${run_file} DESTINATION test/em_real)
+endforeach()
+
+set(generated_run_files
+    p3_lookupTable_1.dat-5.3-3momI
+)
+
+foreach (run_file ${generated_run_files})
+    install(FILES ${CMAKE_BINARY_DIR}/run/${run_file} DESTINATION test/em_real)
 endforeach()
 
 set(extra_run_files
@@ -86,13 +98,14 @@ install(FILES ${CMAKE_SOURCE_DIR}/run/CAMtr_volume_mixing_ratio.RCP8.5
 
 install(FILES
     examples.namelist
-    landFilenames
     namelist.input
     namelist.input.4km
     namelist.input.chem
+    namelist.input.default
     namelist.input.diags
     namelist.input.fire
     namelist.input.global
+    namelist.input.IEVA.4km
     namelist.input.jan00
     namelist.input.jun01
     namelist.input.ndown_1

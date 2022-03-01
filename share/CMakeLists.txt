@@ -17,13 +17,15 @@ add_library(share_c STATIC
 
 target_link_libraries(share_c ${RPC_LIBRARIES})
 
-# share/ has lots of cyclic dependencies with dyn_em/ and can only be built as static library.
 add_library(share STATIC
 	module_model_constants.F
 	module_bc_time_utilities.F
 	module_get_file_names.F
 	module_compute_geop.F
+	module_chem_share.F
 	module_check_a_mundo.F
+	module_HLaw.F
+	module_ctrans_aqchem.F
 	module_random.F
 	module_llxy.F
 	module_interp_nmm.F
@@ -69,6 +71,7 @@ target_link_libraries(share
 	${NETCDF_F77_LIBRARIES}
 	share_c
 	frame
+	phys_bep_bem_helper
 	io_int
 )
 

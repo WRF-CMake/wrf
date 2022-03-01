@@ -6,7 +6,7 @@
 set -ex
 
 if [ "$(uname)" == "Linux" ]; then
-    sudo fallocate -l 8g /extra_swap
+    sudo fallocate -l 12g /extra_swap
     sudo chmod 0600 /extra_swap
     sudo mkswap /extra_swap
     sudo swapon /extra_swap
